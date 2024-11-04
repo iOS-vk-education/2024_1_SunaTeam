@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FF105E52CD95D720017C117 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8FF105E42CD95D630017C117 /* swiftlint.yml */; };
 		EACB4F3A2CCEB71800138488 /* SunaTeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB4F392CCEB71800138488 /* SunaTeamApp.swift */; };
 		EACB4F3C2CCEB71800138488 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACB4F3B2CCEB71800138488 /* ContentView.swift */; };
 		EACB4F3E2CCEB71A00138488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EACB4F3D2CCEB71A00138488 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8FF105E42CD95D630017C117 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		EACB4F362CCEB71800138488 /* SunaTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTeam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACB4F392CCEB71800138488 /* SunaTeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTeamApp.swift; sourceTree = "<group>"; };
 		EACB4F3B2CCEB71800138488 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		EACB4F382CCEB71800138488 /* SunaTeam */ = {
 			isa = PBXGroup;
 			children = (
+				8FF105E42CD95D630017C117 /* swiftlint.yml */,
 				EACB4F392CCEB71800138488 /* SunaTeamApp.swift */,
 				EACB4F3B2CCEB71800138488 /* ContentView.swift */,
 				EACB4F3D2CCEB71A00138488 /* Assets.xcassets */,
@@ -74,6 +77,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EACB4F442CCEB71A00138488 /* Build configuration list for PBXNativeTarget "SunaTeam" */;
 			buildPhases = (
+				8FF105EA2CD95FAA0017C117 /* ShellScript */,
+				8FF105E62CD95DC40017C117 /* ShellScript */,
 				EACB4F322CCEB71800138488 /* Sources */,
 				EACB4F332CCEB71800138488 /* Frameworks */,
 				EACB4F342CCEB71800138488 /* Resources */,
@@ -81,6 +86,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8FF105E92CD95EDF0017C117 /* PBXTargetDependency */,
 			);
 			name = SunaTeam;
 			productName = SunaTeam;
@@ -111,6 +117,9 @@
 				Base,
 			);
 			mainGroup = EACB4F2D2CCEB71800138488;
+			packageReferences = (
+				8FF105E72CD95ED60017C117 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			productRefGroup = EACB4F372CCEB71800138488 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,11 +135,49 @@
 			buildActionMask = 2147483647;
 			files = (
 				EACB4F412CCEB71A00138488 /* Preview Assets.xcassets in Resources */,
+				8FF105E52CD95D720017C117 /* swiftlint.yml in Resources */,
 				EACB4F3E2CCEB71A00138488 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8FF105E62CD95DC40017C117 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint не установлен. Загрузите с https://github.com/realm/SwiftLint (или brew install swiftlint)\"\nfi\n\n";
+		};
+		8FF105EA2CD95FAA0017C117 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EACB4F322CCEB71800138488 /* Sources */ = {
@@ -143,6 +190,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8FF105E92CD95EDF0017C117 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 8FF105E82CD95EDF0017C117 /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EACB4F422CCEB71A00138488 /* Debug */ = {
@@ -344,6 +398,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8FF105E72CD95ED60017C117 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8FF105E82CD95EDF0017C117 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FF105E72CD95ED60017C117 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EACB4F2E2CCEB71800138488 /* Project object */;
 }
