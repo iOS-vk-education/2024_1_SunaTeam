@@ -11,6 +11,10 @@
 		58E8955B2CD7D24E000412A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8955A2CD7D24E000412A5 /* ContentView.swift */; };
 		58E8955D2CD7D250000412A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58E8955C2CD7D250000412A5 /* Assets.xcassets */; };
 		58E895602CD7D250000412A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58E8955F2CD7D250000412A5 /* Preview Assets.xcassets */; };
+		8F6CCC242CE371FF009CBAB0 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6CCC232CE371CD009CBAB0 /* OnboardingSlide.swift */; };
+		8F6CCC262CE37963009CBAB0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6CCC252CE3795B009CBAB0 /* OnboardingView.swift */; };
+		8F6CCC282CE379B3009CBAB0 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6CCC272CE379A2009CBAB0 /* OnboardingContainerView.swift */; };
+		8F6CCC2A2CE379D3009CBAB0 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6CCC292CE379BA009CBAB0 /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		58E8955A2CD7D24E000412A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58E8955C2CD7D250000412A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58E8955F2CD7D250000412A5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8F6CCC232CE371CD009CBAB0 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		8F6CCC252CE3795B009CBAB0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		8F6CCC272CE379A2009CBAB0 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		8F6CCC292CE379BA009CBAB0 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,10 @@
 		58E895572CD7D24E000412A5 /* Suna Travel */ = {
 			isa = PBXGroup;
 			children = (
+				8F6CCC292CE379BA009CBAB0 /* OnboardingViewController.swift */,
+				8F6CCC272CE379A2009CBAB0 /* OnboardingContainerView.swift */,
+				8F6CCC252CE3795B009CBAB0 /* OnboardingView.swift */,
+				8F6CCC232CE371CD009CBAB0 /* OnboardingSlide.swift */,
 				58E895582CD7D24E000412A5 /* Suna_TravelApp.swift */,
 				58E8955A2CD7D24E000412A5 /* ContentView.swift */,
 				58E8955C2CD7D250000412A5 /* Assets.xcassets */,
@@ -138,7 +150,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				58E8955B2CD7D24E000412A5 /* ContentView.swift in Sources */,
+				8F6CCC2A2CE379D3009CBAB0 /* OnboardingViewController.swift in Sources */,
+				8F6CCC282CE379B3009CBAB0 /* OnboardingContainerView.swift in Sources */,
+				8F6CCC242CE371FF009CBAB0 /* OnboardingSlide.swift in Sources */,
 				58E895592CD7D24E000412A5 /* Suna_TravelApp.swift in Sources */,
+				8F6CCC262CE37963009CBAB0 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Suna Travel/Preview Content\"";
-				DEVELOPMENT_TEAM = 949FZ2ST6K;
+				DEVELOPMENT_TEAM = 28J53UH756;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -299,7 +315,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Suna Travel/Preview Content\"";
-				DEVELOPMENT_TEAM = 949FZ2ST6K;
+				DEVELOPMENT_TEAM = 28J53UH756;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
