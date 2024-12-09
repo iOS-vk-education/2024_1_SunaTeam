@@ -1,0 +1,73 @@
+# Xcode
+#
+.DS_Store
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcuserdatad
+*.xcuserdata
+*.xcodeproj/project.pbxproj
+*.pbxproj
+
+# Build
+#
+build/
+DerivedData/
+*.o
+*.linkfilelist
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Logs
+#
+*.log
+
+# User-specific files
+#
+*.user
+*.userdatad
+*.xcuserdatad
+
+# Swift Package Manager
+#
+.build/
+Package.resolved
+
+# CocoaPods
+#
+Pods/
+Podfile.lock
+
+# Carthage
+#
+Carthage/Build/
+Carthage/Checkouts/
+
+# Fastlane
+#
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# AppCode
+#
+.idea/
+
+# SwiftUI Previews
+#
+*.preview.png
+*.preview.json
+
+# Other
+#
+*.swp
+*.swo
+*.tmp
+*.temp
+
+.DS_Store
+SunaTravel/.DS_Store
