@@ -70,5 +70,4 @@ fastlane/screenshots
 *.temp
 
 .DS_Store
-
 SunaTravel/.DS_Store
