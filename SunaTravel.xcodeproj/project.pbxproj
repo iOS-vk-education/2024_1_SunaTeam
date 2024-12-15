@@ -11,6 +11,12 @@
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
 		58F5CAC82D0785E300A3C1FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */; };
+		8F73110A2D0DF455007A78AC /* PlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7311092D0DF451007A78AC /* PlacesModel.swift */; };
+		8F73110C2D0DF48A007A78AC /* FavoritePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73110B2D0DF46E007A78AC /* FavoritePlaceCell.swift */; };
+		8F73110E2D0DF515007A78AC /* FavoritePlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73110D2D0DF509007A78AC /* FavoritePlacesViewController.swift */; };
+		8F7311112D0DF619007A78AC /* Delegate+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7311102D0DF60E007A78AC /* Delegate+DataSource.swift */; };
+		8F7311192D0F1DA1007A78AC /* SearchPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7311182D0F1D95007A78AC /* SearchPlaceViewController.swift */; };
+		8F73111F2D0F204C007A78AC /* SearchPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73111E2D0F2045007A78AC /* SearchPlaceViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58F5CAC42D0785E300A3C1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8F7311092D0DF451007A78AC /* PlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesModel.swift; sourceTree = "<group>"; };
+		8F73110B2D0DF46E007A78AC /* FavoritePlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCell.swift; sourceTree = "<group>"; };
+		8F73110D2D0DF509007A78AC /* FavoritePlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlacesViewController.swift; sourceTree = "<group>"; };
+		8F7311102D0DF60E007A78AC /* Delegate+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Delegate+DataSource.swift"; sourceTree = "<group>"; };
+		8F7311182D0F1D95007A78AC /* SearchPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceViewController.swift; sourceTree = "<group>"; };
+		8F73111E2D0F2045007A78AC /* SearchPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +63,8 @@
 		58F5CABF2D0785E000A3C1FA /* SunaTravel */ = {
 			isa = PBXGroup;
 			children = (
+				8F7311162D0F1D81007A78AC /* SearchTrip */,
+				8F7311052D0DF3FE007A78AC /* FavoritePlaces */,
 				58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */,
 				58F5CAC22D0785E000A3C1FA /* ContentView.swift */,
 				58F5CAC42D0785E300A3C1FA /* Assets.xcassets */,
@@ -65,6 +79,74 @@
 				58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8F7311052D0DF3FE007A78AC /* FavoritePlaces */ = {
+			isa = PBXGroup;
+			children = (
+				8F73110F2D0DF607007A78AC /* Extensions */,
+				8F7311082D0DF427007A78AC /* Views */,
+				8F7311072D0DF420007A78AC /* Models */,
+				8F7311062D0DF417007A78AC /* Controllers */,
+			);
+			path = FavoritePlaces;
+			sourceTree = "<group>";
+		};
+		8F7311062D0DF417007A78AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F73110D2D0DF509007A78AC /* FavoritePlacesViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8F7311072D0DF420007A78AC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8F7311092D0DF451007A78AC /* PlacesModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8F7311082D0DF427007A78AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F73110B2D0DF46E007A78AC /* FavoritePlaceCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8F73110F2D0DF607007A78AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8F7311102D0DF60E007A78AC /* Delegate+DataSource.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8F7311162D0F1D81007A78AC /* SearchTrip */ = {
+			isa = PBXGroup;
+			children = (
+				8F73111A2D0F2008007A78AC /* Models */,
+				8F7311172D0F1D8D007A78AC /* Controllers */,
+			);
+			path = SearchTrip;
+			sourceTree = "<group>";
+		};
+		8F7311172D0F1D8D007A78AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F7311182D0F1D95007A78AC /* SearchPlaceViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8F73111A2D0F2008007A78AC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8F73111E2D0F2045007A78AC /* SearchPlaceViewModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +221,12 @@
 			files = (
 				58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
+				8F73111F2D0F204C007A78AC /* SearchPlaceViewModel.swift in Sources */,
+				8F73110E2D0DF515007A78AC /* FavoritePlacesViewController.swift in Sources */,
+				8F7311192D0F1DA1007A78AC /* SearchPlaceViewController.swift in Sources */,
+				8F7311112D0DF619007A78AC /* Delegate+DataSource.swift in Sources */,
+				8F73110A2D0DF455007A78AC /* PlacesModel.swift in Sources */,
+				8F73110C2D0DF48A007A78AC /* FavoritePlaceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
