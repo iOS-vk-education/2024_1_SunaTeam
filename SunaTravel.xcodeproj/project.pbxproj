@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58461BB72D11AA2E00B3614B /* ProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BB62D11AA2E00B3614B /* ProfileData.swift */; };
+		58461BB92D11AA4700B3614B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BB82D11AA4700B3614B /* ProfileView.swift */; };
+		58461BBB2D11AA6800B3614B /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BBA2D11AA6800B3614B /* EditProfileView.swift */; };
+		58461BBD2D11AA8500B3614B /* ProfileNavigationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BBC2D11AA8500B3614B /* ProfileNavigationViews.swift */; };
+		58461BBF2D11AAA000B3614B /* ProfileNavigationLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BBE2D11AAA000B3614B /* ProfileNavigationLinks.swift */; };
+		58461BC12D11AAB700B3614B /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BC02D11AAB700B3614B /* ProfileInputView.swift */; };
+		58461BC32D11AAD700B3614B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58461BC22D11AAD700B3614B /* ProfileViewModel.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
@@ -25,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58461BB62D11AA2E00B3614B /* ProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileData.swift; sourceTree = "<group>"; };
+		58461BB82D11AA4700B3614B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		58461BBA2D11AA6800B3614B /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		58461BBC2D11AA8500B3614B /* ProfileNavigationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigationViews.swift; sourceTree = "<group>"; };
+		58461BBE2D11AAA000B3614B /* ProfileNavigationLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigationLinks.swift; sourceTree = "<group>"; };
+		58461BC02D11AAB700B3614B /* ProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
+		58461BC22D11AAD700B3614B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +68,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58461BB22D11A9ED00B3614B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				58461BB52D11AA0D00B3614B /* Models */,
+				58461BB42D11AA0500B3614B /* Views */,
+				58461BB32D11A9F800B3614B /* ViewModels */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		58461BB32D11A9F800B3614B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				58461BC22D11AAD700B3614B /* ProfileViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		58461BB42D11AA0500B3614B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				58461BB82D11AA4700B3614B /* ProfileView.swift */,
+				58461BBA2D11AA6800B3614B /* EditProfileView.swift */,
+				58461BBC2D11AA8500B3614B /* ProfileNavigationViews.swift */,
+				58461BBE2D11AAA000B3614B /* ProfileNavigationLinks.swift */,
+				58461BC02D11AAB700B3614B /* ProfileInputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		58461BB52D11AA0D00B3614B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				58461BB62D11AA2E00B3614B /* ProfileData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		58F5CAB42D0785E000A3C1FA = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +125,7 @@
 		58F5CABF2D0785E000A3C1FA /* SunaTravel */ = {
 			isa = PBXGroup;
 			children = (
+				58461BB22D11A9ED00B3614B /* Profile */,
 				8F7310E92D0D90F9007A78AC /* Onboardings */,
 				8F7310E22D0B9023007A78AC /* Extensions */,
 				58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */,
@@ -219,17 +272,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58461BBB2D11AA6800B3614B /* EditProfileView.swift in Sources */,
+				58461BC32D11AAD700B3614B /* ProfileViewModel.swift in Sources */,
+				58461BC12D11AAB700B3614B /* ProfileInputView.swift in Sources */,
 				8F7310F32D0DA0A0007A78AC /* OnboardingToolbar.swift in Sources */,
 				8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */,
+				58461BBF2D11AAA000B3614B /* ProfileNavigationLinks.swift in Sources */,
 				8F7310DF2D0B8FB4007A78AC /* OnboardingViewController.swift in Sources */,
 				58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */,
 				8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */,
+				58461BBD2D11AA8500B3614B /* ProfileNavigationViews.swift in Sources */,
 				8F7310DD2D0B8F8C007A78AC /* OnboardingView.swift in Sources */,
 				8F7310EB2D0D91B5007A78AC /* Color+Extensions.swift in Sources */,
 				8F7310ED2D0D9FEE007A78AC /* OnboardinSlidesView.swift in Sources */,
+				58461BB72D11AA2E00B3614B /* ProfileData.swift in Sources */,
 				8F7310E12D0B8FCC007A78AC /* OnboardingViewModel.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
 				8F7310F12D0DA06D007A78AC /* OnboardingButton.swift in Sources */,
+				58461BB92D11AA4700B3614B /* ProfileView.swift in Sources */,
 				8F7310EF2D0DA02F007A78AC /* PageIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
