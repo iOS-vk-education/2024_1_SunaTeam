@@ -11,14 +11,17 @@ fileprivate struct UIConstants {
     static let collectionTopPadding: CGFloat = 30
     static let collectionViewLineSpacing: CGFloat = 50
     static let collectionViewItemSpacing: CGFloat = 6
-    static let collectionViewItemHeight: CGFloat = 180
     static let viewSidePadding: CGFloat = 16
     static let viewItemWidthPartition: CGFloat = 40
+
+    static var collectionViewItemHeight: CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        return screenHeight * 0.25
+    }
 }
 
-class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
-    
-    let places: [Place] = [
+struct MockData {
+    static let places: [Place] = [
         Place(title: "Niladri Reservoir", subtitle: "Tekergat, Sunamganj", imageName: "FirstPlace"),
         Place(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "SecondPlace"),
         Place(title: "Aonang Villa Resort", subtitle: "Bastola, Islampur", imageName: "ThirdPlace"),
@@ -26,8 +29,10 @@ class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, 
         Place(title: "Kachura Resort", subtitle: "Vellima, Island", imageName: "FifthPlace"),
         Place(title: "Shakardu Resort", subtitle: "Shakartu, Pakistan", imageName: "SixthPlace")
     ]
-    
-    let collectionView: UICollectionView = {
+}
+
+class FavoritePlacesViewController: UIViewController {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = UIConstants.collectionViewLineSpacing
@@ -35,9 +40,13 @@ class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, 
         
         let totalSpacing = UIConstants.collectionViewItemSpacing + (UIConstants.viewSidePadding * 2)
         let itemWidth = (UIScreen.main.bounds.width - totalSpacing) / 2 - UIConstants.viewItemWidthPartition
-        
         layout.itemSize = CGSize(width: itemWidth, height: UIConstants.collectionViewItemHeight)
-        layout.sectionInset = UIEdgeInsets(top: UIConstants.collectionTopPadding, left: UIConstants.viewSidePadding, bottom: 0, right: UIConstants.viewSidePadding)
+        layout.sectionInset = UIEdgeInsets(
+            top: UIConstants.collectionTopPadding,
+            left: UIConstants.viewSidePadding,
+            bottom: 0,
+            right: UIConstants.viewSidePadding
+        )
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FavoritePlaceCell.self, forCellWithReuseIdentifier: "FavoritePlaceCell")
@@ -50,6 +59,7 @@ class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, 
         view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
+        setupCollectionView()
     }
     
     private func setupNavigationBar() {
@@ -71,11 +81,7 @@ class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, 
     private func setupViews() {
         view.addSubview(collectionView)
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
         NSLayoutConstraint.activate([
-            
             collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIConstants.collectionViewLineSpacing),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.viewSidePadding),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.viewSidePadding),
@@ -83,21 +89,21 @@ class FavoritePlacesViewController: UIViewController, UICollectionViewDelegate, 
         ])
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return places.count
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
-    
 }
 
+
+// SwiftUI Preview
 struct FavoritePlacesViewControllerRepresentable: UIViewControllerRepresentable {
-    
     func makeUIViewController(context: Context) -> UINavigationController {
-        let favoritePlacesVC = FavoritePlacesViewController()
-        return UINavigationController(rootViewController: favoritePlacesVC)
+        let vc = FavoritePlacesViewController()
+        return UINavigationController(rootViewController: vc)
     }
     
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-    }
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
 }
 
 struct FavoritePlacesViewController_Previews: PreviewProvider {

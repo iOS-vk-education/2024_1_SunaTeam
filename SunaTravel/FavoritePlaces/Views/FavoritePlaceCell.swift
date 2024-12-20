@@ -13,15 +13,15 @@ fileprivate struct UIConstants {
     static let subtitleFontSize: CGFloat = 14
     static let titleTopPadding: CGFloat = 8
     static let subtitleTopPadding: CGFloat = 4
-    static let imageHeight: CGFloat = 150
-    static let collectionViewLineSpacing: CGFloat = 16
     static let collectionViewItemSpacing: CGFloat = 8
-    static let collectionViewItemWidth: CGFloat = UIScreen.main.bounds.width / 2
-    static let collectionViewItemHeight: CGFloat = 180
     static let viewSidePadding: CGFloat = 16
     static let titleTopMargin: CGFloat = 8
     static let titleFontLargeSize: CGFloat = 20
-    static let subtitleIconConstant: CGFloat = 23
+    static let subtitleIconConstant: CGFloat = 20
+    static let leadingPadding: CGFloat = 5
+    static var imageHeight: CGFloat { return UIScreen.main.bounds.width * 0.35 }
+    static var collectionViewItemHeight: CGFloat { return UIScreen.main.bounds.width * 0.6 }
+    static var collectionViewItemWidth: CGFloat { return UIScreen.main.bounds.width / 2 }
 }
 
 class FavoritePlaceCell: UICollectionViewCell {
@@ -55,7 +55,7 @@ class FavoritePlaceCell: UICollectionViewCell {
     
     let locationIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "mappin.and.ellipse") // Значок геолокации из SF Symbols
+        imageView.image = UIImage(systemName: "mappin.and.ellipse")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,24 +80,38 @@ class FavoritePlaceCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    private func setupViews() {
+        setupImageView()
+        setupTitleLabel()
+        setupSubtitleStackView()
+    }
+    
+    private func setupImageView() {
         contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subtitleStackView)
-        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: UIConstants.imageHeight),
-            
+            imageView.heightAnchor.constraint(equalToConstant: UIConstants.imageHeight)
+        ])
+    }
+    
+    private func setupTitleLabel() {
+        contentView.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: UIConstants.titleTopPadding),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UIConstants.subtitleTopPadding),
-            subtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.subtitleIconConstant),
-            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.leadingPadding),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+    }
+    
+    private func setupSubtitleStackView() {
+        contentView.addSubview(subtitleStackView)
+        locationIcon.widthAnchor.constraint(equalToConstant: UIConstants.subtitleIconConstant).isActive = true
+        NSLayoutConstraint.activate([
+            subtitleStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UIConstants.subtitleTopPadding),
+            subtitleStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.leadingPadding),
+            subtitleStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -108,24 +122,33 @@ class FavoritePlaceCell: UICollectionViewCell {
     }
 }
 
+protocol PlaceProvider {
+    func getModel() -> Place
+}
+
 struct FavoritePlaceCellRepresentable: UIViewRepresentable {
-    var place: Place
+    var placeProvider: PlaceProvider
 
     func makeUIView(context: Context) -> FavoritePlaceCell {
         let cell = FavoritePlaceCell()
-        cell.configure(with: place)
+        cell.configure(with: placeProvider.getModel())
         return cell
     }
 
     func updateUIView(_ uiView: FavoritePlaceCell, context: Context) {
+        uiView.configure(with: placeProvider.getModel())
+    }
+}
+
+struct ExamplePlaceProvider: PlaceProvider {
+    func getModel() -> Place {
+        return Place(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "FirstPlace")
     }
 }
 
 struct FavoritePlaceCell_Previews: PreviewProvider {
     static var previews: some View {
-        let examplePlace = Place(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "FirstPlace")
-        
-        return FavoritePlaceCellRepresentable(place: examplePlace)
+        FavoritePlaceCellRepresentable(placeProvider: ExamplePlaceProvider())
             .frame(width: UIConstants.collectionViewItemWidth, height: UIConstants.collectionViewItemHeight)
             .previewLayout(.sizeThatFits)
             .padding()

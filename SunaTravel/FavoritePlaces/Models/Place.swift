@@ -1,5 +1,5 @@
 //
-//  Places.swift
+//  Place.swift
 //  SunaTravel
 //
 //  Created by Иван Тарасюк on 14.12.2024.
