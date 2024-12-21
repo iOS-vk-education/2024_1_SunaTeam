@@ -11,6 +11,12 @@
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
 		58F5CAC82D0785E300A3C1FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */; };
+		8F0A96DA2D13591900322C53 /* NavigationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A96D92D13590100322C53 /* NavigationItemModel.swift */; };
+		8F7310F92D0DE4A5007A78AC /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310F82D0DE49D007A78AC /* CalendarHeaderView.swift */; };
+		8F7310FC2D0DE4C4007A78AC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310FB2D0DE4B9007A78AC /* MainViewController.swift */; };
+		8F7310FE2D0DE4D9007A78AC /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310FD2D0DE4CF007A78AC /* NavigationBar.swift */; };
+		8F7311002D0DE4E5007A78AC /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310FF2D0DE4DC007A78AC /* ScheduleCell.swift */; };
+		8F7311022D0DE4F6007A78AC /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7311012D0DE4EB007A78AC /* ScheduleModel.swift */; };
 		8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */; };
 		8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */; };
 		8F7310DD2D0B8F8C007A78AC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */; };
@@ -31,6 +37,12 @@
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58F5CAC42D0785E300A3C1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8F0A96D92D13590100322C53 /* NavigationItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItemModel.swift; sourceTree = "<group>"; };
+		8F7310F82D0DE49D007A78AC /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		8F7310FB2D0DE4B9007A78AC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8F7310FD2D0DE4CF007A78AC /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		8F7310FF2D0DE4DC007A78AC /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
+		8F7311012D0DE4EB007A78AC /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
 		8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -75,6 +87,7 @@
 		58F5CABF2D0785E000A3C1FA /* SunaTravel */ = {
 			isa = PBXGroup;
 			children = (
+				8F7310FA2D0DE4A8007A78AC /* MainScreen */,
 				8F7311242D0FA442007A78AC /* swiftlint.yml */,
 				8F7310E92D0D90F9007A78AC /* Onboardings */,
 				8F7310E22D0B9023007A78AC /* Extensions */,
@@ -95,6 +108,31 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8F7310FA2D0DE4A8007A78AC /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8F7311042D0DE53D007A78AC /* Models */,
+				8F7311032D0DE503007A78AC /* Views */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		8F7311032D0DE503007A78AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F7310FF2D0DE4DC007A78AC /* ScheduleCell.swift */,
+				8F7310FD2D0DE4CF007A78AC /* NavigationBar.swift */,
+				8F7310FB2D0DE4B9007A78AC /* MainViewController.swift */,
+				8F7310F82D0DE49D007A78AC /* CalendarHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8F7311042D0DE53D007A78AC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A96D92D13590100322C53 /* NavigationItemModel.swift */,
+				8F7311012D0DE4EB007A78AC /* ScheduleModel.swift */,
 		8F7310E22D0B9023007A78AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F7310FE2D0DE4D9007A78AC /* NavigationBar.swift in Sources */,
+				8F7311022D0DE4F6007A78AC /* ScheduleModel.swift in Sources */,
+				8F7310F92D0DE4A5007A78AC /* CalendarHeaderView.swift in Sources */,
+				8F0A96DA2D13591900322C53 /* NavigationItemModel.swift in Sources */,
+				8F7311002D0DE4E5007A78AC /* ScheduleCell.swift in Sources */,
+				8F7310FC2D0DE4C4007A78AC /* MainViewController.swift in Sources */,
 				8F7310F32D0DA0A0007A78AC /* OnboardingToolbar.swift in Sources */,
 				8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */,
 				8F7310DF2D0B8FB4007A78AC /* OnboardingViewController.swift in Sources */,
