@@ -7,31 +7,33 @@
 import UIKit
 import SwiftUI
 
-fileprivate struct UIConstants {
-    static let collectionTopPadding: CGFloat = 30
-    static let collectionViewLineSpacing: CGFloat = 50
-    static let collectionViewItemSpacing: CGFloat = 6
-    static let viewSidePadding: CGFloat = 16
-    static let viewItemWidthPartition: CGFloat = 40
-
-    static var collectionViewItemHeight: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        return screenHeight * 0.25
-    }
-}
-
 struct MockData {
-    static let places: [Place] = [
-        Place(title: "Niladri Reservoir", subtitle: "Tekergat, Sunamganj", imageName: "FirstPlace"),
-        Place(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "SecondPlace"),
-        Place(title: "Aonang Villa Resort", subtitle: "Bastola, Islampur", imageName: "ThirdPlace"),
-        Place(title: "Rangauti Resort", subtitle: "Sylhet, Airport Road", imageName: "FourthPlace"),
-        Place(title: "Kachura Resort", subtitle: "Vellima, Island", imageName: "FifthPlace"),
-        Place(title: "Shakardu Resort", subtitle: "Shakartu, Pakistan", imageName: "SixthPlace")
+    static let places: [PlaceModel] = [
+        PlaceModel(title: "Niladri Reservoir", subtitle: "Tekergat, Sunamganj", imageName: "FirstPlace"),
+        PlaceModel(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "SecondPlace"),
+        PlaceModel(title: "Aonang Villa Resort", subtitle: "Bastola, Islampur", imageName: "ThirdPlace"),
+        PlaceModel(title: "Rangauti Resort", subtitle: "Sylhet, Airport Road", imageName: "FourthPlace"),
+        PlaceModel(title: "Kachura Resort", subtitle: "Vellima, Island", imageName: "FifthPlace"),
+        PlaceModel(title: "Shakardu Resort", subtitle: "Shakartu, Pakistan", imageName: "SixthPlace")
     ]
 }
 
 class FavoritePlacesViewController: UIViewController {
+    
+    fileprivate struct UIConstants {
+        static let collectionTopPadding: CGFloat = 30
+        static let collectionViewLineSpacing: CGFloat = 50
+        static let collectionViewItemSpacing: CGFloat = 6
+        static let viewSidePadding: CGFloat = 16
+        static let viewItemWidthPartition: CGFloat = 40
+        static let UIBackgroundColor: UIColor = .white
+
+        static var collectionViewItemHeight: CGFloat {
+            let screenHeight = UIScreen.main.bounds.height
+            return screenHeight * 0.2
+        }
+    }
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -49,14 +51,14 @@ class FavoritePlacesViewController: UIViewController {
         )
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(FavoritePlaceCell.self, forCellWithReuseIdentifier: "FavoritePlaceCell")
+        collectionView.register(FavoritePlaceCell.self, forCellWithReuseIdentifier: FavoritePlaceCell.reuseID)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIConstants.UIBackgroundColor
         setupNavigationBar()
         setupViews()
         setupCollectionView()

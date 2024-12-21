@@ -1,11 +1,11 @@
 //
-//  Place.swift
+//  PlaceModel.swift
 //  SunaTravel
 //
 //  Created by Иван Тарасюк on 14.12.2024.
 //
 
-struct Place {
+struct PlaceModel {
     let title: String
     let subtitle: String
     let imageName: String

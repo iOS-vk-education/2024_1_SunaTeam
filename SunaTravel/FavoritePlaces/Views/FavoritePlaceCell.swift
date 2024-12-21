@@ -115,19 +115,16 @@ class FavoritePlaceCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with place: Place) {
+    func configure(with place: PlaceModel) {
         titleLabel.text = place.title
         subtitleLabel.text = place.subtitle
         imageView.image = UIImage(named: place.imageName)
     }
 }
 
-protocol PlaceProvider {
-    func getModel() -> Place
-}
 
 struct FavoritePlaceCellRepresentable: UIViewRepresentable {
-    var placeProvider: PlaceProvider
+    var placeProvider: IPlaceProvider
 
     func makeUIView(context: Context) -> FavoritePlaceCell {
         let cell = FavoritePlaceCell()
@@ -140,15 +137,9 @@ struct FavoritePlaceCellRepresentable: UIViewRepresentable {
     }
 }
 
-struct ExamplePlaceProvider: PlaceProvider {
-    func getModel() -> Place {
-        return Place(title: "Casa Las Tirtugas", subtitle: "Av Damero, Mexico", imageName: "FirstPlace")
-    }
-}
-
 struct FavoritePlaceCell_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritePlaceCellRepresentable(placeProvider: ExamplePlaceProvider())
+        FavoritePlaceCellRepresentable(placeProvider: ExamplePlaceProviderImpl())
             .frame(width: UIConstants.collectionViewItemWidth, height: UIConstants.collectionViewItemHeight)
             .previewLayout(.sizeThatFits)
             .padding()
