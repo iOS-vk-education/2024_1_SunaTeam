@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58D6D1E72D1747900035932D /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6D1E62D1747900035932D /* PlaceModel.swift */; };
+		58D6D1E92D1747EC0035932D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6D1E82D1747EC0035932D /* HomeViewModel.swift */; };
+		58D6D1EB2D1748C80035932D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6D1EA2D1748C80035932D /* HomeViewController.swift */; };
+		58D6D1ED2D17498F0035932D /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6D1EC2D17498F0035932D /* PlaceCell.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58D6D1E62D1747900035932D /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		58D6D1E82D1747EC0035932D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		58D6D1EA2D1748C80035932D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		58D6D1EC2D17498F0035932D /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +76,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58D6D1E22D1746C80035932D /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				58D6D1E32D17471B0035932D /* Models */,
+				58D6D1E42D1747260035932D /* Views */,
+				58D6D1E52D17472E0035932D /* ViewModels */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		58D6D1E32D17471B0035932D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				58D6D1E62D1747900035932D /* PlaceModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		58D6D1E42D1747260035932D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				58D6D1EA2D1748C80035932D /* HomeViewController.swift */,
+				58D6D1EC2D17498F0035932D /* PlaceCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		58D6D1E52D17472E0035932D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				58D6D1E82D1747EC0035932D /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		58F5CAB42D0785E000A3C1FA = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF43D852D1A129E0052A0AA /* MainScreen */,
+				58D6D1E22D1746C80035932D /* HomeScreen */,
 				8F7311242D0FA442007A78AC /* swiftlint.yml */,
 				8F7310E92D0D90F9007A78AC /* Onboardings */,
 				8F7310E22D0B9023007A78AC /* Extensions */,
@@ -289,13 +333,16 @@
 				8F7310F32D0DA0A0007A78AC /* OnboardingToolbar.swift in Sources */,
 				8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */,
 				8F7310DF2D0B8FB4007A78AC /* OnboardingViewController.swift in Sources */,
+				58D6D1E72D1747900035932D /* PlaceModel.swift in Sources */,
 				58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */,
 				8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */,
 				8F7310DD2D0B8F8C007A78AC /* OnboardingView.swift in Sources */,
 				8F7310EB2D0D91B5007A78AC /* Color+Extensions.swift in Sources */,
 				8F7310ED2D0D9FEE007A78AC /* OnboardinSlidesView.swift in Sources */,
+				58D6D1E92D1747EC0035932D /* HomeViewModel.swift in Sources */,
 				8F7310E12D0B8FCC007A78AC /* OnboardingViewModel.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
+				58D6D1EB2D1748C80035932D /* HomeViewController.swift in Sources */,
 				8F7310F12D0DA06D007A78AC /* OnboardingButton.swift in Sources */,
 				8F7310EF2D0DA02F007A78AC /* PageIndicatorView.swift in Sources */,
 				8FF43D862D1A129E0052A0AA /* NavigationBar.swift in Sources */,
@@ -304,6 +351,7 @@
 				8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */,
 				8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */,
 				8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */,
+				58D6D1ED2D17498F0035932D /* PlaceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
