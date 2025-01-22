@@ -62,7 +62,7 @@ class MapViewController: UIViewController, YMKLayersGeoObjectTapListener {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
-
+    
 }
 
 // MARK: - Listener
@@ -92,22 +92,8 @@ extension MapViewController: YMKMapInputListener {
 
 extension MapViewController: YMKMapObjectTapListener {
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let placemark = mapObject as? YMKPlacemarkMapObject,
-              let userData = placemark.userData as? [String: Any],
-              let name = userData["name"] as? String,
-              let latitude = userData["latitude"] as? Double,
-              let longitude = userData["longitude"] as? Double else {
-            return false
-        }
-        
-        let alert = UIAlertController(
-            title: name,
-            message: "Coordinates:\nLatitude: \(latitude)\nLongitude: \(longitude)",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-        
+        let tripDetailViewController = UIHostingController(rootView: ViewTripViewControllerWrapper())
+        navigationController?.pushViewController(tripDetailViewController, animated: true)
         return true
     }
 }
@@ -118,7 +104,7 @@ struct MapView: UIViewControllerRepresentable {
         YMKMapKit.sharedInstance().onStart()
         return MapViewController()
     }
-
+    
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {}
 }
 

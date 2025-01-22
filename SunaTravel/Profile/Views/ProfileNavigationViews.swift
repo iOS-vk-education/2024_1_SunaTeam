@@ -11,7 +11,7 @@ import SwiftUI
 struct BookmarksView: View {
     var body: some View {
         FavoritePlacesViewControllerWrapper()
-            .navigationBarTitle("Favorite Places", displayMode: .inline)
+            .navigationBarTitle("All Places", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // Кнопка "+" для перехода

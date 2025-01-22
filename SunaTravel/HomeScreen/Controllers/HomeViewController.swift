@@ -47,6 +47,7 @@ class HomeViewController: UIViewController {
             return traitCollection.userInterfaceStyle == .dark ? .white : .black
         }, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: HomeViewConstants.profileButtonTextSize)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: HomeViewConstants.profileButtonTextSize, bottom: 0, right: 0)
         button.layer.cornerRadius = HomeViewConstants.profileButtonCornerRadius
         button.layer.masksToBounds = true
         return button
@@ -127,6 +128,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        //profileButton.
         viewAllButton.addTarget(self, action: #selector(viewAllButtonTapped), for: .touchUpInside)
         
         updateProfileButton()
@@ -148,15 +150,20 @@ class HomeViewController: UIViewController {
     private func updateProfileButton() {
         DispatchQueue.main.async {
             self.profileButton.setTitle(self.profileViewModel.profile.name, for: .normal)
-            
+
             if let avatar = self.profileViewModel.profile.avatar {
                 print("Avatar size: \(avatar.size)")
-                let size = CGSize(width: 15, height: 15)
-                let scaledAvatar = avatar.resize(to: size)
-                self.profileButton.setImage(scaledAvatar?.withRenderingMode(.alwaysOriginal), for: .normal)
+                
+                let diameter: CGFloat = 22 
+                let scaledAvatar = avatar.resize(to: CGSize(width: diameter, height: diameter))
+                let roundedAvatar = scaledAvatar?.withRoundedCorners(radius: diameter / 2)
+                
+                self.profileButton.setImage(roundedAvatar?.withRenderingMode(.alwaysOriginal), for: .normal)
             } else {
                 self.profileButton.setImage(UIImage(systemName: "person.circle.fill"), for: .normal)
             }
+            
+            self.profileButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         }
     }
     
@@ -164,7 +171,7 @@ class HomeViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
-        let headerStack = UIStackView(arrangedSubviews: [profileButton, UIView()])
+        let headerStack = UIStackView(arrangedSubviews: [profileButton])
         profileButton.imageView?.contentMode = .scaleAspectFit
         headerStack.axis = .horizontal
         headerStack.alignment = .center
@@ -201,6 +208,29 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 
+extension UIImage {
+    func resize(to size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        draw(in: CGRect(origin: .zero, size: size))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
+    }
+}
+
+extension UIImage {
+    func withRoundedCorners(radius: CGFloat) -> UIImage? {
+        let rect = CGRect(origin: .zero, size: CGSize(width: size.width, height: size.height))
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: radius)
+        path.addClip()
+        draw(in: rect)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return roundedImage
+    }
+}
+
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.places.count
@@ -213,16 +243,6 @@ extension HomeViewController: UICollectionViewDataSource {
         let place = viewModel.places[indexPath.row]
         cell.configure(with: place)
         return cell
-    }
-}
-
-extension UIImage {
-    func resize(to size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
-        self.draw(in: CGRect(origin: .zero, size: size))
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return resizedImage
     }
 }
 

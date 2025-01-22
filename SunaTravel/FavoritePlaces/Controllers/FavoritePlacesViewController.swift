@@ -70,7 +70,7 @@ class FavoritePlacesViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Favorite Places"
+        navigationItem.title = "All Places"
     }
     
     @objc private func backButtonTapped() {

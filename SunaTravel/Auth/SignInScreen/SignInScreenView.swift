@@ -31,6 +31,7 @@ struct SignInScreenView: View{
                     }
                     .buttonStyle(YellowButtonStyle())
                     .padding(.top, 24)
+                    //if login == nnn { ...
                 }
                 .padding(.bottom, 40)
                 

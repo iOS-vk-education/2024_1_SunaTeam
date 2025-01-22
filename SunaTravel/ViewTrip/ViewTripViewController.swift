@@ -43,6 +43,7 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 40
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

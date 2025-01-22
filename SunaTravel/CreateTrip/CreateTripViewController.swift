@@ -31,6 +31,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 40
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -60,6 +61,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let textView = UITextView()
         textView.textColor = .label
         textView.backgroundColor = .quaternaryLabel
+        textView.layer.opacity = 0.4
         textView.layer.cornerRadius = 15
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 17)
@@ -157,19 +159,19 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             tripNameTextField.topAnchor.constraint(equalTo: collapseButton.bottomAnchor, constant: 16),
             tripNameTextField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             tripNameTextField.widthAnchor.constraint(equalToConstant: 360),
-            tripNameTextField.heightAnchor.constraint(equalToConstant: 38),
+            tripNameTextField.heightAnchor.constraint(equalToConstant: 48),
 
             // Location Field
             locationTextField.topAnchor.constraint(equalTo: tripNameTextField.bottomAnchor, constant: 12),
             locationTextField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             locationTextField.widthAnchor.constraint(equalToConstant: 360),
-            locationTextField.heightAnchor.constraint(equalToConstant: 38),
+            locationTextField.heightAnchor.constraint(equalToConstant: 48),
 
             // Date Text Field
             dateTextField.topAnchor.constraint(equalTo: locationTextField.bottomAnchor, constant: 12),
             dateTextField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             dateTextField.widthAnchor.constraint(equalToConstant: 360),
-            dateTextField.heightAnchor.constraint(equalToConstant: 38),
+            dateTextField.heightAnchor.constraint(equalToConstant: 48),
 
             // About Destination Label
             aboutDestinationLabel.topAnchor.constraint(equalTo: dateTextField.bottomAnchor, constant: 12),
@@ -212,6 +214,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.backgroundColor = .quaternaryLabel
+        textField.layer.opacity = 0.4
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
