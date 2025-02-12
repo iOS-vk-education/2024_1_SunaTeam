@@ -1,59 +1,60 @@
+// MARK: тут карусель не затемняется и описания нет
 import UIKit
+import SwiftUI
 
 class ViewTripViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - UI Elements
+    // Background Image
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "background")
+        imageView.image = UIImage(named: "FirstPlace")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(hex: "1B1E28").withAlphaComponent(0.16)
-        button.setTitle("ᐸ", for: .normal) // <
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+//    private let backButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.layer.cornerRadius = 20
+//        button.backgroundColor = UIColor(hex: "1B1E28").withAlphaComponent(0.16)
+//        button.setTitle("<", for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
 
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Details"
-        label.textColor = .black
-        
-        // what with font???
-        if let font = UIFont(name: "SFUIDisplay-Bold", size: 90) {
-            label.font = UIFontMetrics.default.scaledFont(for: font)
-        } else {
-            label.font = UIFont.preferredFont(forTextStyle: .headline)
-        }
-        
-        label.adjustsFontForContentSizeCategory = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        return label
-    }()
-
-
+    
+//    private let titleLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Details"
+//        label.textColor = .black
+//            
+//        // what with font???
+//        if let font = UIFont(name: "SFUIDisplay-Bold", size: 90) {
+//                label.font = UIFontMetrics.default.scaledFont(for: font)
+//        } else{
+//                label.font = UIFont.preferredFont(forTextStyle: .headline)
+//        }
+//            
+//        label.adjustsFontForContentSizeCategory = true
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textAlignment = .center
+//        return label
+//        }()
 
     // Main Container View
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 40
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // Только верхние углы
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    
     private let collapseButton: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "7D848D").withAlphaComponent(0.2)
@@ -61,11 +62,11 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private let NiladriReservoirLabel: UILabel = {
         let label = UILabel()
         label.text = "Niladri Reservoir"
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,7 +75,7 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
     private let TekergatLabel: UILabel = {
         let label = UILabel()
         label.text = "Tekergat"
-        label.textColor = .gray
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -95,19 +96,19 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
     private var photos: [UIImage] = [
-        UIImage(named: "photo1")!,
-        UIImage(named: "photo2")!,
-        UIImage(named: "photo3")!,
-        UIImage(named: "photo4")!,
-        UIImage(named: "photo5")!
-    ]
+            UIImage(named: "FirstPlace")!,
+            UIImage(named: "SecondPlace")!,
+            UIImage(named: "ThirdPlace")!,
+            UIImage(named: "FourthPlace")!,
+            UIImage(named: "FifthPlace")!
+        ]
     
     private let aboutDestinationLabel: UILabel = {
         let label = UILabel()
         label.text = "About Destination"
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 21)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -126,7 +127,7 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         With our comprehensive travel packages, you can rest assured that every detail is meticulously planned to provide you with the ultimate beach vacation. From the moment you book your trip to the time you return home, we are here to support you every step of the way. Don’t miss out on the opportunity to unwind and rejuvenate on the beautiful beaches of Greece—book your travel package today and get ready for the adventure of a lifetime!
         """
-        label.textColor = .darkGray
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 17)
         label.numberOfLines = 8
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -134,17 +135,25 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
     }()
 
     private let readMoreButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Read more", for: .normal)
-        button.setTitleColor(UIColor(hex: "FF7029"), for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(didTapReadMore), for: .touchUpInside)
-        return button
+            let button = UIButton(type: .system)
+            button.setTitle("Read more", for: .normal)
+            button.setTitleColor(UIColor(hex: "FF7029"), for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.addTarget(self, action: #selector(didTapReadMore), for: .touchUpInside)
+            return button
     }()
 
-    private var isExpanded = false
+//    private var photos: [UIImage] = [
+//        UIImage(named: "FirstPlace")!,
+//        UIImage(named: "SecondPlace")!,
+//        UIImage(named: "ThirdPlace")!,
+//        UIImage(named: "FourthPlace")!,
+//        UIImage(named: "FifthPlace")!
+//    ]
 
+    private var isExpanded = false
+    
     private let locationIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "mappin.and.ellipse")
@@ -153,7 +162,7 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     lazy var subtitleStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [locationIcon, TekergatLabel])
         stackView.axis = .horizontal
@@ -167,10 +176,10 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.isScrollEnabled = false // Прокрутка отключена если что это убрать
+        scrollView.isScrollEnabled = false // Scrolling is disabled if you remove it
         return scrollView
     }()
-
+    
     private let descriptionContentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -192,14 +201,12 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
     // MARK: - Setup Methods
     private func setupView() {
         view.addSubview(backgroundImageView)
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
+        //view.addSubview(backButton)
+        //view.addSubview(titleLabel)
         view.addSubview(containerView)
-        
 
         containerView.addSubview(collapseButton)
         
-        // This piece goes here
         containerView.addSubview(descriptionScrollView)
         descriptionScrollView.addSubview(descriptionContentView)
         descriptionContentView.addSubview(descriptionLabel)
@@ -210,50 +217,53 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         containerView.addSubview(photoGalleryCollectionView)
         containerView.addSubview(aboutDestinationLabel)
         containerView.addSubview(subtitleStackView)
-
     }
-    // MARK: setupLayout
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
+            // Background Image
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.widthAnchor.constraint(equalToConstant: 40),
-            backButton.heightAnchor.constraint(equalToConstant: 40),
-
-            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8),
-
+            
+            // Back Button
+            //            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            //            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            //            backButton.widthAnchor.constraint(equalToConstant: 40),
+            //            backButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            // Title Label
+            //            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
+            //            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8),
+            
+            // Container View
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
-
+        
         containerHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: 430)
         containerHeightConstraint.isActive = true
-
+        
         NSLayoutConstraint.activate([
             collapseButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             collapseButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             collapseButton.widthAnchor.constraint(equalToConstant: 36),
             collapseButton.heightAnchor.constraint(equalToConstant: 5),
-
+            
             NiladriReservoirLabel.topAnchor.constraint(equalTo: collapseButton.bottomAnchor, constant: 16),
             NiladriReservoirLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             // Subtitle StackView (Location Icon + location Label)
             subtitleStackView.topAnchor.constraint(equalTo: NiladriReservoirLabel.bottomAnchor, constant: 7),
             subtitleStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-
+            
             photoGalleryCollectionView.topAnchor.constraint(equalTo: TekergatLabel.bottomAnchor, constant: 12),
             photoGalleryCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             photoGalleryCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             photoGalleryCollectionView.heightAnchor.constraint(equalToConstant: 70),
-
+            
             aboutDestinationLabel.topAnchor.constraint(equalTo: photoGalleryCollectionView.bottomAnchor, constant: 18),
             aboutDestinationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
         ])
@@ -263,26 +273,26 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             descriptionScrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             descriptionScrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             descriptionScrollView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
-
+            
             descriptionContentView.topAnchor.constraint(equalTo: descriptionScrollView.topAnchor),
             descriptionContentView.leadingAnchor.constraint(equalTo: descriptionScrollView.leadingAnchor),
             descriptionContentView.trailingAnchor.constraint(equalTo: descriptionScrollView.trailingAnchor),
             descriptionContentView.bottomAnchor.constraint(equalTo: descriptionScrollView.bottomAnchor),
             descriptionContentView.widthAnchor.constraint(equalTo: descriptionScrollView.widthAnchor),
-
+            
             descriptionLabel.topAnchor.constraint(equalTo: descriptionContentView.topAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor, constant: -6),
-
+            
             readMoreButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 7),
-//            readMoreButton.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor),
+            // readMoreButton.leadingAnchor.constraint(equalTo: descriptionContentView.leadingAnchor),
             readMoreButton.trailingAnchor.constraint(equalTo: descriptionContentView.trailingAnchor, constant: -11),
             readMoreButton.bottomAnchor.constraint(equalTo: descriptionContentView.bottomAnchor),
             readMoreButton.heightAnchor.constraint(equalToConstant: 20)
         ])
-
-
     }
+    
+    // ТУТ ОСТАНОВИЛАСЬ
 
     private func addCollapseButtonGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCollapseButton))
@@ -310,7 +320,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             self.view.layoutIfNeeded()
         }
     }
-
 
 
     // MARK: - UICollectionView Data Source
@@ -421,7 +430,7 @@ class PhotoCell: UICollectionViewCell {
     func configure(with image: UIImage, isLast: Bool, remainingCount: Int) {
         imageView.image = image
         overlayLabel.isHidden = true // without counter
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = .clear // clarity
     }
 
 }
@@ -437,7 +446,14 @@ extension ViewTripViewController {
     }
 }
 
-
-
-
-
+struct ViewTripViewControllerWrapper: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
+        let ViewTripViewController = ViewTripViewController()
+        let navigationController = UINavigationController(rootViewController: ViewTripViewController)
+        return navigationController
+    }
+    
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+    }
+}
