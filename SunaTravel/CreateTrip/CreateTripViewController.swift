@@ -1,37 +1,25 @@
 import UIKit
 import PhotosUI  // for multiply photo selection
+import SwiftUI
 
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - UI Elements
-    
+
     // Background Image
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "background")
+        imageView.image = UIImage(named: "FirstPlace")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    // Back Button
-    private let backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(hex: "1B1E28").withAlphaComponent(0.16)
-        button.setTitle("ᐸ", for: .normal) // <
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     // Title Label
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Create a trip"
-        label.textColor = .white
+//        label.text = "Create a trip"
+        label.textColor = .systemBackground
         label.font = UIFont(name: "SFUIDisplay-Regular", size: 80)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.removeConstraints(label.constraints)
@@ -43,14 +31,13 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     // Main Container View
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 40
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]  //only top corners
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    
     private let collapseButton: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "7D848D").withAlphaComponent(0.2)
@@ -75,6 +62,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let textView = UITextView()
         textView.text = "Write description"
         textView.textColor = .lightGray
+//        textView.backgroundColor = .quaternaryLabel
         textView.backgroundColor = UIColor(hex: "F7F7F9")
         textView.layer.cornerRadius = 15
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,11 +80,11 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.systemBackground, for: .normal)
         button.backgroundColor = UIColor(hex: "24BAEC")
         button.layer.cornerRadius = 16
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -117,14 +105,14 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     // MARK: - Setup Methods
-    
+
     private func setupView() {
         view.addSubview(backgroundImageView)
-        view.addSubview(backButton)
+        //view.addSubview(backButton)
         view.addSubview(titleLabel)
         view.addSubview(containerView)
         view.addSubview(addFileButton)
-        
+
         containerView.addSubview(collapseButton)
         containerView.addSubview(tripNameTextField)
         containerView.addSubview(locationTextField)
@@ -140,18 +128,21 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
+
             // Back Button
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.widthAnchor.constraint(equalToConstant: 40),
-            backButton.heightAnchor.constraint(equalToConstant: 40),
+//            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            backButton.widthAnchor.constraint(equalToConstant: 40),
+//            backButton.heightAnchor.constraint(equalToConstant: 40),
+
             
             // Title Label
-            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor), // Центр по вертикали относительно кнопки "Назад"
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),       // Центр по горизонтали относительно экрана
-            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // width up to (до) 80% ширины экрана
-            
+            // MARK: - Maybe somehow fix it in a different way, not from the Back button
+            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor), // Центр по вертикали относительно кнопки "Назад"
+            //
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // 80% of screen
+
             // Add File Button
             addFileButton.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -10),
             addFileButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
@@ -240,6 +231,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.backgroundColor = UIColor(hex: "F7F7F9")
+//        textField.backgroundColor = .quaternaryLabel
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -258,6 +250,7 @@ extension CreateTripViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == descriptionTextView && textView.text.isEmpty {
             textView.text = "Write description"
+//            textView.textColor = .quaternaryLabel
             textView.textColor = .lightGray
         }
     }
@@ -282,5 +275,18 @@ extension CreateTripViewController: PHPickerViewControllerDelegate {
                 self.backgroundImageView.image = image // set the first file as background
             }
         }
+    }
+}
+
+// Swift-UI wrapper for UIKit by using UIViewControllerRepresentable
+struct CreateTripViewControllerWrapper: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
+        let createTripViewController = CreateTripViewController()
+        let navigationController = UINavigationController(rootViewController: createTripViewController)
+        return navigationController
+    }
+    
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
     }
 }
