@@ -78,6 +78,9 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         button.backgroundColor = UIColor(hex: "F7F7F9")
         button.addTarget(self, action: #selector(didTapAddFile), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.textAlignment = .center
+        button.contentVerticalAlignment = .center
+        button.titleEdgeInsets = UIEdgeInsets(top: -2, left: 0, bottom: 0, right: 0)
         return button
     }()
 
