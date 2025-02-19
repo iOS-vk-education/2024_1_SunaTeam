@@ -352,7 +352,8 @@ extension CreateTripViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.textColor == .lightGray {
             textField.text = ""
-            textField.textColor = .black
+//            textField.textColor = .black
+            textField.textColor = UIColor.label // auto adaptation to themes
         }
     }
 
