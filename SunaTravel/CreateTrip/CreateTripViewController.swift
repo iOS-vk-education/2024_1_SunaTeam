@@ -6,7 +6,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
     // MARK: - UI Elements
 
-    // Background Image
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -15,12 +14,11 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         return imageView
     }()
 
-    // Title Label
     private let titleLabel: UILabel = {
         let label = UILabel()
 //        label.text = "Create a trip"
         label.textColor = .systemBackground
-        label.font = UIFont(name: "SFUIDisplay-Regular", size: 80)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.removeConstraints(label.constraints)
         label.textAlignment = .center
@@ -52,7 +50,8 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private let aboutDestinationLabel: UILabel = {
         let label = UILabel()
         label.text = "About Destination"
-        label.textColor = .black
+//        label.textColor = .black
+        label.textColor = UIColor.adaptiveColor(lightHex: "000000", darkHex: "FFFFFF")
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,20 +61,32 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let textView = UITextView()
         textView.text = "Write description"
         textView.textColor = .lightGray
-//        textView.backgroundColor = .quaternaryLabel
-        textView.backgroundColor = UIColor(hex: "F7F7F9")
+        textView.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         textView.layer.cornerRadius = 15
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 17)
         return textView
     }()
 
+    private let dateButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Select date", for: .normal)
+//        button.backgroundColor = UIColor(hex: "F7F7F9")
+        button.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
+        button.layer.cornerRadius = 14
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(didTapDateButton), for: .touchUpInside)
+        return button
+    }()
+
     private let addFileButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("+", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)  // bold type
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(hex: "F7F7F9")
+        button.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
+//        button.backgroundColor = UIColor(hex: "F7F7F9")
         button.addTarget(self, action: #selector(didTapAddFile), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.textAlignment = .center
@@ -87,7 +98,8 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
-        button.setTitleColor(.systemBackground, for: .normal)
+//        button.setTitleColor(.systemBackground, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(hex: "24BAEC")
         button.layer.cornerRadius = 16
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -107,6 +119,18 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         addCollapseButtonGesture() // Add gesture for collapse button
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            if descriptionTextView.text == "Write description" {
+                descriptionTextView.textColor = .lightGray
+            } else {
+                descriptionTextView.textColor = UIColor.label
+            }
+        }
+    }
+
     // MARK: - Setup Methods
 
     private func setupView() {
@@ -115,6 +139,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         view.addSubview(titleLabel)
         view.addSubview(containerView)
         view.addSubview(addFileButton)
+        view.addSubview(dateButton)
 
         containerView.addSubview(collapseButton)
         containerView.addSubview(tripNameTextField)
@@ -122,6 +147,17 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         containerView.addSubview(aboutDestinationLabel)
         containerView.addSubview(descriptionTextView)
         containerView.addSubview(saveButton)
+        
+        // Set placeholder text manually, like in UITextView
+        tripNameTextField.text = "Write a trip name"
+        tripNameTextField.textColor = .lightGray
+        tripNameTextField.delegate = self
+
+        locationTextField.text = "Write location"
+        locationTextField.textColor = .lightGray
+        locationTextField.delegate = self
+        
+        descriptionTextView.textColor = descriptionTextView.text == "Write description" ? .lightGray : UIColor.label
     }
 
     private func setupLayout() {
@@ -196,11 +232,32 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             saveButton.widthAnchor.constraint(equalToConstant: 360),
             saveButton.heightAnchor.constraint(equalToConstant: 65)
         ])
+        
+        // Date Button
+        NSLayoutConstraint.activate([
+            dateButton.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -10),
+            dateButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 9),
+            dateButton.widthAnchor.constraint(equalToConstant: 120),
+            dateButton.heightAnchor.constraint(equalToConstant: 40),
+        ])
+
+    }
+    private func updateTextViewColor() {
+        if descriptionTextView.text == "Write description" {
+            descriptionTextView.textColor = .lightGray
+        } else {
+            descriptionTextView.textColor = UIColor.label
+        }
     }
 
     private func setupDescriptionTextView() {
         descriptionTextView.delegate = self
+        updateTextViewColor()
+        
+        // add left padding
+        descriptionTextView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 8)
     }
+
 
     private func addCollapseButtonGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCollapseButton))
@@ -228,15 +285,53 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             self.view.layoutIfNeeded()
         }
     }
+    
+
+    @objc private func didTapDateButton() {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.maximumDate = Date() // Запрещаем выбирать будущие даты
+
+        let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
+        alert.view.addSubview(datePicker)
+
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            datePicker.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor),
+            datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20)
+        ])
+
+        let selectAction = UIAlertAction(title: "OK", style: .default) { _ in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd MMM yyyy"
+            let selectedDate = formatter.string(from: datePicker.date)
+            self.dateButton.setTitle(selectedDate, for: .normal)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alert.addAction(selectAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+
 
     // Helper: Create text fields and views
     private static func createRoundedTextField(placeholder: String) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
-        textField.backgroundColor = UIColor(hex: "F7F7F9")
-//        textField.backgroundColor = .quaternaryLabel
+//        textField.backgroundColor = UIColor(hex: "F7F7F9")
+        textField.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        // add left padding
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        
         return textField
     }
 }
@@ -246,14 +341,13 @@ extension CreateTripViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == descriptionTextView && textView.textColor == .lightGray {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = UIColor.label
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == descriptionTextView && textView.text.isEmpty {
             textView.text = "Write description"
-//            textView.textColor = .quaternaryLabel
             textView.textColor = .lightGray
         }
     }
@@ -280,6 +374,28 @@ extension CreateTripViewController: PHPickerViewControllerDelegate {
         }
     }
 }
+
+extension CreateTripViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.textColor == .lightGray {
+            textField.text = ""
+//            textField.textColor = .black
+            textField.textColor = UIColor.label // auto adaptation to themes
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text?.isEmpty == true {
+            if textField == tripNameTextField {
+                textField.text = "Write a trip name"
+            } else if textField == locationTextField {
+                textField.text = "Write location"
+            }
+            textField.textColor = .lightGray
+        }
+    }
+}
+
 
 // Swift-UI wrapper for UIKit by using UIViewControllerRepresentable
 struct CreateTripViewControllerWrapper: UIViewControllerRepresentable {
