@@ -17,7 +17,7 @@ extension UIColor {
         }
 
         guard hexSanitized.count == 6, let hexNumber = Int(hexSanitized, radix: 16) else {
-            self.init(white: 0.0, alpha: alpha) // Возвращает черный цвет, если hex некорректен
+            self.init(white: 0.0, alpha: alpha) // return black color, if hex is incorrect
             return
         }
 
@@ -29,7 +29,7 @@ extension UIColor {
         )
     }
 
-    /// Адаптивный цвет, меняющийся в зависимости от темы (светлая/темная)
+    // Adaptive color that changes depending on the theme (light/dark)
     static func adaptiveColor(lightHex: String, darkHex: String) -> UIColor {
         return UIColor { traitCollection in
             let hex = traitCollection.userInterfaceStyle == .dark ? darkHex : lightHex
