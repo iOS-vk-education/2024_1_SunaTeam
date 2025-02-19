@@ -1,4 +1,3 @@
-// MARK: тут карусель не затемняется и описания нет
 import UIKit
 import SwiftUI
 
@@ -31,14 +30,14 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
 //        let label = UILabel()
 //        label.text = "Details"
 //        label.textColor = .black
-//            
+//
 //        // what with font???
 //        if let font = UIFont(name: "SFUIDisplay-Bold", size: 90) {
 //                label.font = UIFontMetrics.default.scaledFont(for: font)
 //        } else{
 //                label.font = UIFont.preferredFont(forTextStyle: .headline)
 //        }
-//            
+//
 //        label.adjustsFontForContentSizeCategory = true
 //        label.translatesAutoresizingMaskIntoConstraints = false
 //        label.textAlignment = .center
@@ -291,8 +290,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             readMoreButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
-    
-    // ТУТ ОСТАНОВИЛАСЬ
 
     private func addCollapseButtonGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCollapseButton))
