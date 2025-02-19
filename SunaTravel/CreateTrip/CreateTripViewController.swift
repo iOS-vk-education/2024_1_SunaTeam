@@ -119,6 +119,21 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         addCollapseButtonGesture() // Add gesture for collapse button
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            tripNameTextField.textColor = UIColor.label
+            locationTextField.textColor = UIColor.label
+
+            if descriptionTextView.text == "Write description" {
+                descriptionTextView.textColor = .lightGray
+            } else {
+                descriptionTextView.textColor = UIColor.label
+            }
+        }
+    }
+
     // MARK: - Setup Methods
 
     private func setupView() {
@@ -145,9 +160,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         locationTextField.textColor = .lightGray
         locationTextField.delegate = self
         
-//        tripNameTextField.textColor = UIColor.adaptiveColor(lightHex: "000000", darkHex: "FFFFFF")
-//        locationTextField.textColor = UIColor.adaptiveColor(lightHex: "000000", darkHex: "FFFFFF")
-//        descriptionTextView.textColor = UIColor.adaptiveColor(lightHex: "000000", darkHex: "FFFFFF")
+        descriptionTextView.textColor = descriptionTextView.text == "Write description" ? .lightGray : UIColor.label
     }
 
     private func setupLayout() {
@@ -232,10 +245,19 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         ])
 
     }
+    private func updateTextViewColor() {
+        if descriptionTextView.text == "Write description" {
+            descriptionTextView.textColor = .lightGray
+        } else {
+            descriptionTextView.textColor = UIColor.label
+        }
+    }
 
     private func setupDescriptionTextView() {
         descriptionTextView.delegate = self
+        updateTextViewColor()
     }
+
 
     private func addCollapseButtonGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCollapseButton))
@@ -313,14 +335,13 @@ extension CreateTripViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == descriptionTextView && textView.textColor == .lightGray {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = UIColor.label
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == descriptionTextView && textView.text.isEmpty {
             textView.text = "Write description"
-//            textView.textColor = .quaternaryLabel
             textView.textColor = .lightGray
         }
     }
