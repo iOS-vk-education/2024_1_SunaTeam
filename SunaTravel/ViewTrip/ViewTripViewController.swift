@@ -290,8 +290,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             readMoreButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
-    
-    // ТУТ ОСТАНОВИЛАСЬ
 
     private func addCollapseButtonGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCollapseButton))
