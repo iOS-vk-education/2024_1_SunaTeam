@@ -123,9 +123,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         super.traitCollectionDidChange(previousTraitCollection)
 
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            tripNameTextField.textColor = UIColor.label
-            locationTextField.textColor = UIColor.label
-
             if descriptionTextView.text == "Write description" {
                 descriptionTextView.textColor = .lightGray
             } else {
@@ -329,6 +326,12 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         textField.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
+//        // set the placeholder color to gray
+//        textField.attributedPlaceholder = NSAttributedString(
+//                string: placeholder,
+//                attributes: [.foregroundColor: UIColor.lightGray]
+//        )
         
         // add left padding
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
