@@ -256,6 +256,9 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private func setupDescriptionTextView() {
         descriptionTextView.delegate = self
         updateTextViewColor()
+        
+        // add left padding
+        descriptionTextView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 8)
     }
 
 
@@ -326,6 +329,12 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         textField.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        // add left padding
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        
         return textField
     }
 }
