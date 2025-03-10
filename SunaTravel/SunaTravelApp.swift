@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct SunaTravelApp: App {
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
+    @StateObject var authViewModel = AuthViewModel()
+    init() {
+        FirebaseApp.configure()
+    }
     var body: some Scene {
         WindowGroup {
             if isFirstLaunch {

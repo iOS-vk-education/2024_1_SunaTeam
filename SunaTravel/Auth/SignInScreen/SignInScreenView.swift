@@ -5,26 +5,57 @@
 //  Created by Иван Тарасюк on 18.12.2024.
 //
 import SwiftUI
+import Firebase
 
 struct SignInScreenView: View{
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    @State private var email = ""
+    @State private var password = ""
+    @State private var errorMessage: String?
     @State private var isSignedIn = false
     var body: some View {
         NavigationView{
             VStack {
                 HeaderView(largeText: "Sign in now",
                            smallText: "Please sign in to continue our app")
-                TextFieldView(text: "Email", isSecureField: false)
+                TextField("Email", text: $email)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
                     .padding(.top, 40)
-                TextFieldView(text: "Password", isSecureField: true)
+                
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                }
                 
                 HStack {
                     Spacer()
-                    ForgetPasswordButtonView()
+                    Button("Forget Password?") {
+                        authViewModel.resetPassword(email: email) { success, error in
+                        }
+                    }
+                    .foregroundStyle(Color.blue)
+                    .font(.system(size: 14))
                 }
                 
                 Button {
-                    return Void()
+                    authViewModel.login(email: email, password: password) { success, error in
+                        if success {
+                            isSignedIn = true
+                        } else {
+                            errorMessage = error
+                        }
+                    }
                 } label: {
                     NavigationLink(destination: AppRootView(), isActive: $isSignedIn) {
                         Text("Sign in")

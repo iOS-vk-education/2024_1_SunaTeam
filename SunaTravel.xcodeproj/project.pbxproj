@@ -19,6 +19,8 @@
 		8F419B332D342A200040CB44 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F419B322D342A170040CB44 /* MapViewController.swift */; };
 		8F419B352D342A460040CB44 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F419B342D342A3F0040CB44 /* MapViewModel.swift */; };
 		8F419B372D342A600040CB44 /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F419B362D342A5D0040CB44 /* MapPlace.swift */; };
+		8F423EB62D6C88BD008C43F7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F423EB52D6C88AF008C43F7 /* AuthViewModel.swift */; };
+		8F423EB92D6C8BCA008C43F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */; };
 		8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */; };
 		8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */; };
 		8F7310DD2D0B8F8C007A78AC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */; };
@@ -73,6 +75,8 @@
 		8F419B322D342A170040CB44 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8F419B342D342A3F0040CB44 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8F419B362D342A5D0040CB44 /* MapPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
+		8F423EB52D6C88AF008C43F7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
 		8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 		58F5CABF2D0785E000A3C1FA /* SunaTravel */ = {
 			isa = PBXGroup;
 			children = (
+				8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */,
 				8F7B7B712D3445CB00F6B880 /* ViewTrip */,
 				8F7B7B6C2D34391800F6B880 /* CreateTrip */,
 				8F419B2E2D3429E50040CB44 /* MapScreen */,
@@ -195,6 +200,7 @@
 		8F0A96DD2D135FD300322C53 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				8F423EB42D6C88A3008C43F7 /* Firebase */,
 				8F0A96E02D135FF900322C53 /* SignUpScreen */,
 				8F0A96DF2D135FEE00322C53 /* SignInScreen */,
 				8F0A96DE2D135FE500322C53 /* Elements */,
@@ -260,6 +266,14 @@
 				8F419B322D342A170040CB44 /* MapViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8F423EB42D6C88A3008C43F7 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8F423EB52D6C88AF008C43F7 /* AuthViewModel.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		8F7310E22D0B9023007A78AC /* Extensions */ = {
@@ -508,6 +522,7 @@
 				58F5CABB2D0785E000A3C1FA /* Resources */,
 				8F7311232D0FA42F007A78AC /* ShellScript */,
 				E2B279F75F1E6AAB2F68D579 /* [CP] Copy Pods Resources */,
+				2B157728E36389399051B6BE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -558,6 +573,7 @@
 			files = (
 				8F7310E82D0B91C8007A78AC /* LaunchScreen.storyboard in Resources */,
 				8F7311252D0FA44C007A78AC /* swiftlint.yml in Resources */,
+				8F423EB92D6C8BCA008C43F7 /* GoogleService-Info.plist in Resources */,
 				58F5CAC82D0785E300A3C1FA /* Preview Assets.xcassets in Resources */,
 				58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */,
 			);
@@ -566,6 +582,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2B157728E36389399051B6BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8F7311232D0FA42F007A78AC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,6 +697,7 @@
 				8F7310F12D0DA06D007A78AC /* OnboardingButton.swift in Sources */,
 				8F7310EF2D0DA02F007A78AC /* PageIndicatorView.swift in Sources */,
 				8F419B352D342A460040CB44 /* MapViewModel.swift in Sources */,
+				8F423EB62D6C88BD008C43F7 /* AuthViewModel.swift in Sources */,
 				8F419B372D342A600040CB44 /* MapPlace.swift in Sources */,
 				8FF43D862D1A129E0052A0AA /* NavigationBar.swift in Sources */,
 				8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */,
