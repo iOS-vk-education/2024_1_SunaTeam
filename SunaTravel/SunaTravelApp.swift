@@ -12,9 +12,8 @@ import Firebase
 struct SunaTravelApp: App {
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     @StateObject var authViewModel = AuthViewModel()
-    init() {
-        FirebaseApp.configure()
-    }
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
             if isFirstLaunch {
@@ -22,7 +21,9 @@ struct SunaTravelApp: App {
                     isFirstLaunch: $isFirstLaunch,
                     viewModel: OnboardingViewModel())
             } else {
-                ContentView()
+                //ContentView()
+                SignInScreenView()
+                    .environmentObject(authViewModel)
             }
         }
     }

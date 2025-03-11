@@ -21,6 +21,8 @@
 		8F419B372D342A600040CB44 /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F419B362D342A5D0040CB44 /* MapPlace.swift */; };
 		8F423EB62D6C88BD008C43F7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F423EB52D6C88AF008C43F7 /* AuthViewModel.swift */; };
 		8F423EB92D6C8BCA008C43F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */; };
+		8F423EBB2D80148B008C43F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F423EBA2D801480008C43F7 /* AppDelegate.swift */; };
+		8F423EBF2D802C8C008C43F7 /* View+KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F423EBE2D802BF8008C43F7 /* View+KeyboardAdaptive.swift */; };
 		8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */; };
 		8F7310DB2D0B8F76007A78AC /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */; };
 		8F7310DD2D0B8F8C007A78AC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */; };
@@ -77,6 +79,8 @@
 		8F419B362D342A5D0040CB44 /* MapPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
 		8F423EB52D6C88AF008C43F7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8F423EBA2D801480008C43F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8F423EBE2D802BF8008C43F7 /* View+KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardAdaptive.swift"; sourceTree = "<group>"; };
 		8F7310D82D0B8F1D007A78AC /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
 		8F7310DA2D0B8F6A007A78AC /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		8F7310DC2D0B8F82007A78AC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		58F5CABF2D0785E000A3C1FA /* SunaTravel */ = {
 			isa = PBXGroup;
 			children = (
+				8F423EBA2D801480008C43F7 /* AppDelegate.swift */,
 				8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */,
 				8F7B7B712D3445CB00F6B880 /* ViewTrip */,
 				8F7B7B6C2D34391800F6B880 /* CreateTrip */,
@@ -200,6 +205,7 @@
 		8F0A96DD2D135FD300322C53 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				8F423EBE2D802BF8008C43F7 /* View+KeyboardAdaptive.swift */,
 				8F423EB42D6C88A3008C43F7 /* Firebase */,
 				8F0A96E02D135FF900322C53 /* SignUpScreen */,
 				8F0A96DF2D135FEE00322C53 /* SignInScreen */,
@@ -680,10 +686,12 @@
 				8FBA13ED2D1AD715003DB8F2 /* Place.swift in Sources */,
 				8FBA14232D1AF91A003DB8F2 /* ProfileNavigationViews.swift in Sources */,
 				8F7310EB2D0D91B5007A78AC /* Color+Extensions.swift in Sources */,
+				8F423EBF2D802C8C008C43F7 /* View+KeyboardAdaptive.swift in Sources */,
 				8F7310ED2D0D9FEE007A78AC /* OnboardinSlidesView.swift in Sources */,
 				8FBA13CE2D1A2BD1003DB8F2 /* FavoritePlacesViewController.swift in Sources */,
 				8F419B332D342A200040CB44 /* MapViewController.swift in Sources */,
 				8FBA14192D1AF8BB003DB8F2 /* ProfileData.swift in Sources */,
+				8F423EBB2D80148B008C43F7 /* AppDelegate.swift in Sources */,
 				8FBA13D02D1A2BD1003DB8F2 /* FavoritePlaceCell.swift in Sources */,
 				8FBA14132D1AEBF9003DB8F2 /* PlaceCell.swift in Sources */,
 				8FBA13E42D1A2D27003DB8F2 /* SearchPlaceViewController.swift in Sources */,

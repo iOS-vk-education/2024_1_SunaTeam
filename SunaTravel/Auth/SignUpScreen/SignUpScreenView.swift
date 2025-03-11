@@ -37,7 +37,7 @@ struct SignUpScreenView: View {
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
-                SecureField("Password", text: $password)
+                TextField("Password", text: $password)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
