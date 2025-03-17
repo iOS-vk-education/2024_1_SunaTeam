@@ -23,14 +23,15 @@ struct SignInScreenView: View {
                            smallText: "Please sign in to continue our app")
                 
                 TextFieldView(text: "Email", isSecureField: false, textValue: $email)
-                    .padding(.top, 40)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
                 
-                TextFieldView(text: "Password", isSecureField: true, textValue: $password)
+                SecuredTextFieldView(text: "Password", textValue: $password)
                 
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
-                        .padding(.top, 5)
+                        .padding(.top, 10)
                 }
                 
                 HStack {
@@ -38,29 +39,50 @@ struct SignInScreenView: View {
                     ForgetPasswordButtonView(email: email)
                 }
                 
-                Button {
-                    authViewModel.login(email: email, password: password) { success, error in
-                        if success {
-                            isSignedIn = true
-                        } else {
-                            errorMessage = error
-                        }
-                    }
-                } label: {
-                    NavigationLink(destination: AppRootView(), isActive: $isSignedIn) {
-                        Text("Sign in")
-                    }
-                    .buttonStyle(YellowButtonStyle())
-                    .padding(.top, 24)
+                Button(action: handleSignIn) {
+                    Text("Sign in")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
                 }
-                .padding(.bottom, 40)
                 
                 SignUpPromptView()
             }
             .padding(.horizontal, 40)
-            .keyboardAdaptive() // ✅ Двигает контент при появлении клавиатуры
+            .keyboardAdaptive()
+            .fullScreenCover(isPresented: $isSignedIn) {
+                AppRootView()
+            }
         }
         .navigationViewStyle(.stack)
+    }
+    
+    private func handleSignIn() {
+        guard isValidEmail(email) else {
+            errorMessage = "Invalid email format"
+            return
+        }
+        
+        guard !password.isEmpty else {
+            errorMessage = "Password cannot be empty"
+            return
+        }
+        
+        authViewModel.login(email: email, password: password) { success, error in
+            if success {
+                isSignedIn = true
+            } else {
+                errorMessage = error ?? "An unknown error occurred"
+            }
+        }
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return predicate.evaluate(with: email)
     }
 }
 
@@ -79,6 +101,8 @@ struct ForgetPasswordButtonView: View {
         }
         .foregroundStyle(Color.blue)
         .font(.system(size: 14))
+        .padding(.top, 8)
+        .padding(.bottom, 8)
     }
 }
 
@@ -95,6 +119,7 @@ struct SignUpPromptView: View {
                 Text("Sign up")
                     .foregroundStyle(Color.blue)
                     .font(.system(size: 14))
+                    .padding(.top, 8)
             }
         }
     }

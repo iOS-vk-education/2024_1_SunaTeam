@@ -25,21 +25,16 @@ struct SignUpScreenView: View {
                 HeaderView(largeText: "Sign up now",
                            smallText: "Please fill the details and create an account")
                 
-                TextField("Name", text: $name)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
+                TextFieldView(text: "Name", isSecureField: false, textValue: $name)
+                    .padding(.top, 10)
                     .cornerRadius(8)
-                    .padding(.top, 40)
-                
-                TextField("Email", text: $email)
+                TextFieldView(text: "Email", isSecureField: false, textValue: $email)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
+                    .padding(.top, 10)
                     .cornerRadius(8)
-                TextField("Password", text: $password)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
+                SecuredTextFieldView(text: "Password", textValue: $password)
+                    .padding(.top, 10)
                     .cornerRadius(8)
                 
                 if let errorMessage = errorMessage {
@@ -63,7 +58,7 @@ struct SignUpScreenView: View {
                     .buttonStyle(YellowButtonStyle())
                     .padding(.top, 24)
                 }
-                .padding(.bottom, 40)
+                .padding(.bottom, 10)
                 
                 HStack {
                     Text("Already have an account")
