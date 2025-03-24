@@ -24,7 +24,35 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         label.textAlignment = .center
         return label
     }()
-
+     
+    // for addNoteButton
+    private let addNoteContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+//    private let addNoteButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+//        let image = UIImage(systemName: "square.and.pencil", withConfiguration: config)
+//        button.setImage(image, for: .normal)
+//        button.tintColor = .white
+//        button.addTarget(self, action: #selector(didTapAddNote), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    private let addNoteButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        let image = UIImage(systemName: "square.and.pencil", withConfiguration: config)
+        button.setImage(image, for: .normal)
+        button.tintColor = UIColor.systemBlue // Синий цвет для иконки
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // Main Container View
     private let containerView: UIView = {
@@ -117,6 +145,17 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         setupLayout()
         setupDescriptionTextView()  // for the modified UITextView
         addCollapseButtonGesture() // Add gesture for collapse button
+//        addNoteButton.addTarget(self, action: #selector(didTapAddNote), for: .touchUpInside)
+        let noteButton = UIBarButtonItem(
+               image: UIImage(systemName: "square.and.pencil"),
+               style: .plain,
+               target: self,
+               action: #selector(didTapAddNote)
+           )
+           noteButton.tintColor = UIColor.systemBlue
+           
+           navigationItem.rightBarButtonItem = noteButton
+
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -137,10 +176,13 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         view.addSubview(backgroundImageView)
         //view.addSubview(backButton)
         view.addSubview(titleLabel)
+        view.addSubview(addNoteButton)
         view.addSubview(containerView)
         view.addSubview(addFileButton)
         view.addSubview(dateButton)
+        view.addSubview(addNoteContainer)
 
+        addNoteContainer.addSubview(addNoteButton)
         containerView.addSubview(collapseButton)
         containerView.addSubview(tripNameTextField)
         containerView.addSubview(locationTextField)
@@ -182,6 +224,9 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // 80% of screen
 
+            addNoteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            addNoteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
+            
             // Add File Button
             addFileButton.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -10),
             addFileButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
@@ -240,6 +285,19 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             dateButton.widthAnchor.constraint(equalToConstant: 120),
             dateButton.heightAnchor.constraint(equalToConstant: 40),
         ])
+        
+        NSLayoutConstraint.activate([
+            addNoteContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
+            // расстояние от верха
+            addNoteContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            addNoteContainer.widthAnchor.constraint(equalToConstant: 40),
+            addNoteContainer.heightAnchor.constraint(equalToConstant: 40),
+
+            addNoteButton.centerXAnchor.constraint(equalTo: addNoteContainer.centerXAnchor),
+            addNoteButton.centerYAnchor.constraint(equalTo: addNoteContainer.centerYAnchor),
+        ])
+        
+        
 
     }
     private func updateTextViewColor() {
@@ -267,6 +325,21 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     @objc private func didTapBack() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func didTapAddNote() {
+        // if addNoteButton – open SwiftUI-screen
+        let contentView = NotesView()
+        let hostingController = UIHostingController(rootView: contentView)
+        let navController = UINavigationController(rootViewController: hostingController)
+            navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
+        
+        // if view on UIKit на UIKit
+//        let notesViewController = NotesViewController()
+//        let navController = UINavigationController(rootViewController: notesViewController)
+//        navController.modalPresentationStyle = .fullScreen
+//        present(navController, animated: true, completion: nil)
+    }
 
     @objc private func didTapAddFile() {
         var config = PHPickerConfiguration()
@@ -291,7 +364,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.maximumDate = Date() // Запрещаем выбирать будущие даты
+        datePicker.maximumDate = Date() // Forbid to choose future dates
 
         let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
