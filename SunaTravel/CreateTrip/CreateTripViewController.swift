@@ -152,7 +152,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
                target: self,
                action: #selector(didTapAddNote)
            )
-           noteButton.tintColor = UIColor.systemBlue
+        noteButton.tintColor = UIColor.systemRed
            
            navigationItem.rightBarButtonItem = noteButton
 
