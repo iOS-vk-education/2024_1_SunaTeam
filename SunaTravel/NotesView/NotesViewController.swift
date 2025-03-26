@@ -34,29 +34,29 @@ struct NoteDetailView: View {
                                 .strikethrough(item.isChecked)
                                 .foregroundColor(item.isChecked ? .gray : .primary)
                         }
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)) // Убираем отступы между строками
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)) 
                     }
                     .onDelete(perform: deleteItem)
                     HStack {
-                        Image(systemName: "circle") // Пустой чекбокс для нового элемента
-                        TextField("New item", text: $newItemText, onCommit: addItem) // Обработчик для добавления нового элемента
+                        Image(systemName: "circle") // checkbox for new element
+                        TextField("New item", text: $newItemText, onCommit: addItem)
                                 .padding(8)
-                                .background(Color(UIColor.secondarySystemBackground)) // Чтобы поле было видно
+                                .background(Color(UIColor.secondarySystemBackground))
                                 .cornerRadius(8)
-                                .onSubmit { // Используем onSubmit для явной обработки события
+                                .onSubmit {
                                     addItem()
-                                    newItemText = "" // Сбрасываем текст после добавления
+                                    newItemText = ""
                                 }
-//                        TextField("New item", text: $newItemText, onCommit: addItem) // Обработчик для добавления нового элемента
+//                        TextField("New item", text: $newItemText, onCommit: addItem)
 //                            .padding(8)
 //                        /*    .background(Color(UIColor.secondarySystemBackground)) */ // Maybe make white
 //                            .cornerRadius(8)
                     }
                 }
-                    // Ряд для ввода нового элемента с чекбоксом
+                    
 //                    HStack {
-//                        Image(systemName: "circle") // Пустой чекбокс для нового элемента
-//                        TextField("New item", text: $newItemText, onCommit: addItem) // Обработчик для добавления нового элемента
+//                        Image(systemName: "circle")
+//                        TextField("New item", text: $newItemText, onCommit: addItem)
 //                            .padding(8)
 //                        /*    .background(Color(UIColor.secondarySystemBackground)) */ // Maybe make white
 //                            .cornerRadius(8)
@@ -135,14 +135,14 @@ struct NoteDetailView: View {
 //        print("Добавляем: \(newItem.text), ID: \(newItem.id)")
 //
 //        note.checklist.append(newItem)
-//        newItemText = ""  // Убеждаемся, что поле очищается
+//        newItemText = ""
 //
-//        updateNote()  // Обновляем заметку после добавления нового элемента
-//        newItemText = ""  // Убеждаемся, что поле очищается
+//        updateNote()
+//        newItemText = ""
         // MARK: Костыль
         guard !newItemText.isEmpty else { return }
         
-        // Проверяем, существует ли уже элемент с таким же текстом
+        // We check if there is already an element with the same text
         if !note.checklist.contains(where: { $0.text == newItemText }) {
             let newItem = ChecklistItem(text: newItemText)
             print("Добавляем: \(newItem.text), ID: \(newItem.id)")
@@ -152,7 +152,7 @@ struct NoteDetailView: View {
             print("Элемент уже существует: \(newItemText)")
         }
         
-        newItemText = "" // Сбрасываем текстовое поле
+        newItemText = ""
     }
     
     private func deleteItem(at offsets: IndexSet) {
@@ -184,8 +184,8 @@ struct NoteDetailView: View {
 
 struct NotesView: View {
     @StateObject private var viewModel = NoteViewModel()
-    @State private var isNavigating = false // Управление навигацией к новой заметке
-    @State private var newNote: Note? // Переменная для новой заметки
+    @State private var isNavigating = false
+    @State private var newNote: Note?
     
     @State private var newTitle: String = ""
     @State private var newText: String = ""
@@ -201,20 +201,39 @@ struct NotesView: View {
                 }
                 .onDelete(perform: viewModel.deleteNote)
             }
-            .navigationTitle("My checklists")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                let note = Note(title: "", text: "")
-                viewModel.notes.append(note)
-                newNote = note
-                isNavigating = true
-                }) {
-                    Image(systemName: "plus.circle.fill")
-                .font(.system(size: 30))
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("My checklists")
+                        .font(.system(size: 35, weight: .bold))
+//                        .font(.headline)
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        let note = Note(title: "", text: "")
+                        viewModel.notes.append(note)
+                        newNote = note
+                        isNavigating = true
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 28))
+                    }
                 }
             }
+//            .navigationTitle("My checklists")
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                let note = Note(title: "", text: "")
+//                viewModel.notes.append(note)
+//                newNote = note
+//                isNavigating = true
+//                }) {
+//                    Image(systemName: "plus.circle.fill") // Button with ✚
+//                .font(.system(size: 30))
+//                }
+//                }
+//            }
         }
     }
 }

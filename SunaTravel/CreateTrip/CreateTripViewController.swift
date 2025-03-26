@@ -49,7 +49,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
         let image = UIImage(systemName: "square.and.pencil", withConfiguration: config)
         button.setImage(image, for: .normal)
-        button.tintColor = UIColor.systemBlue // Синий цвет для иконки
+        button.tintColor = UIColor.systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -219,8 +219,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             
             // Title Label
             // MARK: - Maybe somehow fix it in a different way, not from the Back button
-            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor), // Центр по вертикали относительно кнопки "Назад"
-            //
+            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // 80% of screen
 
@@ -390,7 +389,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         present(alert, animated: true, completion: nil)
     }
 
-
     // Helper: Create text fields and views
     private static func createRoundedTextField(placeholder: String) -> UITextField {
         let textField = UITextField()
@@ -488,3 +486,5 @@ struct CreateTripViewControllerWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
     }
 }
+
+
