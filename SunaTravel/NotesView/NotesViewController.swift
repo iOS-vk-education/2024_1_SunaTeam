@@ -19,8 +19,8 @@ struct NoteDetailView: View {
                 TextField("Enter title", text: $note.title)
                     .font(.title)
                     .focused($isTitleFocused)
-                    .padding(.leading, -2)
-                    .padding(8)
+//                    .padding(.leading, -2)
+//                    .padding(8)
                     .cornerRadius(8)
                 
                 List {
@@ -40,7 +40,7 @@ struct NoteDetailView: View {
                     HStack {
                         Image(systemName: "circle") // checkbox for new element
                         TextField("New item", text: $newItemText, onCommit: addItem)
-                                .padding(8)
+                                .padding(8) // The width of the field
                                 .background(Color(UIColor.secondarySystemBackground))
                                 .cornerRadius(8)
                                 .onSubmit {
@@ -207,6 +207,7 @@ struct NotesView: View {
                     Text("My checklists")
                         .font(.system(size: 35, weight: .bold))
 //                        .font(.headline)
+                        .padding(.bottom, -50)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
