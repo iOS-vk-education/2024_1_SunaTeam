@@ -47,10 +47,6 @@ struct NoteDetailView: View {
                                     addItem()
                                     newItemText = ""
                                 }
-//                        TextField("New item", text: $newItemText, onCommit: addItem)
-//                            .padding(8)
-//                        /*    .background(Color(UIColor.secondarySystemBackground)) */ // Maybe make white
-//                            .cornerRadius(8)
                     }
                 }
                     
@@ -182,6 +178,7 @@ struct NoteDetailView: View {
         }
 }
 
+// The screen of the list of notes
 struct NotesView: View {
     @StateObject private var viewModel = NoteViewModel()
     @State private var isNavigating = false
@@ -201,13 +198,16 @@ struct NotesView: View {
                 }
                 .onDelete(perform: viewModel.deleteNote)
             }
+//            .listStyle(PlainListStyle()) // If we want to disable the standard list of list
+            .padding(.top, -15)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("My checklists")
                         .font(.system(size: 35, weight: .bold))
 //                        .font(.headline)
-                        .padding(.bottom, -50)
+                        .padding(.top, -20)
+                        .padding(.bottom, -120)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -218,6 +218,8 @@ struct NotesView: View {
                     }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 28))
+                            .padding(.top, -20)
+                            .padding(.bottom, -120)
                     }
                 }
             }

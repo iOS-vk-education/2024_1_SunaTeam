@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113861B92D961C070028E166 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861B82D961BFF0028E166 /* CreateTripView.swift */; };
+		113861BB2D961CEC0028E166 /* CreateTripViewController_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861BA2D961C2C0028E166 /* CreateTripViewController_2.swift */; };
+		113861BD2D961DD50028E166 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861BC2D961DD30028E166 /* BackgroundImageView.swift */; };
+		113861BF2D961DEF0028E166 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861BE2D961DE50028E166 /* TitleLabel.swift */; };
+		113861C12D961E080028E166 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861C02D961E060028E166 /* RoundedTextField.swift */; };
+		113861C32D961E1F0028E166 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113861C22D961E1C0028E166 /* PrimaryButton.swift */; };
 		11B7CDDA2D91AE6C00EB4EBF /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B7CDD92D91AE6A00EB4EBF /* extensions.swift */; };
 		11B7CDDC2D91B05D00EB4EBF /* wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B7CDDB2D91B05A00EB4EBF /* wrapper.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
@@ -65,6 +71,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113861B82D961BFF0028E166 /* CreateTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		113861BA2D961C2C0028E166 /* CreateTripViewController_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController_2.swift; sourceTree = "<group>"; };
+		113861BC2D961DD30028E166 /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
+		113861BE2D961DE50028E166 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		113861C02D961E060028E166 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		113861C22D961E1C0028E166 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		11B7CDD92D91AE6A00EB4EBF /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		11B7CDDB2D91B05A00EB4EBF /* wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapper.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +362,12 @@
 		8F7B7B6C2D34391800F6B880 /* CreateTrip */ = {
 			isa = PBXGroup;
 			children = (
+				113861C22D961E1C0028E166 /* PrimaryButton.swift */,
+				113861C02D961E060028E166 /* RoundedTextField.swift */,
+				113861BE2D961DE50028E166 /* TitleLabel.swift */,
+				113861BC2D961DD30028E166 /* BackgroundImageView.swift */,
+				113861BA2D961C2C0028E166 /* CreateTripViewController_2.swift */,
+				113861B82D961BFF0028E166 /* CreateTripView.swift */,
 				11B7CDDB2D91B05A00EB4EBF /* wrapper.swift */,
 				11B7CDD92D91AE6A00EB4EBF /* extensions.swift */,
 				8F7B7B6F2D34396800F6B880 /* UIColor.swift */,
@@ -692,6 +710,7 @@
 				8F0A96EC2D1360AE00322C53 /* SignUpScreenView.swift in Sources */,
 				58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */,
 				8FBA140B2D1AEB0B003DB8F2 /* HomeViewController.swift in Sources */,
+				113861BD2D961DD50028E166 /* BackgroundImageView.swift in Sources */,
 				8FBA14212D1AF905003DB8F2 /* ProfileNavigationLinks.swift in Sources */,
 				8F0A96EA2D13607D00322C53 /* SignInScreenView.swift in Sources */,
 				8F7310D92D0B8F1D007A78AC /* OnboardingContainerView.swift in Sources */,
@@ -709,11 +728,13 @@
 				8FBA13D02D1A2BD1003DB8F2 /* FavoritePlaceCell.swift in Sources */,
 				8FBA14132D1AEBF9003DB8F2 /* PlaceCell.swift in Sources */,
 				8FBA13E42D1A2D27003DB8F2 /* SearchPlaceViewController.swift in Sources */,
+				113861BB2D961CEC0028E166 /* CreateTripViewController_2.swift in Sources */,
 				8F7B7B702D34397100F6B880 /* UIColor.swift in Sources */,
 				8FBA13E72D1A2D27003DB8F2 /* SearchPlaceViewModel.swift in Sources */,
 				8FBA13EF2D1AD720003DB8F2 /* CollectionViewDelegate&DataSource.swift in Sources */,
 				8F7310E12D0B8FCC007A78AC /* OnboardingViewModel.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
+				113861C12D961E080028E166 /* RoundedTextField.swift in Sources */,
 				8F0A96E82D13604000322C53 /* TextFieldView.swift in Sources */,
 				8F7B7B6E2D34393F00F6B880 /* CreateTripViewController.swift in Sources */,
 				11B7CDDA2D91AE6C00EB4EBF /* extensions.swift in Sources */,
@@ -721,14 +742,17 @@
 				11B7CDDC2D91B05D00EB4EBF /* wrapper.swift in Sources */,
 				8F7310EF2D0DA02F007A78AC /* PageIndicatorView.swift in Sources */,
 				8F419B352D342A460040CB44 /* MapViewModel.swift in Sources */,
+				113861B92D961C070028E166 /* CreateTripView.swift in Sources */,
 				8F423EB62D6C88BD008C43F7 /* AuthViewModel.swift in Sources */,
 				8F419B372D342A600040CB44 /* MapPlace.swift in Sources */,
 				8FF43D862D1A129E0052A0AA /* NavigationBar.swift in Sources */,
 				8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */,
 				8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */,
 				8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */,
+				113861C32D961E1F0028E166 /* PrimaryButton.swift in Sources */,
 				8FBA141B2D1AF8C9003DB8F2 /* ProfileViewModel.swift in Sources */,
 				8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */,
+				113861BF2D961DEF0028E166 /* TitleLabel.swift in Sources */,
 				8FBA14112D1AEB9B003DB8F2 /* HomeViewModel.swift in Sources */,
 				8F0A96E42D13603000322C53 /* HeaderView.swift in Sources */,
 			);
