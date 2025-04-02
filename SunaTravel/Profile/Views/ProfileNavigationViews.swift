@@ -23,7 +23,8 @@ struct BookmarksView: View {
                         isShowingNotesView = true
                         print("Notes button tapped")
                     }) {
-                        Image(systemName: "square.and.pencil")
+//                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "checklist")
                     }
                                            )
                     ) {
