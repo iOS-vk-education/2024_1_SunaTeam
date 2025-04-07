@@ -99,13 +99,13 @@ extension MapViewController: YMKMapObjectTapListener {
 }
 
 struct MapView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> MapViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         YMKMapKit.setApiKey("98c7692d-3ebf-4c47-abe7-34663a0e4677")
         YMKMapKit.sharedInstance().onStart()
-        return MapViewController()
+        return UINavigationController(rootViewController: MapViewController())
     }
     
-    func updateUIViewController(_ uiViewController: MapViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 
@@ -124,6 +124,6 @@ struct PopularCitiesMapViewController_Previews: PreviewProvider {
     static var previews: some View {
         MapViewControllerPreview()
             .edgesIgnoringSafeArea(.all)
-            .previewDevice("iPhone 13")
+            .previewDevice("iPhone 15")
     }
 }

@@ -21,8 +21,7 @@ struct SunaTravelApp: App {
                     isFirstLaunch: $isFirstLaunch,
                     viewModel: OnboardingViewModel())
             } else {
-                //ContentView()
-                SignInScreenView()
+                ContentView()
                     .environmentObject(authViewModel)
             }
         }

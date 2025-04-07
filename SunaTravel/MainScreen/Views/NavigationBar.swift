@@ -13,7 +13,7 @@ fileprivate struct UIConstants {
     static let TabViewPadding: CGFloat = 10
 }
 
-class NavigationBar: UITabBarController {
+final class NavigationBar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,19 +24,19 @@ class NavigationBar: UITabBarController {
         }
         tabBar.tintColor = .systemBlue
         
-        let homeView = UIHostingController(rootView: HomeScreenView())
+        let homeView = UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
         homeView.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
-        let calendarView = UIHostingController(rootView: MainView())
+        let calendarView = UINavigationController(rootViewController: UIHostingController(rootView: MainView()))
         calendarView.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), tag: 1)
         
-        let searchView = UIHostingController(rootView: SearchScreenView())
+        let searchView = UINavigationController(rootViewController: SearchPlacesViewController())
         searchView.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass.circle.fill"), tag: 2)
         
-        let mapView = UIHostingController(rootView: MapViewControllerPreview().edgesIgnoringSafeArea(.all))
+        let mapView = UINavigationController(rootViewController: UIHostingController(rootView: MapView().edgesIgnoringSafeArea(.all)))
         mapView.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 3)
         
-        let profileView = UIHostingController(rootView: ProfileView(viewModel: profileViewModel, showEditButton: true))
+        let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: profileViewModel, showEditButton: true)))
         profileView.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 4)
         
         viewControllers = [homeView, calendarView, searchView, mapView, profileView]

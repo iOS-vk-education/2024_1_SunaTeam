@@ -10,7 +10,7 @@ import SwiftUI
 struct SecuredTextFieldView: View {
     var text: String
     @Binding var textValue: String
-    @State private var isPasswordVisible = false
+    @State private var isPasswordVisible = true
 
     var body: some View {
         HStack {

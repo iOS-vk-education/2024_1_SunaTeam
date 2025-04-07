@@ -31,8 +31,8 @@ class AuthViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.user = authResult?.user
+                    completion(true, nil)
                 }
-                completion(true, nil)
             }
         }
     }

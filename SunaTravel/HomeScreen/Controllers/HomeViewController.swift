@@ -253,10 +253,10 @@ struct HomeScreenView: View {
 }
 
 struct HomeViewControllerWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> HomeViewController {
-        return HomeViewController(profileViewModel: profileViewModel)
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
     }
     
-    func updateUIViewController(_ uiViewController: HomeViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }

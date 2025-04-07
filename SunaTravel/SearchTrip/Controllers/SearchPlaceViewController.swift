@@ -48,46 +48,11 @@ class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setupNavigationBar()
         setupViews()
         
         searchBar.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-    
-    private func setupNavigationBar() {
-        
-        let backButton = UIBarButtonItem(
-            title: "<",
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTapped)
-        )
-        navigationItem.leftBarButtonItem = backButton
-        
-        navigationItem.title = "Search"
-        
-        let cancelButton = UIBarButtonItem(
-            title: "Cancel",
-            style: .plain,
-            target: self,
-            action: #selector(cancelButtonTapped)
-        )
-        navigationItem.rightBarButtonItem = cancelButton
-    }
-    
-    @objc
-    private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc
-    private func cancelButtonTapped() {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-        viewModel.resetSearch()
-        collectionView.reloadData()
     }
     
     private func setupViews() {
@@ -144,11 +109,11 @@ struct SearchScreenView: View {
 }
 
 struct SearchViewControllerWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> SearchPlacesViewController {
-        return SearchPlacesViewController()
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UINavigationController(rootViewController: SearchPlacesViewController())
     }
     
-    func updateUIViewController(_ uiViewController: SearchPlacesViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }
 
