@@ -6,6 +6,8 @@
 //
 import SwiftUI
 
+
+// View of editing single note (check-list)
 struct NoteDetailView: View {
     @State private var newItemText: String = ""
     @ObservedObject var viewModel: NoteViewModel
@@ -22,6 +24,7 @@ struct NoteDetailView: View {
 //                    .padding(.leading, -2)
 //                    .padding(8)
                     .cornerRadius(8)
+                    .background(Color(.systemBackground))
                 
                 List {
                     ForEach(note.checklist) { item in
@@ -34,7 +37,7 @@ struct NoteDetailView: View {
                                 .strikethrough(item.isChecked)
                                 .foregroundColor(item.isChecked ? .gray : .primary)
                         }
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)) 
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                     .onDelete(perform: deleteItem)
                     HStack {
@@ -49,42 +52,7 @@ struct NoteDetailView: View {
                                 }
                     }
                 }
-                    
-//                    HStack {
-//                        Image(systemName: "circle")
-//                        TextField("New item", text: $newItemText, onCommit: addItem)
-//                            .padding(8)
-//                        /*    .background(Color(UIColor.secondarySystemBackground)) */ // Maybe make white
-//                            .cornerRadius(8)
-//                    }
                 }
-                
-                //            VStack(alignment: .leading) {
-                //                TextEditor(text: $newItemText)
-                //                    .padding(8)
-                //                    .background(Color(UIColor.secondarySystemBackground))
-                //                    .cornerRadius(8)
-                //                    .frame(height: 200)
-                //                    .overlay(
-                //                        HStack {
-                //                            Button(action: addItem) {
-                //                                Image(systemName: "plus.circle.fill")
-                //                                    .foregroundColor(.blue)
-                //                                    .font(.system(size: 24))
-                //                            }
-                //                            .padding(.leading, 8) // Speaking to the left
-                //                            .disabled(newItemText.isEmpty)
-                //
-                //                            Spacer() // to keep the button on the left
-                //                        }
-                //                    )
-                //                // Return key processor
-                //                    .onSubmit {
-                //                        addItem() // adding a new element by pressing "Return"
-                //                }
-                //            }
-                //            .padding(.horizontal)
-                //        .padding()
                 .listStyle(PlainListStyle())
 //                .frame(height: geometry.size.height - 150)
 //                .frame(maxHeight: .infinity)  // so that less space on the screen occupies, but isn't working
@@ -92,7 +60,7 @@ struct NoteDetailView: View {
                     isTitleFocused = true
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color(.systemBackground))
                 .edgesIgnoringSafeArea(.all)
                 //            .navigationTitle("Edit Note")
                 .toolbar {
@@ -120,21 +88,6 @@ struct NoteDetailView: View {
     }
     
     private func addItem() {
-//        guard !newItemText.isEmpty else { return }
-//        let newItem = ChecklistItem(text: newItemText)
-//        print("Добавляем: \(newItem.text), ID: \(newItem.id)")
-//        note.checklist.append(newItem)
-//        newItemText = ""
-//        updateNote()
-//        guard !newItemText.isEmpty else { return }
-//        let newItem = ChecklistItem(text: newItemText)
-//        print("Добавляем: \(newItem.text), ID: \(newItem.id)")
-//
-//        note.checklist.append(newItem)
-//        newItemText = ""
-//
-//        updateNote()
-//        newItemText = ""
         // MARK: Костыль
         guard !newItemText.isEmpty else { return }
         
@@ -157,9 +110,6 @@ struct NoteDetailView: View {
     }
     
     private func updateNote() {
-//        if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
-//            viewModel.notes[index] = note
-//        }
         if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
                 viewModel.notes[index] = note
                 print("Обновляем заметку \(note.title), теперь в ней \(note.checklist.count) элементов")
@@ -178,37 +128,51 @@ struct NoteDetailView: View {
         }
 }
 
-// The screen of the list of notes
+
+
+
+// The screen of the list of notes(checklists)
 struct NotesView: View {
     @StateObject private var viewModel = NoteViewModel()
     @State private var isNavigating = false
     @State private var newNote: Note?
-    
-    @State private var newTitle: String = ""
-    @State private var newText: String = ""
-    
+
     var body: some View {
         NavigationView {
-            List {
-                ForEach($viewModel.notes) { $note in
-                    NavigationLink(destination: NoteDetailView(viewModel: viewModel, note: $note)) {
-                        Text(note.title)
-                            .font(.headline)
+            VStack {
+
+                List {
+                    ForEach($viewModel.notes) { $note in
+                        NavigationLink(destination: NoteDetailView(viewModel: viewModel, note: $note)) {
+                            Text(note.title)
+                                .font(.headline)
+                        }
                     }
+                    .onDelete(perform: viewModel.deleteNote)
                 }
-                .onDelete(perform: viewModel.deleteNote)
+                .padding(.top, -15)
+                NavigationLink(
+                    destination: Group {
+                        if let note = newNote {
+                            NoteDetailView(viewModel: viewModel, note: binding(for: note))
+                        } else {
+                            EmptyView()
+                        }
+                    },
+                    isActive: $isNavigating,
+                    label: { EmptyView() }
+                )
+                .hidden()
             }
-//            .listStyle(PlainListStyle()) // If we want to disable the standard list of list
-            .padding(.top, -15)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("My checklists")
                         .font(.system(size: 35, weight: .bold))
-//                        .font(.headline)
                         .padding(.top, -20)
                         .padding(.bottom, -120)
                 }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         let note = Note(title: "", text: "")
@@ -223,163 +187,13 @@ struct NotesView: View {
                     }
                 }
             }
-//            .navigationTitle("My checklists")
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                let note = Note(title: "", text: "")
-//                viewModel.notes.append(note)
-//                newNote = note
-//                isNavigating = true
-//                }) {
-//                    Image(systemName: "plus.circle.fill") // Button with ✚
-//                .font(.system(size: 30))
-//                }
-//                }
-//            }
         }
     }
+
+    private func binding(for note: Note) -> Binding<Note> {
+        guard let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) else {
+            fatalError("Note not found")
+        }
+        return $viewModel.notes[index]
+    }
 }
-
-
-
-// Implementation with a git
-//import SwiftUI
-//
-//struct NotesView: View {
-//    @StateObject private var viewModel = NoteViewModel()
-//    
-//    // Fields for a new note
-//    @State private var newTitle: String = ""
-//    @State private var newText: String = ""
-//    
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                // List of notes
-//                List {
-//                    ForEach(viewModel.notes) { note in
-//                        // Transition to a detailed screen or just a conclusion(output)
-//                        NavigationLink(destination: NoteDetailView(note: note)) {
-//                            Text(note.title)
-//                                .font(.headline)
-//                        }
-//                    }
-//                    .onDelete(perform: viewModel.deleteNote)
-//                }
-//                
-//                // Section for adding a new note
-//                VStack(alignment: .leading, spacing: 8) {
-//                    TextField("Tittle", text: $newTitle)
-//                        .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    TextField("The text of the note", text: $newText)
-//                        .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    
-//                    Button(action: {
-//                        guard !newTitle.isEmpty else { return }
-//                        // Add a note and clean the fields
-//                        viewModel.addNote(title: newTitle, text: newText)
-//                        newTitle = ""
-//                        newText = ""
-//                    }) {
-//                        Text("Add")
-//                            .frame(maxWidth: .infinity)
-//                            .padding()
-//                            .background(Color.blue)
-//                            .foregroundColor(.white)
-//                            .cornerRadius(8)
-//                    }
-//                }
-//                .padding()
-//            }
-//            .navigationTitle("My notes")
-//        }
-//    }
-//}
-//
-//struct NoteDetailView: View {
-//    let note: Note
-//    
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 16) {
-//            Text(note.title)
-//                .font(.title)
-//                .bold()
-//            
-//            Text(note.text)
-//                .font(.body)
-//        }
-//        .padding()
-//    }
-//}
-//
-//struct NotesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
-//import UIKit
-//
-//class NotesViewController: UIViewController {
-//
-//    private var notes: [String] = []
-//    private let tableView = UITableView()
-//    private let addButton = UIButton(type: .system)
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .systemBackground
-//        title = "Notes"
-//        setupTableView()
-//        setupAddButton()
-//        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissSelf))
-//    }
-//
-//    private func setupTableView() {
-//        tableView.frame = view.bounds
-//        tableView.dataSource = self
-//        view.addSubview(tableView)
-//    }
-//
-//    private func setupAddButton() {
-//        addButton.setTitle("Add Note", for: .normal)
-//        addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-//        addButton.frame = CGRect(x: 20, y: view.frame.height - 60, width: view.frame.width - 40, height: 40)
-//        view.addSubview(addButton)
-//    }
-//
-//    @objc private func addNote() {
-//        let alertController = UIAlertController(title: "New Note", message: nil, preferredStyle: .alert)
-//        alertController.addTextField { textField in
-//            textField.placeholder = "Note Content"
-//        }
-//        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
-//            if let note = alertController.textFields?.first?.text, !note.isEmpty {
-//                self.notes.append(note)
-//                self.tableView.reloadData()
-//            }
-//        }
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        alertController.addAction(saveAction)
-//        alertController.addAction(cancelAction)
-//        present(alertController, animated: true, completion: nil)
-//    }
-//
-//    @objc private func dismissSelf() {
-//        dismiss(animated: true, completion: nil)
-//    }
-//}
-//
-//extension NotesViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return notes.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-//        cell.textLabel?.text = notes[indexPath.row]
-//        return cell
-//    }
-//}
