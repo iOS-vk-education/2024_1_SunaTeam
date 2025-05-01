@@ -48,46 +48,11 @@ class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setupNavigationBar()
         setupViews()
         
         searchBar.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-    
-    private func setupNavigationBar() {
-        
-        let backButton = UIBarButtonItem(
-            title: "<",
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTapped)
-        )
-        navigationItem.leftBarButtonItem = backButton
-        
-        navigationItem.title = "Search"
-        
-        let cancelButton = UIBarButtonItem(
-            title: "Cancel",
-            style: .plain,
-            target: self,
-            action: #selector(cancelButtonTapped)
-        )
-        navigationItem.rightBarButtonItem = cancelButton
-    }
-    
-    @objc
-    private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc
-    private func cancelButtonTapped() {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-        viewModel.resetSearch()
-        collectionView.reloadData()
     }
     
     private func setupViews() {
@@ -112,16 +77,24 @@ class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritePlaceCell", for: indexPath) as! FavoritePlaceCell
-        let place = viewModel.filteredPlaces[indexPath.item]
+        let place = MockData.places[indexPath.item]
         cell.configure(with: place)
+        cell.didSelectPlace = {
+            self.didTapCell(with: place)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        _ = viewModel.filteredPlaces[indexPath.item]
+        let selectedPlace = viewModel.filteredPlaces[indexPath.item]
+        didTapCell(with: selectedPlace)
     }
     
-    
+    func didTapCell(with place: Place) {
+        let detailViewController = UIHostingController(rootView: ViewTripViewControllerWrapper())
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
     // UISearchBarDelegate method
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.filterPlaces(by: searchText)
@@ -136,11 +109,11 @@ struct SearchScreenView: View {
 }
 
 struct SearchViewControllerWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> SearchPlacesViewController {
-        return SearchPlacesViewController()
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UINavigationController(rootViewController: SearchPlacesViewController())
     }
     
-    func updateUIViewController(_ uiViewController: SearchPlacesViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }
 

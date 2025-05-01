@@ -74,12 +74,12 @@ struct EditProfileView: View {
                 }
             }
         }
-        .alert(isPresented: $viewModel.isSuccessMessageShowed) {
-            Alert(
-                title: Text("Success"),
-                message: Text("Changes have been saved successfully.")
-            )
-        }
+//        .alert(isPresented: $viewModel.isSuccessMessageShowed) {
+//            Alert(
+//                title: Text("Success"),
+//                message: Text("Changes have been saved successfully.")
+//            )
+//        }
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(isImagePickerPresented: $isImagePickerPresented, selectedImage: $selectedImage)
         }

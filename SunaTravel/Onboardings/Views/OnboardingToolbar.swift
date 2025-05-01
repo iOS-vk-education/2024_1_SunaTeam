@@ -15,7 +15,7 @@ struct OnboardingToolbar: View {
         }) {
             Text("Skip")
                 .font(.headline)
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.gray)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(Color.gray.opacity(OnboardingConstants.buttonSkipBackgroundOpacity))

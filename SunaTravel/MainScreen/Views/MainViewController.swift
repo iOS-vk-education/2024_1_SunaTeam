@@ -13,6 +13,7 @@ fileprivate struct UIConstants {
 
 struct MainView: View {
     @State private var selectedDate: Date = Date()
+    @State private var selectedItem: ScheduleItem? = nil
     
     var body: some View {
         VStack {
@@ -35,13 +36,26 @@ struct MainView: View {
                 ScrollView {
                     LazyVStack(spacing: UIConstants.VStackSpacing) {
                         ForEach(scheduleItems.filter { isSameDay($0.date, selectedDate) }) { item in
-                            ScheduleCell(item: item)
+                            ScheduleCell(item: item) {
+                                self.selectedItem = item
+                            }
                         }
                     }
                     .padding(.horizontal)
                 }
             }
             .padding(.top)
+            .background(
+                NavigationLink(
+                    destination: ViewTripViewControllerWrapper(),
+                    isActive: .constant(selectedItem != nil)
+                ) {
+                    EmptyView()
+                }
+            )
+            .onAppear {
+                selectedItem = nil
+            }
         }
     }
     

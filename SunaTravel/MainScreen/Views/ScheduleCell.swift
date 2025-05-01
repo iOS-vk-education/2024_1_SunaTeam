@@ -22,7 +22,8 @@ fileprivate struct UIConstants {
 
 struct ScheduleCell: View {
     let item: ScheduleItem
-
+    var onTap: (() -> Void)?
+    
     var body: some View {
         HStack {
             Image(item.imageName)
@@ -40,6 +41,9 @@ struct ScheduleCell: View {
                 Text(item.location)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+            }
+            .onTapGesture {
+                onTap?()
             }
             Spacer()
         }

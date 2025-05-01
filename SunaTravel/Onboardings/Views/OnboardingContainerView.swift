@@ -19,8 +19,8 @@ struct OnboardingConstants {
     static let hStackSpacing: CGFloat = 8
     static let circleOpacity: Double = 0.3
     static let buttonCornerRadius: CGFloat = 10
-    static let buttonSkipCornerRadius: CGFloat = 7
-    static let buttonSkipBackgroundOpacity: Double = 0.7
+    static let buttonSkipCornerRadius: CGFloat = 8
+    static let buttonSkipBackgroundOpacity: Double = 0.4
 }
 
 struct OnboardingContainerView: View {

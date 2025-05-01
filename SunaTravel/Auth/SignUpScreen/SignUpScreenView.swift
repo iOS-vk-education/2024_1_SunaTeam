@@ -10,30 +10,55 @@ import SwiftUI
 
 struct SignUpScreenView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var isNavigatingToHome = false
     @State private var shouldHideBackButton = false
-
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    @State private var name = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var errorMessage: String?
+    @State private var isNavigatingToHome = false
+    
     var body: some View {
         NavigationView {
             VStack {
                 HeaderView(largeText: "Sign up now",
                            smallText: "Please fill the details and create an account")
                 
-                TextFieldView(text: "Name", isSecureField: false)
-                    .padding(.top, 40)
-                TextFieldView(text: "Email", isSecureField: false)
-                TextFieldView(text: "Password", isSecureField: true)
+                TextFieldView(text: "Name", isSecureField: false, textValue: $name)
+                    .padding(.top, 10)
+                    .cornerRadius(8)
+                TextFieldView(text: "Email", isSecureField: false, textValue: $email)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .padding(.top, 10)
+                    .cornerRadius(8)
+                SecuredTextFieldView(text: "Password", textValue: $password)
+                    .padding(.top, 10)
+                    .cornerRadius(8)
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                }
+                
                 
                 NavigationLink(destination: AppRootView(), isActive: $isNavigatingToHome) {
                     Button("Sign Up") {
-                        presentationMode.wrappedValue.dismiss()
-                        isNavigatingToHome = true
-                        shouldHideBackButton = true
+                        authViewModel.register(email: email, password: password) { success, error in
+                            if success {
+                                presentationMode.wrappedValue.dismiss()
+                                isNavigatingToHome = true
+                                shouldHideBackButton = true
+                            } else {
+                                errorMessage = error
+                            }
+                        }
                     }
                     .buttonStyle(YellowButtonStyle())
                     .padding(.top, 24)
                 }
-                .padding(.bottom, 40)
+                .padding(.bottom, 10)
                 
                 HStack {
                     Text("Already have an account")
@@ -48,7 +73,7 @@ struct SignUpScreenView: View {
                 }
             }
             .padding(.horizontal, 40)
-            .navigationBarBackButtonHidden(shouldHideBackButton) 
+            .navigationBarBackButtonHidden(shouldHideBackButton)
         }
     }
 }

@@ -11,10 +11,10 @@ import SwiftUI
 struct ProfileNavigationLinks: View {
     var body: some View {
         List {
-            ProfileLink(title: "Favorite Places", destination: BookmarksView(), image: "bookmark.circle")
+            ProfileLink(title: "All Places", destination: BookmarksView(), image: "bookmark.circle")
             ProfileLink(title: "Search Trips", destination: PreviousTripsView(), image: "globe.europe.africa")
-            ProfileLink(title: "Settings", destination: SettingsView(), image: "gearshape")
-            ProfileLink(title: "About app", destination: VersionView(), image: "info.circle")
+            //ProfileLink(title: "Settings", destination: SettingsView(), image: "gearshape")
+            //ProfileLink(title: "About app", destination: VersionView(), image: "info.circle")
         }
         .listStyle(.plain)
     }

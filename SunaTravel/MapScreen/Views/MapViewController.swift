@@ -45,9 +45,9 @@ class MapViewController: UIViewController, YMKLayersGeoObjectTapListener {
         
         let initialLocation = YMKPoint(latitude: 55.751244, longitude: 37.618423)
         mapView.mapWindow.map.move(
-            with: YMKCameraPosition(target: initialLocation, zoom: 2, azimuth: 0, tilt: 0),
-            animation: YMKAnimation(type: .smooth, duration: 5),
-            cameraCallback: nil
+            with: YMKCameraPosition(target: initialLocation, zoom: 2, azimuth: 0, tilt: 0)
+            //animation: YMKAnimation(type: .smooth, duration: 5),
+            //cameraCallback: nil
         )
         
         mapView.mapWindow.map.addInputListener(with: self)
@@ -62,7 +62,7 @@ class MapViewController: UIViewController, YMKLayersGeoObjectTapListener {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
-
+    
 }
 
 // MARK: - Listener
@@ -92,34 +92,20 @@ extension MapViewController: YMKMapInputListener {
 
 extension MapViewController: YMKMapObjectTapListener {
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let placemark = mapObject as? YMKPlacemarkMapObject,
-              let userData = placemark.userData as? [String: Any],
-              let name = userData["name"] as? String,
-              let latitude = userData["latitude"] as? Double,
-              let longitude = userData["longitude"] as? Double else {
-            return false
-        }
-        
-        let alert = UIAlertController(
-            title: name,
-            message: "Coordinates:\nLatitude: \(latitude)\nLongitude: \(longitude)",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-        
+        let tripDetailViewController = UIHostingController(rootView: ViewTripViewControllerWrapper())
+        navigationController?.pushViewController(tripDetailViewController, animated: true)
         return true
     }
 }
 
 struct MapView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> MapViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         YMKMapKit.setApiKey("98c7692d-3ebf-4c47-abe7-34663a0e4677")
         YMKMapKit.sharedInstance().onStart()
-        return MapViewController()
+        return UINavigationController(rootViewController: MapViewController())
     }
-
-    func updateUIViewController(_ uiViewController: MapViewController, context: Context) {}
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 
@@ -138,6 +124,6 @@ struct PopularCitiesMapViewController_Previews: PreviewProvider {
     static var previews: some View {
         MapViewControllerPreview()
             .edgesIgnoringSafeArea(.all)
-            .previewDevice("iPhone 13")
+            .previewDevice("iPhone 15")
     }
 }
