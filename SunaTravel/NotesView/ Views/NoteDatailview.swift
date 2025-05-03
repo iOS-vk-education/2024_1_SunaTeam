@@ -1,8 +1,8 @@
 //
-//  NotesViewController.swift
+//  NoteDatailview.swift
 //  SunaTravel
 //
-//  Created by Lilia Chechina on 12.03.2025.
+//  Created by Lilia Chechina on 03.05.2025.
 //
 import SwiftUI
 
@@ -21,8 +21,6 @@ struct NoteDetailView: View {
                 TextField("Enter title", text: $note.title)
                     .font(.title)
                     .focused($isTitleFocused)
-//                    .padding(.leading, -2)
-//                    .padding(8)
                     .cornerRadius(8)
                     .background(Color(.systemBackground))
                 
@@ -54,15 +52,12 @@ struct NoteDetailView: View {
                 }
                 }
                 .listStyle(PlainListStyle())
-//                .frame(height: geometry.size.height - 150)
-//                .frame(maxHeight: .infinity)  // so that less space on the screen occupies, but isn't working
                 .onAppear {
                     isTitleFocused = true
                 }
                 .padding()
                 .background(Color(.systemBackground))
                 .edgesIgnoringSafeArea(.all)
-                //            .navigationTitle("Edit Note")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -74,7 +69,8 @@ struct NoteDetailView: View {
                         }
                     }
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 0.17)
             }
         }
     
@@ -90,15 +86,14 @@ struct NoteDetailView: View {
     private func addItem() {
         // MARK: Костыль
         guard !newItemText.isEmpty else { return }
-        
         // We check if there is already an element with the same text
         if !note.checklist.contains(where: { $0.text == newItemText }) {
             let newItem = ChecklistItem(text: newItemText)
-            print("Добавляем: \(newItem.text), ID: \(newItem.id)")
+            print("Add: \(newItem.text), ID: \(newItem.id)")
             
             note.checklist.append(newItem)
         } else {
-            print("Элемент уже существует: \(newItemText)")
+            print("Element is already exists: \(newItemText)")
         }
         
         newItemText = ""
@@ -112,10 +107,10 @@ struct NoteDetailView: View {
     private func updateNote() {
         if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
                 viewModel.notes[index] = note
-                print("Обновляем заметку \(note.title), теперь в ней \(note.checklist.count) элементов")
+                print("update the note \(note.title), now it contains \(note.checklist.count) elements")
                 
                 for item in note.checklist {
-                    print("Элемент: \(item.text), ID: \(item.id)")
+                    print("element: \(item.text), ID: \(item.id)")
                 }
             }
     }
@@ -126,74 +121,4 @@ struct NoteDetailView: View {
                 dismiss()
             }
         }
-}
-
-
-
-
-// The screen of the list of notes(checklists)
-struct NotesView: View {
-    @StateObject private var viewModel = NoteViewModel()
-    @State private var isNavigating = false
-    @State private var newNote: Note?
-
-    var body: some View {
-        NavigationView {
-            VStack {
-
-                List {
-                    ForEach($viewModel.notes) { $note in
-                        NavigationLink(destination: NoteDetailView(viewModel: viewModel, note: $note)) {
-                            Text(note.title)
-                                .font(.headline)
-                        }
-                    }
-                    .onDelete(perform: viewModel.deleteNote)
-                }
-                .padding(.top, -15)
-                NavigationLink(
-                    destination: Group {
-                        if let note = newNote {
-                            NoteDetailView(viewModel: viewModel, note: binding(for: note))
-                        } else {
-                            EmptyView()
-                        }
-                    },
-                    isActive: $isNavigating,
-                    label: { EmptyView() }
-                )
-                .hidden()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("My checklists")
-                        .font(.system(size: 35, weight: .bold))
-                        .padding(.top, -20)
-                        .padding(.bottom, -120)
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        let note = Note(title: "", text: "")
-                        viewModel.notes.append(note)
-                        newNote = note
-                        isNavigating = true
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 28))
-                            .padding(.top, -20)
-                            .padding(.bottom, -120)
-                    }
-                }
-            }
-        }
-    }
-
-    private func binding(for note: Note) -> Binding<Note> {
-        guard let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) else {
-            fatalError("Note not found")
-        }
-        return $viewModel.notes[index]
-    }
 }
