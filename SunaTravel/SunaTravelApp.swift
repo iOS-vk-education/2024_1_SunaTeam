@@ -21,9 +21,24 @@ struct SunaTravelApp: App {
                     isFirstLaunch: $isFirstLaunch,
                     viewModel: OnboardingViewModel())
             } else {
-                ContentView()
+                RootView()
                     .environmentObject(authViewModel)
             }
         }
+    }
+}
+
+struct RootView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    var body: some View {
+        Group {
+            if authViewModel.isAuthenticated {
+                AppRootView()
+            } else {
+                SignInScreenView()
+            }
+        }
+        .animation(.easeInOut, value: authViewModel.isAuthenticated)
     }
 }

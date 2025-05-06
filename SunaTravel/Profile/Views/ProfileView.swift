@@ -9,23 +9,9 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
-    let showEditButton: Bool
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                if showEditButton {
-                    NavigationLink(destination: EditProfileView(viewModel: viewModel)) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(.primary)
-                    }
-                    .padding()
-                } else {
-                    
-                }
-            }
-            Spacer()
             if let avatar = viewModel.profile.avatar {
                 Image(uiImage: avatar)
                     .resizable()
@@ -51,21 +37,11 @@ struct ProfileView: View {
                 .foregroundColor(.secondary)
             
             //MARK: – Статистика – на будущее
-            //                HStack {
-            //                    ProfileInfoItem(count: viewModel.profile.rewardPointsCount, title: "Reward Points")
-            //                    Spacer()
-            //                    ProfileInfoItem(count: viewModel.profile.travelTipsCount, title: "Travel Tips")
-            //                    Spacer()
-            //                    ProfileInfoItem(count: viewModel.profile.bucketListCount, title: "Bucket List")
-            //                }
-            //                .padding()
-            
             ProfileNavigationLinks()
             Spacer()
         }
         .padding()
         .navigationBarTitle("Profile", displayMode: .inline)
-        .navigationBarHidden(showEditButton)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: EditProfileView(viewModel: viewModel)) {

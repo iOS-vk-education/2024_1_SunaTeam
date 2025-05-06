@@ -45,6 +45,7 @@ struct MainView: View {
                 }
             }
             .padding(.top)
+            .navigationBarHidden(true)
             .background(
                 NavigationLink(
                     destination: ViewTripViewControllerWrapper(),
