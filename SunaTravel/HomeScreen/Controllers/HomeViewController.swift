@@ -46,10 +46,13 @@ class HomeViewController: UIViewController {
         button.setTitleColor(UIColor { traitCollection in
             return traitCollection.userInterfaceStyle == .dark ? .white : .black
         }, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: HomeViewConstants.profileButtonTextSize)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: HomeViewConstants.profileButtonTextSize, bottom: 0, right: 0)
-        button.layer.cornerRadius = HomeViewConstants.profileButtonCornerRadius
-        button.layer.masksToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: HomeViewConstants.profileButtonTextSize, weight: .semibold)
+        
+        button.titleLabel?.lineBreakMode = .byClipping
+        button.titleLabel?.adjustsFontSizeToFitWidth = false
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        
         return button
     }()
     
@@ -63,16 +66,6 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: – Уведомления на будущее
-    //    private let notificationButton: UIButton = {
-    //        let button = UIButton(type: .system)
-    //        button.setImage(UIImage(systemName: "bell.badge"), for: .normal)
-    //        button.tintColor = UIColor { traitCollection in
-    //                return traitCollection.userInterfaceStyle == .dark ? .white : .black
-    //        }
-    //        button.layer.cornerRadius = HomeViewConstants.notificationButtonCornerRadius
-    //        button.layer.masksToBounds = true
-    //        return button
-    //    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -101,7 +94,7 @@ class HomeViewController: UIViewController {
     }()
     
     @objc private func profileButtonTapped() {
-        let profileVC = UIHostingController(rootView: ProfileView(viewModel: profileViewModel, showEditButton: false))
+        let profileVC = UIHostingController(rootView: ProfileView(viewModel: profileViewModel))
         navigationController?.pushViewController(profileVC, animated: true)
     }
     
@@ -126,9 +119,9 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCustomNavigationBar()
         setupUI()
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        //profileButton.
         viewAllButton.addTarget(self, action: #selector(viewAllButtonTapped), for: .touchUpInside)
         
         updateProfileButton()
@@ -144,17 +137,39 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    private func setupCustomNavigationBar() {
+        let profileContainer = UIButton(type: .custom)
+        profileContainer.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        
+        profileButton.translatesAutoresizingMaskIntoConstraints = false
+        profileContainer.addSubview(profileButton)
+        
+        NSLayoutConstraint.activate([
+            profileButton.topAnchor.constraint(equalTo: profileContainer.topAnchor),
+            profileButton.bottomAnchor.constraint(equalTo: profileContainer.bottomAnchor),
+            profileButton.leadingAnchor.constraint(equalTo: profileContainer.leadingAnchor),
+            profileButton.trailingAnchor.constraint(equalTo: profileContainer.trailingAnchor),
+            
+            profileButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 120)
+        ])
+        
+        navigationItem.titleView = profileContainer
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
     }
     
     private func updateProfileButton() {
         DispatchQueue.main.async {
             self.profileButton.setTitle(self.profileViewModel.profile.name, for: .normal)
-
+            
             if let avatar = self.profileViewModel.profile.avatar {
                 print("Avatar size: \(avatar.size)")
                 
-                let diameter: CGFloat = 22 
+                let diameter: CGFloat = 22
                 let scaledAvatar = avatar.resize(to: CGSize(width: diameter, height: diameter))
                 let roundedAvatar = scaledAvatar?.withRoundedCorners(radius: diameter / 2)
                 
@@ -171,8 +186,8 @@ class HomeViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
-        let headerStack = UIStackView(arrangedSubviews: [profileButton])
-        profileButton.imageView?.contentMode = .scaleAspectFit
+        // Убираем profileButton из headerStack, так как теперь он в navigation bar
+        let headerStack = UIStackView()
         headerStack.axis = .horizontal
         headerStack.alignment = .center
         headerStack.spacing = HomeViewConstants.headerStackSpacing
@@ -181,13 +196,14 @@ class HomeViewController: UIViewController {
         titleStack.axis = .horizontal
         titleStack.spacing = HomeViewConstants.titleStackSpacing
         
-        let mainStack = UIStackView(arrangedSubviews: [headerStack, titleLabel, titleStack, collectionView])
+        let mainStack = UIStackView(arrangedSubviews: [titleLabel, titleStack, collectionView])
         mainStack.axis = .vertical
         mainStack.spacing = HomeViewConstants.mainStackSpacing
         
         view.addSubview(mainStack)
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            // Теперь отступаем от safeAreaLayoutGuide.topAnchor
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: HomeViewConstants.mainStackTopAnchor),
             mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: HomeViewConstants.mainStackLeadingAnchor),
             mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: HomeViewConstants.mainStackTrailingAnchor),
@@ -254,7 +270,12 @@ struct HomeScreenView: View {
 
 struct HomeViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        return UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+        let navController = UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+                
+                // Дополнительные настройки navigation controller
+                navController.navigationBar.prefersLargeTitles = false
+                navController.navigationBar.tintColor = .orange
+        return navController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
