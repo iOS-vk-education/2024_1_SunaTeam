@@ -19,6 +19,8 @@ struct SignUpScreenView: View {
     @State private var errorMessage: String?
     @State private var isNavigatingToHome = false
     
+    private let profileViewModel = AppState.shared.profileViewModel
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -54,6 +56,7 @@ struct SignUpScreenView: View {
                                 errorMessage = error
                             }
                         }
+                        profileViewModel.saveChanges(name: name, email: email, location: "", phoneNumber: "", avatar: nil)
                     }
                     .buttonStyle(YellowButtonStyle())
                     .padding(.top, 24)

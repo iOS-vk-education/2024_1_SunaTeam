@@ -254,7 +254,7 @@ struct HomeScreenView: View {
 
 struct HomeViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        return UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+        return UINavigationController(rootViewController: HomeViewController(profileViewModel: AppState.shared.profileViewModel))
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {

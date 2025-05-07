@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import FirebaseAuth
 
 fileprivate struct UIConstants {
     static let TabViewHeight: CGFloat = 70
@@ -24,7 +25,7 @@ final class NavigationBar: UITabBarController {
         }
         tabBar.tintColor = .systemBlue
         
-        let homeView = UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+        let homeView = UINavigationController(rootViewController: HomeViewController(profileViewModel: AppState.shared.profileViewModel))
         homeView.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
         let calendarView = UINavigationController(rootViewController: UIHostingController(rootView: MainView()))
@@ -36,7 +37,7 @@ final class NavigationBar: UITabBarController {
         let mapView = UINavigationController(rootViewController: UIHostingController(rootView: MapView().edgesIgnoringSafeArea(.all)))
         mapView.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 3)
         
-        let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: profileViewModel, showEditButton: true)))
+        let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: AppState.shared.profileViewModel, showEditButton: true)))
         profileView.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 4)
         
         viewControllers = [homeView, calendarView, searchView, mapView, profileView]

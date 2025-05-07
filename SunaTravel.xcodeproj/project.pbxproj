@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		381328BDEF7CEC248750D412 /* Pods_SunaTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24462ECA2998A97B286B699 /* Pods_SunaTravel.framework */; };
+		58985E012DC7842B007A2FC1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58985E002DC78426007A2FC1 /* AppState.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
@@ -60,16 +62,17 @@
 		8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D812D1A129E0052A0AA /* MainViewController.swift */; };
 		8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D7D2D1A129E0052A0AA /* NavigationItemModel.swift */; };
 		8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D832D1A129E0052A0AA /* ScheduleCell.swift */; };
-		A44FE35B617920FA75703381 /* Pods_SunaTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83AFCBF65B9A4ED4E105C05 /* Pods_SunaTravel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		166FF62922D617E9C5327ADD /* Pods-SunaTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunaTravel.release.xcconfig"; path = "Target Support Files/Pods-SunaTravel/Pods-SunaTravel.release.xcconfig"; sourceTree = "<group>"; };
+		2F9EC12957C4E34A3FFD42E8 /* Pods-SunaTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunaTravel.debug.xcconfig"; path = "Target Support Files/Pods-SunaTravel/Pods-SunaTravel.debug.xcconfig"; sourceTree = "<group>"; };
+		58985E002DC78426007A2FC1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58F5CAC42D0785E300A3C1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58F5CAC72D0785E300A3C1FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		65770D700E11F67CEC1F6D0A /* Pods-SunaTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunaTravel.release.xcconfig"; path = "Target Support Files/Pods-SunaTravel/Pods-SunaTravel.release.xcconfig"; sourceTree = "<group>"; };
 		8F0A96E12D13601D00322C53 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
 		8F0A96E32D13602900322C53 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8F0A96E72D13603700322C53 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
@@ -119,8 +122,7 @@
 		8FF43D812D1A129E0052A0AA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8FF43D822D1A129E0052A0AA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		8FF43D832D1A129E0052A0AA /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
-		B83AFCBF65B9A4ED4E105C05 /* Pods_SunaTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunaTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C577E33F94A3E258991D4488 /* Pods-SunaTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunaTravel.debug.xcconfig"; path = "Target Support Files/Pods-SunaTravel/Pods-SunaTravel.debug.xcconfig"; sourceTree = "<group>"; };
+		D24462ECA2998A97B286B699 /* Pods_SunaTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunaTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,17 +130,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A44FE35B617920FA75703381 /* Pods_SunaTravel.framework in Frameworks */,
+				381328BDEF7CEC248750D412 /* Pods_SunaTravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1AE20CA0726B226FE2A83354 /* Frameworks */ = {
+		37A29B9B3F029AE1BC5ECA45 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B83AFCBF65B9A4ED4E105C05 /* Pods_SunaTravel.framework */,
+				D24462ECA2998A97B286B699 /* Pods_SunaTravel.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,7 +151,7 @@
 				58F5CABF2D0785E000A3C1FA /* SunaTravel */,
 				58F5CABE2D0785E000A3C1FA /* Products */,
 				8C0F4E23340EF3D517E67AB2 /* Pods */,
-				1AE20CA0726B226FE2A83354 /* Frameworks */,
+				37A29B9B3F029AE1BC5ECA45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,8 +200,8 @@
 		8C0F4E23340EF3D517E67AB2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C577E33F94A3E258991D4488 /* Pods-SunaTravel.debug.xcconfig */,
-				65770D700E11F67CEC1F6D0A /* Pods-SunaTravel.release.xcconfig */,
+				2F9EC12957C4E34A3FFD42E8 /* Pods-SunaTravel.debug.xcconfig */,
+				166FF62922D617E9C5327ADD /* Pods-SunaTravel.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -455,6 +457,7 @@
 		8FBA14142D1AF872003DB8F2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				58985E002DC78426007A2FC1 /* AppState.swift */,
 				8FBA14172D1AF89D003DB8F2 /* Views */,
 				8FBA14162D1AF895003DB8F2 /* ViewModels */,
 				8FBA14152D1AF88B003DB8F2 /* Models */,
@@ -525,13 +528,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58F5CACB2D0785E300A3C1FA /* Build configuration list for PBXNativeTarget "SunaTravel" */;
 			buildPhases = (
-				902622A216B002D3D4A50E57 /* [CP] Check Pods Manifest.lock */,
+				6DE8B5E9F8D72855C7741243 /* [CP] Check Pods Manifest.lock */,
 				58F5CAB92D0785E000A3C1FA /* Sources */,
 				58F5CABA2D0785E000A3C1FA /* Frameworks */,
 				58F5CABB2D0785E000A3C1FA /* Resources */,
 				8F7311232D0FA42F007A78AC /* ShellScript */,
-				E2B279F75F1E6AAB2F68D579 /* [CP] Copy Pods Resources */,
-				2B157728E36389399051B6BE /* [CP] Embed Pods Frameworks */,
+				3A36D235ABADE78148747F07 /* [CP] Embed Pods Frameworks */,
+				620B281CFCC7CFFF7C576824 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -591,7 +594,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2B157728E36389399051B6BE /* [CP] Embed Pods Frameworks */ = {
+		3A36D235ABADE78148747F07 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -608,24 +611,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F7311232D0FA42F007A78AC /* ShellScript */ = {
+		620B281CFCC7CFFF7C576824 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --config \"${SRCROOT}/swiftlint.yml\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		902622A216B002D3D4A50E57 /* [CP] Check Pods Manifest.lock */ = {
+		6DE8B5E9F8D72855C7741243 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -647,22 +650,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E2B279F75F1E6AAB2F68D579 /* [CP] Copy Pods Resources */ = {
+		8F7311232D0FA42F007A78AC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+			);
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SunaTravel/Pods-SunaTravel-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --config \"${SRCROOT}/swiftlint.yml\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -715,6 +718,7 @@
 				8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */,
 				8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */,
 				8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */,
+				58985E012DC7842B007A2FC1 /* AppState.swift in Sources */,
 				8FBA141B2D1AF8C9003DB8F2 /* ProfileViewModel.swift in Sources */,
 				8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */,
 				8FBA14112D1AEB9B003DB8F2 /* HomeViewModel.swift in Sources */,
@@ -843,7 +847,7 @@
 		};
 		58F5CACC2D0785E300A3C1FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C577E33F94A3E258991D4488 /* Pods-SunaTravel.debug.xcconfig */;
+			baseConfigurationReference = 2F9EC12957C4E34A3FFD42E8 /* Pods-SunaTravel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -876,7 +880,7 @@
 		};
 		58F5CACD2D0785E300A3C1FA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65770D700E11F67CEC1F6D0A /* Pods-SunaTravel.release.xcconfig */;
+			baseConfigurationReference = 166FF62922D617E9C5327ADD /* Pods-SunaTravel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
