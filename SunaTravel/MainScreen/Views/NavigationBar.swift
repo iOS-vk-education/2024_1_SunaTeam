@@ -12,11 +12,26 @@ fileprivate struct UIConstants {
     static let TabViewHeight: CGFloat = 70
     static let TabViewPadding: CGFloat = 10
 }
-
+    
 final class NavigationBar: UITabBarController {
+    private let authViewModel: AuthViewModel
+    
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = authViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTabs()
+    }
+    
+    private func setupTabs() {
         
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor { traitCollection in
@@ -24,7 +39,7 @@ final class NavigationBar: UITabBarController {
         }
         tabBar.tintColor = .systemBlue
         
-        let homeView = UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+        let homeView = UINavigationController(rootViewController: HomeViewController(profileViewModel: AppState.shared.profileViewModel))
         homeView.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
         let calendarView = UINavigationController(rootViewController: UIHostingController(rootView: MainView()))
@@ -36,7 +51,7 @@ final class NavigationBar: UITabBarController {
         let mapView = UINavigationController(rootViewController: UIHostingController(rootView: MapView().edgesIgnoringSafeArea(.all)))
         mapView.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 3)
         
-        let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: profileViewModel)))
+        let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: AppState.shared.profileViewModel)))
         profileView.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 4)
         
         viewControllers = [homeView, calendarView, searchView, mapView, profileView]
@@ -51,9 +66,11 @@ class EmptyViewController: UIViewController {
 }
 
 struct AppRootView: UIViewControllerRepresentable {
+    @EnvironmentObject var authViewModel: AuthViewModel
+
     func makeUIViewController(context: Context) -> NavigationBar {
-        return NavigationBar()
+        NavigationBar(authViewModel: authViewModel)
     }
-    
+
     func updateUIViewController(_ uiViewController: NavigationBar, context: Context) {}
 }

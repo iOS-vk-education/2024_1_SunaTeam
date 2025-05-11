@@ -12,36 +12,40 @@ class AuthViewModel: ObservableObject {
     @Published var user: User?
     @Published var isAuthenticated: Bool = false
     
+    private var handle: AuthStateDidChangeListenerHandle?
+    
     init() {
         checkAuthState()
     }
     
-    func checkAuthState() {
-        if let user = Auth.auth().currentUser {
-            handleAuthenticatedUser(user)
-        } else {
-            handleUnauthenticatedUser()
+    deinit {
+        if let handle = handle {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
-        
-        Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+    }
+    
+    func checkAuthState() {
+        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             guard let self = self else { return }
-            
-            if let user = user {
-                handleAuthenticatedUser(user)
-            } else {
-                handleUnauthenticatedUser()
+            DispatchQueue.main.async {
+                if let user = user, user.isEmailVerified {
+                    self.user = user
+                    self.isAuthenticated = true
+                    print("User authenticated: \(user.uid)")
+                } else {
+                    self.user = nil
+                    self.isAuthenticated = false
+                    print("User not authenticated")
+                }
             }
         }
     }
     
     private func handleAuthenticatedUser(_ user: User) {
-        if user.isEmailVerified {
+        DispatchQueue.main.async {
+            self.user = user
             self.isAuthenticated = true
             print("User authenticated: \(user.uid)")
-            
-        } else {
-            self.isAuthenticated = false
-            try? Auth.auth().signOut()
         }
     }
     

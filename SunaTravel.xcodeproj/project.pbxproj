@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58F18D832DD12C390048B8FE /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F18D822DD12C300048B8FE /* AppState.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58F18D822DD12C300048B8FE /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 		8FBA14142D1AF872003DB8F2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				58F18D822DD12C300048B8FE /* AppState.swift */,
 				8FBA14172D1AF89D003DB8F2 /* Views */,
 				8FBA14162D1AF895003DB8F2 /* ViewModels */,
 				8FBA14152D1AF88B003DB8F2 /* Models */,
@@ -715,6 +718,7 @@
 				8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */,
 				8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */,
 				8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */,
+				58F18D832DD12C390048B8FE /* AppState.swift in Sources */,
 				8FBA141B2D1AF8C9003DB8F2 /* ProfileViewModel.swift in Sources */,
 				8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */,
 				8FBA14112D1AEB9B003DB8F2 /* HomeViewModel.swift in Sources */,
@@ -851,7 +855,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SunaTravel/Preview Content\"";
-				DEVELOPMENT_TEAM = 28J53UH756;
+				DEVELOPMENT_TEAM = 949FZ2ST6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -884,7 +888,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SunaTravel/Preview Content\"";
-				DEVELOPMENT_TEAM = 28J53UH756;
+				DEVELOPMENT_TEAM = 949FZ2ST6K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
