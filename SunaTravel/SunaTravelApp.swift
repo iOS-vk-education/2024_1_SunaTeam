@@ -12,6 +12,7 @@ import Firebase
 struct SunaTravelApp: App {
     @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     @StateObject var authViewModel = AuthViewModel()
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
