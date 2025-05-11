@@ -1,5 +1,5 @@
 //
-//  NoteViewModel.swift
+//  NotesView.swift
 //  SunaTravel
 //
 //  Created by Lilia Chechina on 03.05.2025.
@@ -27,13 +27,18 @@ struct NotesView: View {
                             .font(.headline)
                     }
                 }
-                .onDelete(perform: viewModel.deleteNote)
+                .onDelete(perform: deleteNote)
             }
             .padding(.top, -15)
             NavigationLink(
                 destination: Group {
-                    if let note = newNote {
-                        NoteDetailView(viewModel: viewModel, note: binding(for: note))
+//                    if let note = newNote {
+//                        NoteDetailView(viewModel: viewModel, note: binding(for: note))
+//                    } else {
+//                        EmptyView()
+//                    }
+                    if let note = newNote, let binding = binding(for: note) {
+                        NoteDetailView(viewModel: viewModel, note: binding)
                     } else {
                         EmptyView()
                     }
@@ -48,10 +53,10 @@ struct NotesView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    let note = Note(title: "", text: "")
-                    viewModel.notes.append(note)
-                    newNote = note
-                    isNavigating = true
+                     viewModel.addNote(title: "", text: "") { addedNote in
+                         self.newNote = addedNote
+                         self.isNavigating = true
+                     }
                 }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 28))
@@ -61,10 +66,18 @@ struct NotesView: View {
             }
         }
     }
+
+    private func deleteNote(at offsets: IndexSet) {
+        for index in offsets {
+            let noteToDelete = viewModel.notes[index]
+            viewModel.deleteNote(note: noteToDelete)
+        }
+    }
     
-    private func binding(for note: Note) -> Binding<Note> {
+    private func binding(for note: Note) -> Binding<Note>? {
         guard let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) else {
-            fatalError("Note not found")
+//            fatalError("Note not found")
+            return nil
         }
         return $viewModel.notes[index]
     }

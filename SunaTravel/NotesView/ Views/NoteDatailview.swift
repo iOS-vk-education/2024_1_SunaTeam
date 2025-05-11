@@ -23,6 +23,9 @@ struct NoteDetailView: View {
                     .focused($isTitleFocused)
                     .cornerRadius(8)
                     .background(Color(.systemBackground))
+                    .onChange(of: note.title) { _ in
+                                            updateNote()
+                                        }
                 
                 List {
                     ForEach(note.checklist) { item in
@@ -35,6 +38,7 @@ struct NoteDetailView: View {
                                 .strikethrough(item.isChecked)
                                 .foregroundColor(item.isChecked ? .gray : .primary)
                         }
+                        
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                     .onDelete(perform: deleteItem)
@@ -73,52 +77,38 @@ struct NoteDetailView: View {
                 .padding(.top, 0.17)
             }
         }
-    
 
-    
     private func toggleItem(_ item: ChecklistItem) {
-        if let index = note.checklist.firstIndex(where: { $0.id == item.id }) {
-            note.checklist[index].isChecked.toggle()
-            updateNote()
-        }
-    }
-    
-    private func addItem() {
-        // MARK: Костыль
-        guard !newItemText.isEmpty else { return }
-        // We check if there is already an element with the same text
-        if !note.checklist.contains(where: { $0.text == newItemText }) {
-            let newItem = ChecklistItem(text: newItemText)
-            print("Add: \(newItem.text), ID: \(newItem.id)")
-            
-            note.checklist.append(newItem)
-        } else {
-            print("Element is already exists: \(newItemText)")
-        }
-        
-        newItemText = ""
-    }
-    
-    private func deleteItem(at offsets: IndexSet) {
-        note.checklist.remove(atOffsets: offsets)
-        updateNote()
-    }
-    
-    private func updateNote() {
-        if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
-                viewModel.notes[index] = note
-                print("update the note \(note.title), now it contains \(note.checklist.count) elements")
-                
-                for item in note.checklist {
-                    print("element: \(item.text), ID: \(item.id)")
-                }
-            }
-    }
-    
-    private func deleteNote() {
-            if let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) {
-                viewModel.notes.remove(at: index)
-                dismiss()
-            }
-        }
+           if let index = note.checklist.firstIndex(where: { $0.id == item.id }) {
+               note.checklist[index].isChecked.toggle()
+               updateNote()
+           }
+       }
+
+       private func addItem() {
+           guard !newItemText.isEmpty else { return }
+           if !note.checklist.contains(where: { $0.text == newItemText }) {
+               let newItem = ChecklistItem(text: newItemText)
+               note.checklist.append(newItem)
+               updateNote()
+           }
+           newItemText = ""
+       }
+
+       private func deleteItem(at offsets: IndexSet) {
+           note.checklist.remove(atOffsets: offsets)
+           updateNote()
+       }
+
+       private func updateNote() {
+           viewModel.updateNote(note)
+       }
+
+       private func deleteNote() {
+               if let selectedNote = viewModel.selectedNote, selectedNote.id == note.id {
+                   viewModel.selectedNote = nil
+               }
+           viewModel.deleteNote(note: note)
+           dismiss()
+       }
 }
