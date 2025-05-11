@@ -6,7 +6,16 @@
 //
 
 import SwiftUI
-import FirebaseAuth
+
+var profileViewModel = ProfileViewModel(profile: ProfileData(
+    name: "Leonardo",
+    email: "leonardo@gmail.com",
+    location: "Moscow, Russia",
+    phoneNumber: "+1-222-333-44-55",
+    rewardPointsCount: 360,
+    travelTipsCount: 238,
+    bucketListCount: 473
+))
 
 //struct NavigationItem {
 //    let title: String
