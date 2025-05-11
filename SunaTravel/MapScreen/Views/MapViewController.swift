@@ -27,6 +27,8 @@ class MapViewController: UIViewController, YMKLayersGeoObjectTapListener {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = .all
+        extendedLayoutIncludesOpaqueBars = true
         setupMapView()
         setupMarkers()
     }
@@ -46,8 +48,6 @@ class MapViewController: UIViewController, YMKLayersGeoObjectTapListener {
         let initialLocation = YMKPoint(latitude: 55.751244, longitude: 37.618423)
         mapView.mapWindow.map.move(
             with: YMKCameraPosition(target: initialLocation, zoom: 2, azimuth: 0, tilt: 0)
-            //animation: YMKAnimation(type: .smooth, duration: 5),
-            //cameraCallback: nil
         )
         
         mapView.mapWindow.map.addInputListener(with: self)

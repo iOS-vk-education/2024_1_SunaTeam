@@ -38,6 +38,7 @@ final class NavigationBar: UITabBarController {
         mapView.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), tag: 3)
         
         let profileView = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(viewModel: AppState.shared.profileViewModel, showEditButton: true)))
+
         profileView.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 4)
         
         viewControllers = [homeView, calendarView, searchView, mapView, profileView]

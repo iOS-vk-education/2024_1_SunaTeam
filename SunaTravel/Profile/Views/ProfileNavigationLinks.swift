@@ -13,8 +13,7 @@ struct ProfileNavigationLinks: View {
         List {
             ProfileLink(title: "All Places", destination: BookmarksView(), image: "bookmark.circle")
             ProfileLink(title: "Search Trips", destination: PreviousTripsView(), image: "globe.europe.africa")
-            //ProfileLink(title: "Settings", destination: SettingsView(), image: "gearshape")
-            //ProfileLink(title: "About app", destination: VersionView(), image: "info.circle")
+            ProfileLink(title: "Settings", destination: SettingsView().environmentObject(AppSettings.shared), image: "gearshape")
         }
         .listStyle(.plain)
     }
