@@ -270,7 +270,8 @@ struct HomeScreenView: View {
 
 struct HomeViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        let navController = UINavigationController(rootViewController: HomeViewController(profileViewModel: profileViewModel))
+
+        let navController = UINavigationController(rootViewController: HomeViewController(profileViewModel: AppState.shared.profileViewModel))
                 
                 // Дополнительные настройки navigation controller
                 navController.navigationBar.prefersLargeTitles = false
