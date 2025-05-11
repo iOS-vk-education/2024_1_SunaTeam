@@ -454,3 +454,4 @@ struct ViewTripViewControllerWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
     }
 }
+

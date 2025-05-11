@@ -1,6 +1,8 @@
 import UIKit
 import PhotosUI  // for multiply photo selection
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -103,6 +105,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         button.layer.cornerRadius = 16
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(didTapSave), for: .touchUpInside)
         return button
     }()
 
@@ -333,6 +336,41 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc private func didTapSave() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User not authenticated")
+            return
+        }
+
+        // remove placeholders
+        let tripName = tripNameTextField.textColor == .lightGray ? "" : tripNameTextField.text ?? ""
+        let location = locationTextField.textColor == .lightGray ? "" : locationTextField.text ?? ""
+        let description = descriptionTextView.textColor == .lightGray ? "" : descriptionTextView.text ?? ""
+        let date = dateButton.title(for: .normal) ?? ""
+
+        let db = Firestore.firestore()
+        let tripData: [String: Any] = [
+            "tripName": tripName,
+            "location": location,
+            "description": description,
+            "date": date,
+            "createdAt": Timestamp(date: Date())
+        ]
+
+        db.collection("userData")
+            .document(userId)
+            .collection("trips")
+            .addDocument(data: tripData) { error in
+                if let error = error {
+                    print("Failed to save trip: \(error)")
+                } else {
+                    print("Trip saved successfully")
+                    self.dismiss(animated: true)
+                }
+            }
+    }
+
 
     // Helper: Create text fields and views
     private static func createRoundedTextField(placeholder: String) -> UITextField {

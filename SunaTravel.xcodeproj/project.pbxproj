@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11158B142DCB948C008171CD /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11158B0C2DCB948C008171CD /* NotesView.swift */; };
+		11158B152DCB948C008171CD /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11158B112DCB948C008171CD /* NoteViewModel.swift */; };
+		11158B162DCB948C008171CD /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11158B0E2DCB948C008171CD /* ChecklistItem.swift */; };
+		11158B172DCB948C008171CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11158B0F2DCB948C008171CD /* Note.swift */; };
+		11158B182DCB948C008171CD /* NoteDatailview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11158B0B2DCB948C008171CD /* NoteDatailview.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
 		58F5CAC52D0785E300A3C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58F5CAC42D0785E300A3C1FA /* Assets.xcassets */; };
@@ -64,6 +69,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11158B0B2DCB948C008171CD /* NoteDatailview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDatailview.swift; sourceTree = "<group>"; };
+		11158B0C2DCB948C008171CD /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		11158B0E2DCB948C008171CD /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
+		11158B0F2DCB948C008171CD /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		11158B112DCB948C008171CD /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
 		58F5CAC22D0785E000A3C1FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +145,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11158B0D2DCB948C008171CD /*  Views */ = {
+			isa = PBXGroup;
+			children = (
+				11158B0B2DCB948C008171CD /* NoteDatailview.swift */,
+				11158B0C2DCB948C008171CD /* NotesView.swift */,
+			);
+			path = " Views";
+			sourceTree = "<group>";
+		};
+		11158B102DCB948C008171CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11158B0E2DCB948C008171CD /* ChecklistItem.swift */,
+				11158B0F2DCB948C008171CD /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		11158B122DCB948C008171CD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				11158B112DCB948C008171CD /* NoteViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		11158B132DCB948C008171CD /* NotesView */ = {
+			isa = PBXGroup;
+			children = (
+				11158B0D2DCB948C008171CD /*  Views */,
+				11158B102DCB948C008171CD /* Models */,
+				11158B122DCB948C008171CD /* ViewModels */,
+			);
+			path = NotesView;
+			sourceTree = "<group>";
+		};
 		58F5CAB42D0785E000A3C1FA = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +221,7 @@
 				58F5CAC62D0785E300A3C1FA /* Preview Content */,
 				8F7310E72D0B91C8007A78AC /* LaunchScreen.storyboard */,
 				8F7311242D0FA442007A78AC /* swiftlint.yml */,
+				11158B132DCB948C008171CD /* NotesView */,
 			);
 			path = SunaTravel;
 			sourceTree = "<group>";
@@ -702,6 +749,11 @@
 				8F7B7B702D34397100F6B880 /* UIColor.swift in Sources */,
 				8FBA13E72D1A2D27003DB8F2 /* SearchPlaceViewModel.swift in Sources */,
 				8FBA13EF2D1AD720003DB8F2 /* CollectionViewDelegate&DataSource.swift in Sources */,
+				11158B142DCB948C008171CD /* NotesView.swift in Sources */,
+				11158B152DCB948C008171CD /* NoteViewModel.swift in Sources */,
+				11158B162DCB948C008171CD /* ChecklistItem.swift in Sources */,
+				11158B172DCB948C008171CD /* Note.swift in Sources */,
+				11158B182DCB948C008171CD /* NoteDatailview.swift in Sources */,
 				8F7310E12D0B8FCC007A78AC /* OnboardingViewModel.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
 				8F0A96E82D13604000322C53 /* TextFieldView.swift in Sources */,
