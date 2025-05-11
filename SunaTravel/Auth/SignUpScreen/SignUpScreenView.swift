@@ -15,10 +15,7 @@ struct SignUpScreenView: View {
     @State private var password = ""
     @State private var errorMessage: String?
     
-    private let profileViewModel = AppState.shared.profileViewModel
-    
     var body: some View {
-
         VStack {
             HeaderView(largeText: "Sign up now",
                        smallText: "Please fill the details and create an account")
@@ -43,7 +40,6 @@ struct SignUpScreenView: View {
             Button("Sign Up") {
                 authViewModel.register(email: email, password: password) { success, error in
                     if success {
-                        profileViewModel.saveChanges(name: name, email: email, location: "", phoneNumber: "", avatar: nil)
                     } else {
                         errorMessage = error
                     }
