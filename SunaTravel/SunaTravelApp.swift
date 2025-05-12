@@ -30,21 +30,18 @@ struct SunaTravelApp: App {
 
 struct RootView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @StateObject private var appSettings = AppSettings.shared
     
     var body: some View {
         Group {
             if authViewModel.isAuthenticated {
                 AppRootView()
-                    .environmentObject(appSettings)
-                    .preferredColorScheme(appSettings.isDarkMode ? .dark : .light)
-                    .onAppear {
-                        appSettings.updateAppTheme()
-                    }
+                    .environmentObject(authViewModel) // Добавьте это
             } else {
                 SignInScreenView()
             }
         }
-        .animation(.easeInOut, value: authViewModel.isAuthenticated)
+        .onAppear {
+            authViewModel.checkAuthState() // Принудительная проверка
+        }
     }
 }

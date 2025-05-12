@@ -1,10 +1,3 @@
-//
-//  AuthViewModel.swift
-//  SunaTravel
-//
-//  Created by Иван Тарасюк on 24.02.2025.
-//
-
 import Foundation
 import FirebaseAuth
 
@@ -35,14 +28,8 @@ class AuthViewModel: ObservableObject {
     }
     
     private func handleAuthenticatedUser(_ user: User) {
-        if user.isEmailVerified {
-            self.isAuthenticated = true
-            print("User authenticated: \(user.uid)")
-            
-        } else {
-            self.isAuthenticated = false
-            try? Auth.auth().signOut()
-        }
+        self.isAuthenticated = true
+        print("User authenticated: \(user.uid)")
     }
     
     private func handleUnauthenticatedUser() {
@@ -55,6 +42,7 @@ class AuthViewModel: ObservableObject {
             try Auth.auth().signOut()
             self.isAuthenticated = false
         } catch {
+            print("Ошибка выхода: \(error.localizedDescription)")
         }
     }
     
@@ -65,6 +53,7 @@ class AuthViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.user = authResult?.user
+                    self.isAuthenticated = true
                 }
                 completion(true, nil)
             }
@@ -78,6 +67,7 @@ class AuthViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.user = authResult?.user
+                    self.isAuthenticated = true
                     completion(true, nil)
                 }
             }
@@ -88,6 +78,7 @@ class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.user = nil
+            self.isAuthenticated = false
         } catch let error {
             print("Ошибка выхода: \(error.localizedDescription)")
         }
