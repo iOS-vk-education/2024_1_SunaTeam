@@ -35,13 +35,13 @@ struct RootView: View {
         Group {
             if authViewModel.isAuthenticated {
                 AppRootView()
-                    .environmentObject(authViewModel) // Добавьте это
+                    .environmentObject(authViewModel)
             } else {
                 SignInScreenView()
             }
         }
         .onAppear {
-            authViewModel.checkAuthState() // Принудительная проверка
+            authViewModel.checkAuthState()
         }
     }
 }

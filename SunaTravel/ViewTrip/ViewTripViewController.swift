@@ -4,7 +4,6 @@ import SwiftUI
 class ViewTripViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - UI Elements
-    // Background Image
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -12,37 +11,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
-//    private let backButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.layer.cornerRadius = 20
-//        button.backgroundColor = UIColor(hex: "1B1E28").withAlphaComponent(0.16)
-//        button.setTitle("<", for: .normal)
-//        button.setTitleColor(.white, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
-
-    
-//    private let titleLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Details"
-//        label.textColor = .black
-//
-//        // what with font???
-//        if let font = UIFont(name: "SFUIDisplay-Bold", size: 90) {
-//                label.font = UIFontMetrics.default.scaledFont(for: font)
-//        } else{
-//                label.font = UIFont.preferredFont(forTextStyle: .headline)
-//        }
-//
-//        label.adjustsFontForContentSizeCategory = true
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textAlignment = .center
-//        return label
-//        }()
 
     // Main Container View
     private let containerView: UIView = {
@@ -143,14 +111,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             return button
     }()
 
-//    private var photos: [UIImage] = [
-//        UIImage(named: "FirstPlace")!,
-//        UIImage(named: "SecondPlace")!,
-//        UIImage(named: "ThirdPlace")!,
-//        UIImage(named: "FourthPlace")!,
-//        UIImage(named: "FifthPlace")!
-//    ]
-
     private var isExpanded = false
     
     private let locationIcon: UIImageView = {
@@ -200,8 +160,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
     // MARK: - Setup Methods
     private func setupView() {
         view.addSubview(backgroundImageView)
-        //view.addSubview(backButton)
-        //view.addSubview(titleLabel)
         view.addSubview(containerView)
 
         containerView.addSubview(collapseButton)
@@ -226,17 +184,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            // Back Button
-            //            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            //            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            //            backButton.widthAnchor.constraint(equalToConstant: 40),
-            //            backButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            // Title Label
-            //            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            //            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8),
-            
             // Container View
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -254,7 +201,6 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             NiladriReservoirLabel.topAnchor.constraint(equalTo: collapseButton.bottomAnchor, constant: 16),
             NiladriReservoirLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            // Subtitle StackView (Location Icon + location Label)
             subtitleStackView.topAnchor.constraint(equalTo: NiladriReservoirLabel.bottomAnchor, constant: 7),
             subtitleStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             

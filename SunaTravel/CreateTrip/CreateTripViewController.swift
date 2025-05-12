@@ -16,7 +16,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-//        label.text = "Create a trip"
         label.textColor = .systemBackground
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +70,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private let dateButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Select date", for: .normal)
-//        button.backgroundColor = UIColor(hex: "F7F7F9")
         button.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         button.layer.cornerRadius = 14
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -86,7 +84,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
-//        button.backgroundColor = UIColor(hex: "F7F7F9")
         button.addTarget(self, action: #selector(didTapAddFile), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.textAlignment = .center
@@ -98,7 +95,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
-//        button.setTitleColor(.systemBackground, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(hex: "24BAEC")
         button.layer.cornerRadius = 16
@@ -135,7 +131,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
     private func setupView() {
         view.addSubview(backgroundImageView)
-        //view.addSubview(backButton)
         view.addSubview(titleLabel)
         view.addSubview(containerView)
         view.addSubview(addFileButton)
@@ -148,7 +143,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         containerView.addSubview(descriptionTextView)
         containerView.addSubview(saveButton)
         
-        // Set placeholder text manually, like in UITextView
         tripNameTextField.text = "Write a trip name"
         tripNameTextField.textColor = .lightGray
         tripNameTextField.delegate = self
@@ -168,17 +162,6 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            // Back Button
-//            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            backButton.widthAnchor.constraint(equalToConstant: 40),
-//            backButton.heightAnchor.constraint(equalToConstant: 40),
-
-            
-            // Title Label
-            // MARK: - Maybe somehow fix it in a different way, not from the Back button
-            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor), // Центр по вертикали относительно кнопки "Назад"
-            //
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // 80% of screen
 
@@ -322,18 +305,9 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     private static func createRoundedTextField(placeholder: String) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
-//        textField.backgroundColor = UIColor(hex: "F7F7F9")
         textField.backgroundColor = UIColor.adaptiveColor(lightHex: "F7F7F9", darkHex: "2C2C2E")
         textField.layer.cornerRadius = 15
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
-//        // set the placeholder color to gray
-//        textField.attributedPlaceholder = NSAttributedString(
-//                string: placeholder,
-//                attributes: [.foregroundColor: UIColor.lightGray]
-//        )
-        
-        // add left padding
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
@@ -360,7 +334,6 @@ extension CreateTripViewController: UITextViewDelegate {
 }
 
 // MARK: - PHPickerViewControllerDelegate
-// The code works on devices with iOS 14 and higher
 extension CreateTripViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
@@ -385,7 +358,6 @@ extension CreateTripViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.textColor == .lightGray {
             textField.text = ""
-//            textField.textColor = .black
             textField.textColor = UIColor.label // auto adaptation to themes
         }
     }

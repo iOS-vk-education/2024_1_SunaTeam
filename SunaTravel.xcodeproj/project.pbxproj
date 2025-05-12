@@ -59,7 +59,6 @@
 		8FF43D862D1A129E0052A0AA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D822D1A129E0052A0AA /* NavigationBar.swift */; };
 		8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D7E2D1A129E0052A0AA /* ScheduleModel.swift */; };
 		8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D812D1A129E0052A0AA /* MainViewController.swift */; };
-		8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D7D2D1A129E0052A0AA /* NavigationItemModel.swift */; };
 		8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF43D832D1A129E0052A0AA /* ScheduleCell.swift */; };
 		A0BA2D944A7FA244AF49790E /* Pods_SunaTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C47DA0719B81D9609CEADA8A /* Pods_SunaTravel.framework */; };
 /* End PBXBuildFile section */
@@ -115,7 +114,6 @@
 		8FBA14202D1AF8F1003DB8F2 /* ProfileNavigationLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigationLinks.swift; sourceTree = "<group>"; };
 		8FBA14222D1AF90A003DB8F2 /* ProfileNavigationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigationViews.swift; sourceTree = "<group>"; };
 		8FBA14242D1AF91D003DB8F2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		8FF43D7D2D1A129E0052A0AA /* NavigationItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItemModel.swift; sourceTree = "<group>"; };
 		8FF43D7E2D1A129E0052A0AA /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		8FF43D812D1A129E0052A0AA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8FF43D822D1A129E0052A0AA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -496,7 +494,6 @@
 		8FF43D7F2D1A129E0052A0AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8FF43D7D2D1A129E0052A0AA /* NavigationItemModel.swift */,
 				8FF43D7E2D1A129E0052A0AA /* ScheduleModel.swift */,
 			);
 			path = Models;
@@ -717,7 +714,6 @@
 				8FF43D862D1A129E0052A0AA /* NavigationBar.swift in Sources */,
 				8FF43D882D1A129E0052A0AA /* ScheduleModel.swift in Sources */,
 				8FF43D892D1A129E0052A0AA /* MainViewController.swift in Sources */,
-				8FF43D8A2D1A129E0052A0AA /* NavigationItemModel.swift in Sources */,
 				586ED5482DD16C1B00AC1352 /* AppState.swift in Sources */,
 				8FBA141B2D1AF8C9003DB8F2 /* ProfileViewModel.swift in Sources */,
 				8FF43D8B2D1A129E0052A0AA /* ScheduleCell.swift in Sources */,
