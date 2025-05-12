@@ -15,7 +15,7 @@ class ProfileViewModel: ObservableObject {
         db.collection("userData").document(uid).getDocument { snapshot, error in
             if let data = snapshot?.data(), error == nil {
                 DispatchQueue.main.async {
-                    self.profile.name = data["name"] as? String ?? "hg"
+                    self.profile.name = data["name"] as? String ?? ""
                     self.profile.email = data["email"] as? String ?? ""
                     self.profile.phoneNumber = data["phoneNumber"] as? String ?? ""
                     self.profile.location = data["location"] as? String ?? ""
@@ -31,8 +31,6 @@ class ProfileViewModel: ObservableObject {
 
     func saveChanges(name: String, email: String, location: String, phoneNumber: String, avatar: UIImage?) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        print("gg")
-        print(uid)
         let userData: [String: Any] = [
             "name": name,
             "email": email,

@@ -12,6 +12,8 @@ class AppState {
     static let shared = AppState()
 
     let profileViewModel: ProfileViewModel
+    
+    private var authListener: AuthStateDidChangeListenerHandle?
 
     private init() {
         let initialProfile = ProfileData(
@@ -25,12 +27,11 @@ class AppState {
         )
         self.profileViewModel = ProfileViewModel(profile: initialProfile)
 
-        print ("ewdh")
-        if let uid = Auth.auth().currentUser?.uid {
-            profileViewModel.loadProfileData(for: uid)
-            print("jj")
-        } else {
-            print("nn")
-        }
+        authListener = Auth.auth().addStateDidChangeListener { _, user in
+                if let uid = user?.uid {
+                    self.profileViewModel.loadProfileData(for: uid)
+                }
+            }
+
     }
 }
