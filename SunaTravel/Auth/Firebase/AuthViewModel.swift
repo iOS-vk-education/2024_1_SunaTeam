@@ -1,10 +1,3 @@
-//
-//  AuthViewModel.swift
-//  SunaTravel
-//
-//  Created by Иван Тарасюк on 24.02.2025.
-//
-
 import Foundation
 import FirebaseAuth
 
@@ -12,41 +5,31 @@ class AuthViewModel: ObservableObject {
     @Published var user: User?
     @Published var isAuthenticated: Bool = false
     
-    private var handle: AuthStateDidChangeListenerHandle?
-    
     init() {
         checkAuthState()
     }
     
-    deinit {
-        if let handle = handle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
-    }
-    
     func checkAuthState() {
-        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+        if let user = Auth.auth().currentUser {
+            handleAuthenticatedUser(user)
+        } else {
+            handleUnauthenticatedUser()
+        }
+        
+        Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                if let user = user, user.isEmailVerified {
-                    self.user = user
-                    self.isAuthenticated = true
-                    print("User authenticated: \(user.uid)")
-                } else {
-                    self.user = nil
-                    self.isAuthenticated = false
-                    print("User not authenticated")
-                }
+            
+            if let user = user {
+                handleAuthenticatedUser(user)
+            } else {
+                handleUnauthenticatedUser()
             }
         }
     }
     
     private func handleAuthenticatedUser(_ user: User) {
-        DispatchQueue.main.async {
-            self.user = user
-            self.isAuthenticated = true
-            print("User authenticated: \(user.uid)")
-        }
+        self.isAuthenticated = true
+        print("User authenticated: \(user.uid)")
     }
     
     private func handleUnauthenticatedUser() {
@@ -59,6 +42,7 @@ class AuthViewModel: ObservableObject {
             try Auth.auth().signOut()
             self.isAuthenticated = false
         } catch {
+            print("Ошибка выхода: \(error.localizedDescription)")
         }
     }
     
@@ -69,6 +53,7 @@ class AuthViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.user = authResult?.user
+                    self.isAuthenticated = true
                 }
                 completion(true, nil)
             }
@@ -82,6 +67,7 @@ class AuthViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.user = authResult?.user
+                    self.isAuthenticated = true
                     completion(true, nil)
                 }
             }
@@ -92,6 +78,7 @@ class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.user = nil
+            self.isAuthenticated = false
         } catch let error {
             print("Ошибка выхода: \(error.localizedDescription)")
         }
