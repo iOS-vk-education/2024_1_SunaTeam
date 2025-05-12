@@ -7,6 +7,7 @@ import FirebaseAuth
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - UI Elements
+    private var tripId: String?  // for FireBase
 
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -342,35 +343,57 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             print("User not authenticated")
             return
         }
-
+        
         // remove placeholders
         let tripName = tripNameTextField.textColor == .lightGray ? "" : tripNameTextField.text ?? ""
         let location = locationTextField.textColor == .lightGray ? "" : locationTextField.text ?? ""
         let description = descriptionTextView.textColor == .lightGray ? "" : descriptionTextView.text ?? ""
         let date = dateButton.title(for: .normal) ?? ""
-
+        
         let db = Firestore.firestore()
-        let tripData: [String: Any] = [
+        let data: [String: Any] = [
             "tripName": tripName,
             "location": location,
             "description": description,
             "date": date,
             "createdAt": Timestamp(date: Date())
         ]
-
-        db.collection("userData")
-            .document(userId)
-            .collection("trips")
-            .addDocument(data: tripData) { error in
+        
+        //        db.collection("userData")
+        //            .document(userId)
+        //            .collection("trips")
+        //            .addDocument(data: tripData) { error in
+        //                if let error = error {
+        //                    print("Failed to save trip: \(error)")
+        //                } else {
+        //                    print("Trip saved successfully")
+        //                    self.dismiss(animated: true)
+        //                }
+        //            }
+        let tripsCollection = db.collection("userData").document(userId).collection("trips")
+        
+        if let tripId = self.tripId {
+            tripsCollection.document(tripId).setData(data, merge: true) { error in
                 if let error = error {
-                    print("Failed to save trip: \(error)")
+                    print("Failed to update trip: \(error)")
                 } else {
-                    print("Trip saved successfully")
+                    print("Trip updated successfully")
                     self.dismiss(animated: true)
                 }
             }
-    }
-
+        } else {
+            let newDoc = tripsCollection.document()
+            self.tripId = newDoc.documentID
+            newDoc.setData(data) { error in
+                if let error = error {
+                    print("Failed to create trip: \(error)")
+                } else {
+                    print("Trip created successfully")
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+}
 
     // Helper: Create text fields and views
     private static func createRoundedTextField(placeholder: String) -> UITextField {
