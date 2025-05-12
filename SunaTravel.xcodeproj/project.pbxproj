@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C6AE972DD23D4200E07413 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE952DD23D4200E07413 /* CreateTripViewController.swift */; };
+		11C6AE982DD23D4200E07413 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE942DD23D4200E07413 /* UIColor.swift */; };
+		11C6AEA22DD23DAE00E07413 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE9A2DD23DAE00E07413 /* NotesView.swift */; };
+		11C6AEA32DD23DAE00E07413 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE9C2DD23DAE00E07413 /* ChecklistItem.swift */; };
+		11C6AEA42DD23DAE00E07413 /* NoteDatailview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE992DD23DAE00E07413 /* NoteDatailview.swift */; };
+		11C6AEA52DD23DAE00E07413 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE9D2DD23DAE00E07413 /* Note.swift */; };
+		11C6AEA62DD23DAE00E07413 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C6AE9F2DD23DAE00E07413 /* NoteViewModel.swift */; };
 		586ED5482DD16C1B00AC1352 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586ED5472DD16C1B00AC1352 /* AppState.swift */; };
 		58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */; };
 		58F5CAC32D0785E000A3C1FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F5CAC22D0785E000A3C1FA /* ContentView.swift */; };
@@ -37,8 +44,6 @@
 		8F7310F12D0DA06D007A78AC /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310F02D0DA061007A78AC /* OnboardingButton.swift */; };
 		8F7310F32D0DA0A0007A78AC /* OnboardingToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7310F22D0DA08C007A78AC /* OnboardingToolbar.swift */; };
 		8F7311252D0FA44C007A78AC /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8F7311242D0FA442007A78AC /* swiftlint.yml */; };
-		8F7B7B6E2D34393F00F6B880 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7B7B6D2D34392A00F6B880 /* CreateTripViewController.swift */; };
-		8F7B7B702D34397100F6B880 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7B7B6F2D34396800F6B880 /* UIColor.swift */; };
 		8F7B7B732D3445E700F6B880 /* ViewTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7B7B722D3445DE00F6B880 /* ViewTripViewController.swift */; };
 		8FBA13CE2D1A2BD1003DB8F2 /* FavoritePlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBA13C02D1A2BD1003DB8F2 /* FavoritePlacesViewController.swift */; };
 		8FBA13D02D1A2BD1003DB8F2 /* FavoritePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBA13C62D1A2BD1003DB8F2 /* FavoritePlaceCell.swift */; };
@@ -65,6 +70,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11C6AE942DD23D4200E07413 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		11C6AE952DD23D4200E07413 /* CreateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
+		11C6AE992DD23DAE00E07413 /* NoteDatailview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDatailview.swift; sourceTree = "<group>"; };
+		11C6AE9A2DD23DAE00E07413 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		11C6AE9C2DD23DAE00E07413 /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
+		11C6AE9D2DD23DAE00E07413 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		11C6AE9F2DD23DAE00E07413 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		586ED5472DD16C1B00AC1352 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		58F5CABD2D0785E000A3C1FA /* SunaTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunaTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F5CAC02D0785E000A3C1FA /* SunaTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunaTravelApp.swift; sourceTree = "<group>"; };
@@ -96,8 +108,6 @@
 		8F7310F02D0DA061007A78AC /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
 		8F7310F22D0DA08C007A78AC /* OnboardingToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingToolbar.swift; sourceTree = "<group>"; };
 		8F7311242D0FA442007A78AC /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
-		8F7B7B6D2D34392A00F6B880 /* CreateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
-		8F7B7B6F2D34396800F6B880 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8F7B7B722D3445DE00F6B880 /* ViewTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTripViewController.swift; sourceTree = "<group>"; };
 		8FBA13C02D1A2BD1003DB8F2 /* FavoritePlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlacesViewController.swift; sourceTree = "<group>"; };
 		8FBA13C62D1A2BD1003DB8F2 /* FavoritePlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCell.swift; sourceTree = "<group>"; };
@@ -137,6 +147,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11C6AE962DD23D4200E07413 /* CreateTrip */ = {
+			isa = PBXGroup;
+			children = (
+				11C6AE942DD23D4200E07413 /* UIColor.swift */,
+				11C6AE952DD23D4200E07413 /* CreateTripViewController.swift */,
+			);
+			path = CreateTrip;
+			sourceTree = "<group>";
+		};
+		11C6AE9B2DD23DAE00E07413 /*  Views */ = {
+			isa = PBXGroup;
+			children = (
+				11C6AE992DD23DAE00E07413 /* NoteDatailview.swift */,
+				11C6AE9A2DD23DAE00E07413 /* NotesView.swift */,
+			);
+			path = " Views";
+			sourceTree = "<group>";
+		};
+		11C6AE9E2DD23DAE00E07413 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11C6AE9C2DD23DAE00E07413 /* ChecklistItem.swift */,
+				11C6AE9D2DD23DAE00E07413 /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		11C6AEA02DD23DAE00E07413 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				11C6AE9F2DD23DAE00E07413 /* NoteViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		11C6AEA12DD23DAE00E07413 /* NotesView */ = {
+			isa = PBXGroup;
+			children = (
+				11C6AE9B2DD23DAE00E07413 /*  Views */,
+				11C6AE9E2DD23DAE00E07413 /* Models */,
+				11C6AEA02DD23DAE00E07413 /* ViewModels */,
+			);
+			path = NotesView;
+			sourceTree = "<group>";
+		};
 		58F5CAB42D0785E000A3C1FA = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +216,6 @@
 				8F423EBA2D801480008C43F7 /* AppDelegate.swift */,
 				8F423EB82D6C8BCA008C43F7 /* GoogleService-Info.plist */,
 				8F7B7B712D3445CB00F6B880 /* ViewTrip */,
-				8F7B7B6C2D34391800F6B880 /* CreateTrip */,
 				8F419B2E2D3429E50040CB44 /* MapScreen */,
 				8FBA14142D1AF872003DB8F2 /* Profile */,
 				8FBA14082D1AEAB4003DB8F2 /* HomeScreen */,
@@ -177,6 +231,8 @@
 				58F5CAC62D0785E300A3C1FA /* Preview Content */,
 				8F7310E72D0B91C8007A78AC /* LaunchScreen.storyboard */,
 				8F7311242D0FA442007A78AC /* swiftlint.yml */,
+				11C6AE962DD23D4200E07413 /* CreateTrip */,
+				11C6AEA12DD23DAE00E07413 /* NotesView */,
 			);
 			path = SunaTravel;
 			sourceTree = "<group>";
@@ -341,15 +397,6 @@
 				8F7310DE2D0B8FA5007A78AC /* OnboardingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		8F7B7B6C2D34391800F6B880 /* CreateTrip */ = {
-			isa = PBXGroup;
-			children = (
-				8F7B7B6F2D34396800F6B880 /* UIColor.swift */,
-				8F7B7B6D2D34392A00F6B880 /* CreateTripViewController.swift */,
-			);
-			path = CreateTrip;
 			sourceTree = "<group>";
 		};
 		8F7B7B712D3445CB00F6B880 /* ViewTrip */ = {
@@ -674,6 +721,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11C6AE972DD23D4200E07413 /* CreateTripViewController.swift in Sources */,
+				11C6AE982DD23D4200E07413 /* UIColor.swift in Sources */,
 				8FBA141D2D1AF8DE003DB8F2 /* EditProfileView.swift in Sources */,
 				8FBA14252D1AF926003DB8F2 /* ProfileView.swift in Sources */,
 				8FBA141F2D1AF8ED003DB8F2 /* ProfileInputView.swift in Sources */,
@@ -701,14 +750,17 @@
 				8F423EBB2D80148B008C43F7 /* AppDelegate.swift in Sources */,
 				8FBA13D02D1A2BD1003DB8F2 /* FavoritePlaceCell.swift in Sources */,
 				8FBA14132D1AEBF9003DB8F2 /* PlaceCell.swift in Sources */,
+				11C6AEA22DD23DAE00E07413 /* NotesView.swift in Sources */,
+				11C6AEA32DD23DAE00E07413 /* ChecklistItem.swift in Sources */,
+				11C6AEA42DD23DAE00E07413 /* NoteDatailview.swift in Sources */,
+				11C6AEA52DD23DAE00E07413 /* Note.swift in Sources */,
+				11C6AEA62DD23DAE00E07413 /* NoteViewModel.swift in Sources */,
 				8FBA13E42D1A2D27003DB8F2 /* SearchPlaceViewController.swift in Sources */,
-				8F7B7B702D34397100F6B880 /* UIColor.swift in Sources */,
 				8FBA13E72D1A2D27003DB8F2 /* SearchPlaceViewModel.swift in Sources */,
 				8FBA13EF2D1AD720003DB8F2 /* CollectionViewDelegate&DataSource.swift in Sources */,
 				8F7310E12D0B8FCC007A78AC /* OnboardingViewModel.swift in Sources */,
 				58F5CAC12D0785E000A3C1FA /* SunaTravelApp.swift in Sources */,
 				8F0A96E82D13604000322C53 /* TextFieldView.swift in Sources */,
-				8F7B7B6E2D34393F00F6B880 /* CreateTripViewController.swift in Sources */,
 				8F7310F12D0DA06D007A78AC /* OnboardingButton.swift in Sources */,
 				8F7310EF2D0DA02F007A78AC /* PageIndicatorView.swift in Sources */,
 				8F419B352D342A460040CB44 /* MapViewModel.swift in Sources */,

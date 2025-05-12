@@ -1,6 +1,8 @@
 import UIKit
 import PhotosUI  // for multiply photo selection
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -24,8 +26,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         label.textAlignment = .center
         return label
     }()
-
-
+     
     // Main Container View
     private let containerView: UIView = {
         let view = UIView()
@@ -104,6 +105,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         button.layer.cornerRadius = 16
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(didTapSave), for: .touchUpInside)
         return button
     }()
 
@@ -137,10 +139,13 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         view.addSubview(backgroundImageView)
         //view.addSubview(backButton)
         view.addSubview(titleLabel)
+//        view.addSubview(addNoteButton)  // former
         view.addSubview(containerView)
         view.addSubview(addFileButton)
         view.addSubview(dateButton)
+//        view.addSubview(addNoteContainer)  // former
 
+//        addNoteContainer.addSubview(addNoteButton)
         containerView.addSubview(collapseButton)
         containerView.addSubview(tripNameTextField)
         containerView.addSubview(locationTextField)
@@ -177,11 +182,14 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             
             // Title Label
             // MARK: - Maybe somehow fix it in a different way, not from the Back button
-            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor), // Центр по вертикали относительно кнопки "Назад"
-            //
+            //titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8), // 80% of screen
 
+            // former
+//            addNoteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//            addNoteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
+            
             // Add File Button
             addFileButton.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -10),
             addFileButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
@@ -240,7 +248,19 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             dateButton.widthAnchor.constraint(equalToConstant: 120),
             dateButton.heightAnchor.constraint(equalToConstant: 40),
         ])
-
+        
+//        NSLayoutConstraint.activate([
+//            addNoteContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 1),
+//            // Distance from the top
+//            addNoteContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            addNoteContainer.widthAnchor.constraint(equalToConstant: 40),
+//            addNoteContainer.heightAnchor.constraint(equalToConstant: 40),
+//
+//            addNoteButton.centerXAnchor.constraint(equalTo: addNoteContainer.centerXAnchor),
+//            addNoteButton.centerYAnchor.constraint(equalTo: addNoteContainer.centerYAnchor),
+//        ])
+        
+        
     }
     private func updateTextViewColor() {
         if descriptionTextView.text == "Write description" {
@@ -291,7 +311,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.maximumDate = Date() // Запрещаем выбирать будущие даты
+        datePicker.maximumDate = Date() // Forbid to choose future dates
 
         let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
@@ -315,6 +335,40 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         alert.addAction(cancelAction)
 
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func didTapSave() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User not authenticated")
+            return
+        }
+
+        // remove placeholders
+        let tripName = tripNameTextField.textColor == .lightGray ? "" : tripNameTextField.text ?? ""
+        let location = locationTextField.textColor == .lightGray ? "" : locationTextField.text ?? ""
+        let description = descriptionTextView.textColor == .lightGray ? "" : descriptionTextView.text ?? ""
+        let date = dateButton.title(for: .normal) ?? ""
+
+        let db = Firestore.firestore()
+        let tripData: [String: Any] = [
+            "tripName": tripName,
+            "location": location,
+            "description": description,
+            "date": date,
+            "createdAt": Timestamp(date: Date())
+        ]
+
+        db.collection("userData")
+            .document(userId)
+            .collection("trips")
+            .addDocument(data: tripData) { error in
+                if let error = error {
+                    print("Failed to save trip: \(error)")
+                } else {
+                    print("Trip saved successfully")
+                    self.dismiss(animated: true)
+                }
+            }
     }
 
 
