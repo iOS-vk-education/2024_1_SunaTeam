@@ -6,6 +6,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 fileprivate struct UIConstants {
     static let collectionTopPadding: CGFloat = 10
@@ -19,6 +20,8 @@ fileprivate struct UIConstants {
 class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDataSource {
     
     var viewModel = SearchPlacesViewModel()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -53,6 +56,15 @@ class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UI
         searchBar.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        AppSettings.shared.$currentLanguage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newLanguage in
+                self?.updateLocalizedText(for: newLanguage)
+            }
+            .store(in: &cancellables)
+        
+        collectionView.delegate = self
     }
     
     private func setupViews() {
@@ -99,6 +111,10 @@ class SearchPlacesViewController: UIViewController, UICollectionViewDelegate, UI
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.filterPlaces(by: searchText)
         collectionView.reloadData()
+    }
+    
+    private func updateLocalizedText(for language: String) {
+        searchBar.placeholder = SearchText.search(for: language)
     }
 }
 

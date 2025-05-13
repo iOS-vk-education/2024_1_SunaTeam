@@ -30,14 +30,17 @@ struct SunaTravelApp: App {
 
 struct RootView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject private var settings = AppSettings.shared
     
     var body: some View {
         Group {
             if authViewModel.isAuthenticated {
                 AppRootView()
                     .environmentObject(authViewModel) // Добавьте это
+                    .environmentObject(settings)
             } else {
                 SignInScreenView()
+                    .environmentObject(settings)
             }
         }
         .onAppear {

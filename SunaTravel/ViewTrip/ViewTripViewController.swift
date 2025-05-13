@@ -1,7 +1,10 @@
 import UIKit
+import Combine
 import SwiftUI
 
 class ViewTripViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private var cancellables = Set<AnyCancellable>()
+
 
     // MARK: - UI Elements
     // Background Image
@@ -195,6 +198,19 @@ class ViewTripViewController: UIViewController, UICollectionViewDelegate, UIColl
         photoGalleryCollectionView.delegate = self
         photoGalleryCollectionView.dataSource = self
         photoGalleryCollectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        
+        AppSettings.shared.$currentLanguage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newLanguage in
+                self?.updateLocalizedText(for: newLanguage)
+            }
+            .store(in: &cancellables)
+        
+    }
+    
+    private func updateLocalizedText(for language: String) {
+        aboutDestinationLabel.text = ViewText.about(for: language)
+        readMoreButton.setTitle(ViewText.more(for: language), for: .normal)
     }
 
     // MARK: - Setup Methods

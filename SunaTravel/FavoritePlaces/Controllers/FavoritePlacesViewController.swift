@@ -6,6 +6,7 @@
 //
 import UIKit
 import SwiftUI
+import Combine
 
 fileprivate struct UIConstants {
     static let collectionTopPadding: CGFloat = 15
@@ -32,6 +33,8 @@ struct MockData {
 }
 
 class FavoritePlacesViewController: UIViewController {
+    private var cancellables = Set<AnyCancellable>()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -62,6 +65,15 @@ class FavoritePlacesViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         setupCollectionView()
+        
+        AppSettings.shared.$currentLanguage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newLanguage in
+                self?.updateLocalizedText(for: newLanguage)
+            }
+            .store(in: &cancellables)
+        
+        collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +104,10 @@ class FavoritePlacesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    private func updateLocalizedText(for language: String) {
+        navigationItem.title = FavoriteText.title(for: language)
     }
 }
 
