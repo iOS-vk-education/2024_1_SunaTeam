@@ -19,6 +19,8 @@ struct EditProfileView: View {
     @State private var isImagePickerPresented: Bool = false
     @State var profileImage: UIImage?
     
+    @EnvironmentObject var settings: AppSettings
+    
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         _tempName = State(initialValue: viewModel.profile.name)
@@ -51,26 +53,26 @@ struct EditProfileView: View {
                     
                     isImagePickerPresented.toggle()
                 }) {
-                    Text("Change Profile Picture")
+                    Text(EditProfileText.avatar(for: settings.currentLanguage))
                         .foregroundColor(.orange)
                 }
                 
                 VStack(alignment: .leading, spacing: 15) {
-                    ProfileInputField(title: "Name", text: $tempName)
-                    ProfileInputField(title: "Email", text: $tempEmail)
-                    ProfileInputField(title: "Location", text: $tempLocation)
-                    ProfileInputField(title: "Mobile Number", text: $tempPhoneNumber)
+                    ProfileInputField(title: EditProfileText.name(for: settings.currentLanguage), text: $tempName)
+                    ProfileInputField(title: EditProfileText.email(for: settings.currentLanguage), text: $tempEmail)
+                    ProfileInputField(title: EditProfileText.location(for: settings.currentLanguage), text: $tempLocation)
+                    ProfileInputField(title: EditProfileText.number(for: settings.currentLanguage), text: $tempPhoneNumber)
                 }
                 .padding()
                 
                 Spacer()
             }
         }
-        .navigationBarTitle("Edit Profile", displayMode: .inline)
+        .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: saveChanges) {
-                    Text("Save").foregroundColor(.orange).fontWeight(.bold)
+                    Text(EditProfileText.save(for: settings.currentLanguage)).foregroundColor(.orange).fontWeight(.bold)
                 }
             }
         }

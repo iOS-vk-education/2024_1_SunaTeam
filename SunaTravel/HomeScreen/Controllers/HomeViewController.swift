@@ -13,6 +13,7 @@ import Combine
 
 class HomeViewController: UIViewController {
     @ObservedObject var profileViewModel: ProfileViewModel
+
     private var cancellables = Set<AnyCancellable>()
     
     fileprivate struct HomeViewConstants {
@@ -70,6 +71,7 @@ class HomeViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Remember the\n bright moments"
+        
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: HomeViewConstants.titleLabelTextSize, weight: .bold)
         let attributedString = NSMutableAttributedString(string: label.text!)
@@ -132,6 +134,13 @@ class HomeViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        AppSettings.shared.$currentLanguage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newLanguage in
+                self?.updateLocalizedText(for: newLanguage)
+            }
+            .store(in: &cancellables)
+        
         collectionView.delegate = self
     }
     
@@ -180,6 +189,22 @@ class HomeViewController: UIViewController {
             
             self.profileButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         }
+    }
+    
+    private func updateLocalizedText(for language: String) {
+        titleLabel.text = HomeText.title(for: language)
+        
+        let attributedString = NSMutableAttributedString(string: titleLabel.text ?? "")
+        if language == "eng" {
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 21, length: 7))
+        } else {
+            attributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 22, length: 7))
+
+        }
+        titleLabel.attributedText = attributedString
+
+        bestDestinationLabel.text = HomeText.destinationLabel(for: language)
+        viewAllButton.setTitle(HomeText.viewAll(for: language), for: .normal)
     }
     
     

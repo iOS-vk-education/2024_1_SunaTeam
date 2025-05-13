@@ -10,10 +10,11 @@ import SwiftUI
 import FirebaseAuth
 
 struct BookmarksView: View {
+    @EnvironmentObject var settings: AppSettings
     @State private var isShowingNotesView = false  // for navigation
     var body: some View {
         FavoritePlacesViewControllerWrapper()
-            .navigationBarTitle("All Places", displayMode: .inline)
+            .navigationBarTitle(ProfileText.listPlaces(for: settings.currentLanguage), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: CreateTripViewControllerWrapper()
@@ -42,9 +43,11 @@ struct BookmarksView: View {
 }
 
 struct PreviousTripsView: View {
+    @EnvironmentObject var settings: AppSettings
+
     var body: some View {
         SearchViewControllerWrapper()
-            .navigationBarTitle("Search Places", displayMode: .inline)
+            .navigationBarTitle(ProfileText.listSearch(for: settings.currentLanguage), displayMode: .inline)
     }
 }
 
@@ -52,20 +55,21 @@ struct SettingsView: View {
     @ObservedObject private var appSettings = AppSettings.shared
     @State private var showingLogoutAlert = false
     @State private var isLoggedOut = false
+    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("APPEARANCE")
+                    Text(SettingsText.settingsAppearance(for: settings.currentLanguage))
                         .font(.caption)
                         .foregroundColor(.gray)
                         .padding(.horizontal)
                     
                     HStack {
                         Image(systemName: appSettings.isDarkMode ? "moon.fill" : "sun.max.fill")
-                        Text("Dark Mode")
+                        Text(SettingsText.settingsMode(for: settings.currentLanguage))
                         Spacer()
                         Toggle("", isOn: $appSettings.isDarkMode)
                             .labelsHidden()
@@ -78,7 +82,7 @@ struct SettingsView: View {
                 
                 // Секция языка
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("LANGUAGE")
+                    Text(SettingsText.settingsLanguage(for: settings.currentLanguage))
                         .font(.caption)
                         .foregroundColor(.gray)
                         .padding(.horizontal)
@@ -98,7 +102,7 @@ struct SettingsView: View {
             Button(action: {
                 showingLogoutAlert = true
             }) {
-                Text("Logout")
+                Text(SettingsText.settingsLogout(for: settings.currentLanguage))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -109,12 +113,12 @@ struct SettingsView: View {
         }
         .alert(isPresented: $showingLogoutAlert) {
             Alert(
-                title: Text("Logout"),
-                message: Text("Are you sure you want to logout?"),
-                primaryButton: .destructive(Text("Logout")) {
+                title: Text(SettingsText.settingsAlertTitle(for: settings.currentLanguage)),
+                message: Text(SettingsText.settingsAlertText(for: settings.currentLanguage)),
+                primaryButton: .destructive(Text(SettingsText.settingsLogout(for: settings.currentLanguage))) {
                     logout()
                 },
-                secondaryButton: .cancel()
+                secondaryButton: .cancel(Text(SettingsText.settingsCancel(for: settings.currentLanguage)))
             )
         }
         .fullScreenCover(isPresented: $isLoggedOut) {

@@ -1,10 +1,12 @@
 import UIKit
+import Combine
 import PhotosUI  // for multiply photo selection
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
 
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - UI Elements
     private var tripId: String?  // for FireBase
@@ -120,6 +122,24 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         setupLayout()
         setupDescriptionTextView()  // for the modified UITextView
         addCollapseButtonGesture() // Add gesture for collapse button
+        
+        AppSettings.shared.$currentLanguage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newLanguage in
+                self?.updateLocalizedText(for: newLanguage)
+            }
+            .store(in: &cancellables)
+        
+    }
+    
+    private func updateLocalizedText(for language: String) {
+        aboutDestinationLabel.text = CreateText.about(for: language)
+        descriptionTextView.text = CreateText.description(for: language)
+        tripNameTextField.placeholder = CreateText.name(for: language)
+        locationTextField.placeholder = CreateText.location(for: language)
+        dateButton.setTitle(CreateText.date(for: language), for: .normal)
+        saveButton.setTitle(CreateText.save(for: language), for: .normal)
+        
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -155,13 +175,13 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         containerView.addSubview(saveButton)
         
         // Set placeholder text manually, like in UITextView
-        tripNameTextField.text = "Write a trip name"
-        tripNameTextField.textColor = .lightGray
-        tripNameTextField.delegate = self
-
-        locationTextField.text = "Write location"
-        locationTextField.textColor = .lightGray
-        locationTextField.delegate = self
+//        tripNameTextField.text = "Write a trip name"
+//        tripNameTextField.textColor = .lightGray
+//        tripNameTextField.delegate = self
+//
+//        locationTextField.text = "Write location"
+//        locationTextField.textColor = .lightGray
+//        locationTextField.delegate = self
         
         descriptionTextView.textColor = descriptionTextView.text == "Write description" ? .lightGray : UIColor.label
     }
