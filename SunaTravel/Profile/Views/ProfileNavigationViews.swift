@@ -10,13 +10,31 @@ import SwiftUI
 import FirebaseAuth
 
 struct BookmarksView: View {
+    @State private var isShowingNotesView = false  // for navigation
     var body: some View {
         FavoritePlacesViewControllerWrapper()
             .navigationBarTitle("All Places", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: CreateTripViewControllerWrapper()) {
+                    NavigationLink(destination: CreateTripViewControllerWrapper()
+                        .navigationBarItems(trailing:
+                                                Button(action: {
+                        isShowingNotesView = true
+                        print("Notes button tapped")
+                    }) {
+//                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "checklist")
+                    }
+                                           )
+                    ) {
                         Image(systemName: "plus")
+                            .offset(x: 10)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: NotesView(), isActive: $isShowingNotesView) {
+                        EmptyView()
                     }
                 }
             }
