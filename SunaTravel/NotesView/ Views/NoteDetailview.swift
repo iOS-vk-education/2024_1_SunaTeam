@@ -1,5 +1,5 @@
 //
-//  NoteDatailview.swift
+//  NoteDetailview.swift
 //  SunaTravel
 //
 //  Created by Lilia Chechina on 03.05.2025.
@@ -112,3 +112,4 @@ struct NoteDetailView: View {
            dismiss()
        }
 }
+

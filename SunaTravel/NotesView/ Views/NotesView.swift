@@ -9,10 +9,16 @@ import SwiftUI
 
 // The screen of the list of notes(checklists)
 struct NotesView: View {
-    @StateObject private var viewModel = NoteViewModel()
+//    @StateObject private var viewModel = NoteViewModel()
+    @StateObject private var viewModel: NoteViewModel
     @State private var isNavigating = false
     @State private var newNote: Note?
     
+    init(userId: String, tripId: String) {
+        print("NotesView is initialized with userId: \(userId), tripId: \(tripId)")
+        _viewModel = StateObject(wrappedValue: NoteViewModel(userId: userId, tripId: tripId))
+    }
+
     var body: some View {
         VStack {
             List {
@@ -68,11 +74,14 @@ struct NotesView: View {
     }
 
     private func deleteNote(at offsets: IndexSet) {
-        for index in offsets {
-            let noteToDelete = viewModel.notes[index]
-            viewModel.deleteNote(note: noteToDelete)
+        let notesToDelete = offsets.compactMap { index in
+            viewModel.notes.indices.contains(index) ? viewModel.notes[index] : nil
+        }
+        for note in notesToDelete {
+            viewModel.deleteNote(note: note)
         }
     }
+
     
     private func binding(for note: Note) -> Binding<Note>? {
         guard let index = viewModel.notes.firstIndex(where: { $0.id == note.id }) else {
@@ -82,3 +91,4 @@ struct NotesView: View {
         return $viewModel.notes[index]
     }
 }
+
