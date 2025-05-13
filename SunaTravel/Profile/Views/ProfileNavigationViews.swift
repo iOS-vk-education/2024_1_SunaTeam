@@ -10,32 +10,47 @@ import SwiftUI
 import FirebaseAuth
 
 struct BookmarksView: View {
-    @State private var isShowingNotesView = false  // for navigation
+    @State private var tripId: String?
+    let userId = Auth.auth().currentUser?.uid ?? ""
+    @State private var isShowingNotesView = false
+    @State private var shouldNavigateToNotes = false
+
     var body: some View {
         FavoritePlacesViewControllerWrapper()
             .navigationBarTitle("All Places", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: CreateTripViewControllerWrapper()
-                        .navigationBarItems(trailing:
-                                                Button(action: {
-                        isShowingNotesView = true
-                        print("Notes button tapped")
-                    }) {
-//                        Image(systemName: "square.and.pencil")
-                        Image(systemName: "checklist")
-                    }
-                                           )
+                    NavigationLink(destination: CreateTripViewControllerWrapper(
+                        tripId: $tripId,
+                        shouldNavigateToNotes: $shouldNavigateToNotes
+                    )
+                    .navigationBarItems(trailing:
+                        Button(action: {
+                            if let tripId = tripId {
+                                isShowingNotesView = true
+                            }
+                        }) {
+                            Image(systemName: "checklist")
+                        }
+                    )
                     ) {
                         Image(systemName: "plus")
                             .offset(x: 10)
                     }
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: NotesView(), isActive: $isShowingNotesView) {
+                    NavigationLink(
+                        destination: NotesView(userId: userId, tripId: tripId ?? ""),
+                        isActive: $isShowingNotesView
+                    ) {
                         EmptyView()
                     }
+                }
+            }
+            .onChange(of: shouldNavigateToNotes) { newValue in
+                if newValue {
+                    isShowingNotesView = true
                 }
             }
     }

@@ -8,6 +8,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
     // MARK: - UI Elements
     private var tripId: String?  // for FireBase
+    var didFinishSavingTrip: ((String) -> Void)?
 
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -203,7 +204,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
 
-        containerHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: 430)
+        containerHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: 340)
         containerHeightConstraint.isActive = true
 
         NSLayoutConstraint.activate([
@@ -236,7 +237,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             descriptionTextView.heightAnchor.constraint(equalToConstant: 140),
 
             // Save Button
-            saveButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 20),
+            saveButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 10),
             saveButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             saveButton.widthAnchor.constraint(equalToConstant: 360),
             saveButton.heightAnchor.constraint(equalToConstant: 65)
@@ -359,40 +360,37 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             "createdAt": Timestamp(date: Date())
         ]
         
-        //        db.collection("userData")
-        //            .document(userId)
-        //            .collection("trips")
-        //            .addDocument(data: tripData) { error in
-        //                if let error = error {
-        //                    print("Failed to save trip: \(error)")
-        //                } else {
-        //                    print("Trip saved successfully")
-        //                    self.dismiss(animated: true)
-        //                }
-        //            }
         let tripsCollection = db.collection("userData").document(userId).collection("trips")
         
         if let tripId = self.tripId {
-            tripsCollection.document(tripId).setData(data, merge: true) { error in
-                if let error = error {
-                    print("Failed to update trip: \(error)")
-                } else {
-                    print("Trip updated successfully")
-                    self.dismiss(animated: true)
+                tripsCollection.document(tripId).setData(data, merge: true) { error in
+                    if let error = error {
+                        print("Failed to update trip: \(error)")
+                    } else {
+                        print("Trip updated successfully")
+                        DispatchQueue.main.async {
+                            self.didFinishSavingTrip?(tripId)
+                            self.dismiss(animated: true)
+                        }
+                    }
+                }
+            } else {
+                let newDoc = tripsCollection.document()
+                let newTripId = newDoc.documentID
+                self.tripId = newTripId
+
+                newDoc.setData(data) { error in
+                    if let error = error {
+                        print("Failed to create trip: \(error)")
+                    } else {
+                        print("Trip created successfully")
+                        DispatchQueue.main.async {
+                            self.didFinishSavingTrip?(newTripId)
+                            self.dismiss(animated: true)
+                        }
+                    }
                 }
             }
-        } else {
-            let newDoc = tripsCollection.document()
-            self.tripId = newDoc.documentID
-            newDoc.setData(data) { error in
-                if let error = error {
-                    print("Failed to create trip: \(error)")
-                } else {
-                    print("Trip created successfully")
-                    self.dismiss(animated: true)
-                }
-            }
-        }
 }
 
     // Helper: Create text fields and views
@@ -482,13 +480,21 @@ extension CreateTripViewController: UITextFieldDelegate {
 
 // Swift-UI wrapper for UIKit by using UIViewControllerRepresentable
 struct CreateTripViewControllerWrapper: UIViewControllerRepresentable {
-    
+//    @State private var tripId: String?
+//    @State private var shouldNavigateToNotes = false
+    @Binding var tripId: String?
+    @Binding var shouldNavigateToNotes: Bool
+
     func makeUIViewController(context: Context) -> UINavigationController {
-        let createTripViewController = CreateTripViewController()
-        let navigationController = UINavigationController(rootViewController: createTripViewController)
-        return navigationController
+            let vc = CreateTripViewController()
+            vc.didFinishSavingTrip = { id in
+                DispatchQueue.main.async {
+                    self.tripId = id
+                    self.shouldNavigateToNotes = true
+                }
+            }
+            return UINavigationController(rootViewController: vc)
+        }
+
+        func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
     }
-    
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-    }
-}
