@@ -67,11 +67,12 @@ final class NavigationBar: UITabBarController {
     }
     
     private func updateLocalizedText(for language: String) {
-        let titles = NavigationText.titles(for: language)
         
-        tabBar.items?.enumerated().forEach { index, item in
-            item.title = titles[index]
-        }
+        tabBar.items?[0].title = NavigationText.home(for: language)
+        tabBar.items?[1].title = NavigationText.calendar(for: language)
+        tabBar.items?[2].title = NavigationText.search(for: language)
+        tabBar.items?[3].title = NavigationText.map(for: language)
+        tabBar.items?[4].title = NavigationText.profile(for: language)
     }
 }
 
