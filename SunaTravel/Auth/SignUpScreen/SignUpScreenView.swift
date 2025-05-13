@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SignUpScreenView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var settings: AppSettings
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
@@ -20,18 +19,18 @@ struct SignUpScreenView: View {
     
     var body: some View {
         VStack {
-            HeaderView(largeText: SignUpText.title(for: settings.currentLanguage),
-                       smallText: SignUpText.text(for: settings.currentLanguage))
+            HeaderView(largeText: "Sign up now",
+                       smallText: "Please fill the details and create an account")
             
-            TextFieldView(text: SignUpText.name(for: settings.currentLanguage), isSecureField: false, textValue: $name)
+            TextFieldView(text: "Name", isSecureField: false, textValue: $name)
                 .padding(.top, 10)
                 .cornerRadius(8)
-            TextFieldView(text: SignUpText.email(for: settings.currentLanguage), isSecureField: false, textValue: $email)
+            TextFieldView(text: "Email", isSecureField: false, textValue: $email)
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 .padding(.top, 10)
                 .cornerRadius(8)
-            SecuredTextFieldView(text: SignUpText.password(for: settings.currentLanguage), textValue: $password)
+            SecuredTextFieldView(text: "Password", textValue: $password)
                 .padding(.top, 10)
                 .cornerRadius(8)
             
@@ -40,7 +39,7 @@ struct SignUpScreenView: View {
                     .foregroundColor(.red)
             }
             
-            Button(SignUpText.signup(for: settings.currentLanguage)) {
+            Button("Sign Up") {
                 authViewModel.register(email: email, password: password) { success, error in
                     if success {
                         profileViewModel.saveChanges(name: name, email: email, location: "", phoneNumber: "", avatar: nil)
@@ -54,11 +53,11 @@ struct SignUpScreenView: View {
             .padding(.bottom, 10)
             
             HStack {
-                Text(SignUpText.already(for: settings.currentLanguage))
+                Text("Already have an account")
                     .font(.system(size: 14))
                     .foregroundStyle(.secondary)
                 
-                NavigationLink(SignUpText.signin(for: settings.currentLanguage)) {
+                NavigationLink("Sign in") {
                     SignInScreenView()
                 }
                 .foregroundStyle(Color.blue)
@@ -66,7 +65,7 @@ struct SignUpScreenView: View {
             }
         }
         .padding(.horizontal, 40)
-        .navigationTitle(SignUpText.signup(for: settings.currentLanguage))
+        .navigationTitle("Sign Up")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

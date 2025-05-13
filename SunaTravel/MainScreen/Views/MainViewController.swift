@@ -14,12 +14,11 @@ fileprivate struct UIConstants {
 struct MainView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedItem: ScheduleItem? = nil
-    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         VStack {
             DatePicker(
-                MainText.select(for: settings.currentLanguage),
+                "Select Date",
                 selection: $selectedDate,
                 displayedComponents: [.date]
             )
@@ -28,7 +27,7 @@ struct MainView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(MainText.schedule(for: settings.currentLanguage))
+                    Text("My Schedule")
                         .font(.title3.bold())
                     Spacer()
                 }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import UIKit
-import Combine
 
 fileprivate struct UIConstants {
     static let TabViewHeight: CGFloat = 70
@@ -16,7 +15,6 @@ fileprivate struct UIConstants {
     
 final class NavigationBar: UITabBarController {
     private let authViewModel: AuthViewModel
-    private var cancellables = Set<AnyCancellable>()
     
     init(authViewModel: AuthViewModel) {
         self.authViewModel = authViewModel
@@ -31,13 +29,6 @@ final class NavigationBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
-        
-        AppSettings.shared.$currentLanguage
-            .receive(on: RunLoop.main)
-            .sink { [weak self] newLanguage in
-                self?.updateLocalizedText(for: newLanguage)
-            }
-            .store(in: &cancellables)
     }
     
     private func setupTabs() {
@@ -64,14 +55,6 @@ final class NavigationBar: UITabBarController {
         profileView.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 4)
         
         viewControllers = [homeView, calendarView, searchView, mapView, profileView]
-    }
-    
-    private func updateLocalizedText(for language: String) {
-        let titles = NavigationText.titles(for: language)
-        
-        tabBar.items?.enumerated().forEach { index, item in
-            item.title = titles[index]
-        }
     }
 }
 

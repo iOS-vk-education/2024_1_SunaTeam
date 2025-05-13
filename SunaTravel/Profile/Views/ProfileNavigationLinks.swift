@@ -9,13 +9,11 @@ import Foundation
 import SwiftUI
 
 struct ProfileNavigationLinks: View {
-    @EnvironmentObject var settings: AppSettings
-
     var body: some View {
         List {
-            ProfileLink(title: ProfileText.listPlaces(for: settings.currentLanguage), destination: BookmarksView(), image: "bookmark.circle")
-            ProfileLink(title: ProfileText.listSearch(for: settings.currentLanguage), destination: PreviousTripsView(), image: "globe.europe.africa")
-            ProfileLink(title: ProfileText.listSettings(for: settings.currentLanguage), destination: SettingsView().environmentObject(AppSettings.shared), image: "gearshape")
+            ProfileLink(title: "All Places", destination: BookmarksView(), image: "bookmark.circle")
+            ProfileLink(title: "Search Trips", destination: PreviousTripsView(), image: "globe.europe.africa")
+            ProfileLink(title: "Settings", destination: SettingsView().environmentObject(AppSettings.shared), image: "gearshape")
         }
         .listStyle(.plain)
     }

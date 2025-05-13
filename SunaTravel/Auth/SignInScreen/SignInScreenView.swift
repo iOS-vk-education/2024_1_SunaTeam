@@ -10,7 +10,6 @@ import Firebase
 struct SignInScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var settings: AppSettings
     
     @State private var email = ""
     @State private var password = ""
@@ -20,14 +19,14 @@ struct SignInScreenView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HeaderView(largeText: SignInText.title(for: settings.currentLanguage),
-                           smallText: SignInText.text(for: settings.currentLanguage))
+                HeaderView(largeText: "Sign in now",
+                           smallText: "Please sign in to continue our app")
                 
-                TextFieldView(text: SignInText.email(for: settings.currentLanguage), isSecureField: false, textValue: $email)
+                TextFieldView(text: "Email", isSecureField: false, textValue: $email)
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                 
-                SecuredTextFieldView(text: SignInText.password(for: settings.currentLanguage), textValue: $password)
+                SecuredTextFieldView(text: "Password", textValue: $password)
                 
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
@@ -41,7 +40,7 @@ struct SignInScreenView: View {
                 }
                 
                 Button(action: handleSignIn) {
-                    Text(SignInText.signin(for: settings.currentLanguage))
+                    Text("Sign in")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.orange)
@@ -62,12 +61,12 @@ struct SignInScreenView: View {
     
     private func handleSignIn() {
         guard isValidEmail(email) else {
-            errorMessage = SignInText.invalidEmail(for: settings.currentLanguage)
+            errorMessage = "Invalid email format"
             return
         }
         
         guard !password.isEmpty else {
-            errorMessage = SignInText.invalidPassword(for: settings.currentLanguage)
+            errorMessage = "Password cannot be empty"
             return
         }
         
@@ -89,10 +88,9 @@ struct SignInScreenView: View {
 
 struct ForgetPasswordButtonView: View {
     var email: String
-    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
-        Button(SignInText.forget(for: settings.currentLanguage)) {
+        Button("Forget Password?") {
             Auth.auth().sendPasswordReset(withEmail: email) { error in
                 if let error = error {
                     print("Error resetting password: \(error.localizedDescription)")
@@ -110,16 +108,15 @@ struct ForgetPasswordButtonView: View {
 
 struct SignUpPromptView: View {
     @State private var isNavigating = false
-    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         HStack {
-            Text(SignInText.dont(for: settings.currentLanguage))
+            Text("Don't have an account?")
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
             NavigationLink(destination: SignUpScreenView(),
                            isActive: $isNavigating) {
-                Text(SignInText.signup(for: settings.currentLanguage))
+                Text("Sign up")
                     .foregroundStyle(Color.blue)
                     .font(.system(size: 14))
                     .padding(.top, 8)
