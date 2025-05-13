@@ -11,14 +11,31 @@ import FirebaseAuth
 
 struct BookmarksView: View {
     @EnvironmentObject var settings: AppSettings
-
+    @State private var isShowingNotesView = false  // for navigation
     var body: some View {
         FavoritePlacesViewControllerWrapper()
             .navigationBarTitle(ProfileText.listPlaces(for: settings.currentLanguage), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: CreateTripViewControllerWrapper()) {
+                    NavigationLink(destination: CreateTripViewControllerWrapper()
+                        .navigationBarItems(trailing:
+                                                Button(action: {
+                        isShowingNotesView = true
+                        print("Notes button tapped")
+                    }) {
+//                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "checklist")
+                    }
+                                           )
+                    ) {
                         Image(systemName: "plus")
+                            .offset(x: 10)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: NotesView(), isActive: $isShowingNotesView) {
+                        EmptyView()
                     }
                 }
             }
