@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
-    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         VStack {
@@ -42,7 +41,7 @@ struct ProfileView: View {
             Spacer()
         }
         .padding()
-        .navigationBarTitle(ProfileText.title(for: settings.currentLanguage) , displayMode: .inline)
+        .navigationBarTitle("Profile", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: EditProfileView(viewModel: viewModel)) {
