@@ -35,7 +35,6 @@ class HomeViewController: UIViewController {
     private let viewModel = HomeViewModel()
     
     // MARK: - UI Components
-    
     private let profileButton: UIButton = {
         let button = UIButton(type: .system)
         let defaultAvatar = UIImage(systemName: "person.circle.fill")?.withRenderingMode(.alwaysTemplate)
@@ -64,8 +63,6 @@ class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: – Уведомления на будущее
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -116,7 +113,6 @@ class HomeViewController: UIViewController {
     }()
     
     // MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCustomNavigationBar()
@@ -184,9 +180,7 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Setup UI
-    
     private func setupUI() {
-        // Убираем profileButton из headerStack, так как теперь он в navigation bar
         let headerStack = UIStackView()
         headerStack.axis = .horizontal
         headerStack.alignment = .center
@@ -272,7 +266,6 @@ struct HomeViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let navController = UINavigationController(rootViewController: HomeViewController(profileViewModel: AppState.shared.profileViewModel))
                 
-                // Дополнительные настройки navigation controller
                 navController.navigationBar.prefersLargeTitles = false
                 navController.navigationBar.tintColor = .orange
         return navController

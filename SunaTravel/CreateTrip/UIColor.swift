@@ -20,7 +20,6 @@ extension UIColor {
         )
     }
 
-    // Adaptive color that changes depending on the theme (light/dark)
     static func adaptiveColor(lightHex: String, darkHex: String) -> UIColor {
         return UIColor { traitCollection in
             let hex = traitCollection.userInterfaceStyle == .dark ? darkHex : lightHex
